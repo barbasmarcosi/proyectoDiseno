@@ -1,13 +1,94 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+  color: aliceblue;
+  background-color: rgb(157, 157, 157);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.Layout {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 80px calc(100% - 116px) 60px;
+  grid-template-areas:
+    "header header"
+    "navbar main "
+    "footer footer";
+}
+.Header {
+  display: grid;
+  grid-area: header;
+  background: linear-gradient(rgb(175, 10, 10), rgb(166, 3, 3));
+  border-radius: 0 0 12px 12px;
+  box-shadow: 3px 3px 3px black;
+  z-index: 1;
+}
+.Header-title {
+  justify-self: center;
+  text-shadow: 1px 1px 1px gainsboro;
+}
+.Header-link {
+  display: grid;
+  grid-template-columns: auto;
+  align-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+.Main {
+  display: grid;
+  grid-area: main;
+}
+.NavBar {
+  min-width: 220px;
+  min-height: calc(100vh - 140px);
+  display: grid;
+  grid-area: navbar;
+  margin: -12px 0;
+  background-color: rgb(51, 51, 51);
+  border-right: 1px solid aliceblue;
+  box-shadow: 3px 3px 3px black;
+}
+.NavBar-items {
+  display: grid;
+  align-self: flex-start;
+  margin-left: -40px;
+  grid-template-columns: 100%;
+}
+.NavBar-item {
+  border-bottom: 2px solid red;
+}
+.Accordion, .Accordion-children-active, .NavBar-item-link {
+  margin: 0;
+  padding: 8px;
+  font-size: 20px;
+  border-bottom: 2px solid;
+  border-radius: 8px;
+  transition: 1s border-bottom;
+  transition: 0.5s background-color;
+  text-decoration: none;
+  display: grid;
+  color: inherit;
+}
+.Accordion:hover, .NavBar-item-link:hover{
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  background-color: rgb(61, 61, 61);
+}
+.NavBar-item-link:hover {
+  background-color: rgb(72, 72, 72);
+}
+.Footer {
+  display: grid;
+  grid-area: footer;
+  width: 100%;
+  background: linear-gradient(rgb(175, 10, 10), rgb(166, 3, 3));
+  border-radius: 12px 12px 0 0;
+}
+.Footer-title {
+  justify-self: center;
+  text-shadow: 1px 1px 1px gainsboro;
+}
+.Home {
+  margin: 100px;
+}
+.Compras {
+  margin: 100px;
 }
