@@ -6,7 +6,7 @@ body {
 }
 .Layout {
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 20% 80%;
   grid-template-rows: 80px calc(100% - 116px) 60px;
   grid-template-areas:
     "header header"
@@ -16,10 +16,14 @@ body {
 .Header {
   display: grid;
   grid-area: header;
-  background: linear-gradient(rgb(175, 10, 10), rgb(166, 3, 3));
+  background-color: rgb(175, 10, 10);
+  transition: 0.5s background-color;
   border-radius: 0 0 12px 12px;
   box-shadow: 3px 3px 3px black;
   z-index: 1;
+}
+.Header:hover {
+  background-color: brown;
 }
 .Header-title {
   justify-self: center;
@@ -31,10 +35,6 @@ body {
   align-content: center;
   text-decoration: none;
   color: inherit;
-}
-.Main {
-  display: grid;
-  grid-area: main;
 }
 .NavBar {
   min-width: 220px;
@@ -55,8 +55,11 @@ body {
 .NavBar-item {
   border-bottom: 2px solid red;
 }
-.Accordion, .Accordion-children-active, .NavBar-item-link {
+.Accordion,
+.Accordion-children-active,
+.NavBar-item-link {
   margin: 0;
+  margin-top: 4px;
   padding: 8px;
   font-size: 20px;
   border-bottom: 2px solid;
@@ -67,7 +70,8 @@ body {
   display: grid;
   color: inherit;
 }
-.Accordion:hover, .NavBar-item-link:hover{
+.Accordion:hover,
+.NavBar-item-link:hover {
   cursor: pointer;
   border-bottom: 2px solid black;
   background-color: rgb(61, 61, 61);
@@ -86,9 +90,174 @@ body {
   justify-self: center;
   text-shadow: 1px 1px 1px gainsboro;
 }
-.Home {
-  margin: 100px;
+.Main {
+  display: grid;
+  justify-content: stretch;
+  width: 100%;
+  grid-area: main;
 }
-.Compras {
-  margin: 100px;
+.Pedidos {
+  margin: 2rem;
+  display: grid;
+  justify-self: center;
+  width: 80%;
+}
+
+.Pedidos-form {
+  grid-template-columns: 50% 50%;
+  column-gap: 4rem;
+  row-gap: 4rem;
+  margin: 2rem;
+  display: grid;
+  justify-self: center;
+  width: 100%;
+}
+.LabeledInput {
+  display: grid;
+  justify-content: stretch;
+  border: 1px solid black;
+  padding: 6px;
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.3rem;
+}
+.LabeledInput--hidden {
+  position: absolute;
+  top: -100vw;
+  left: -100vw;
+}
+.LabeledInput-label {
+  position: block;
+  width: max-content;
+  padding: 0 0.5rem;
+  top: -1rem;
+  margin: -1rem 1rem;
+  background-color: rgb(157, 157, 157);
+  font-size: 12px;
+  color: black;
+}
+.LabeledInput-text {
+  font-size: 1.3rem;
+  text-align: center;
+  align-self: center;
+  outline: none;
+  border: none;
+  height: 2.3rem;
+  border-radius: 0.3rem;
+}
+.LabeledInput-text:focus {
+  border: 1px red solid;
+}
+.LabeledInput-text--filled,
+.LabeledInput-text--filled:focus {
+  border: 1px greenyellow solid;
+}
+.LabeledDataList-option {
+  background-color: aqua;
+}
+.Labeler {
+  display: grid;
+  border: 1px solid black;
+  width: max-content;
+  border-radius: 0.3rem;
+}
+.Labeler--hidden {
+  position: absolute;
+  top: -100vw;
+  left: -100vw;
+}
+.Labeler-label {
+  position: block;
+  width: max-content;
+  padding: 0 0.5rem;
+  margin: -0.5rem;
+  margin-left: 0.5rem;
+  background-color: rgb(157, 157, 157);
+  font-size: 12px;
+  color: black;
+}
+.Labeler-labeled {
+  display: grid;
+  height: 2.3rem;
+  margin: 0.5rem;
+  align-items: center;
+}
+.Switch-bar, .Switch-ball--active {
+  display: grid;
+  height: 0.5rem;
+  width: 2rem;
+  background-color: gray;
+  border-radius: 0.5rem;
+  align-content: center;
+  transition: 1s background-color;
+}
+.Switch-bar--active {
+  background-color: rgb(56, 84, 113);
+}
+.Switch-ball,
+.Switch-ball--active {
+  height: 1rem;
+  width: 1rem;
+  background-color: azure;
+  border-radius: 2rem;
+  transition: .5s margin-left, .5s background-color;
+}
+.Switch-ball--active {
+  margin-left: 1rem;
+  align-self: flex-end;
+  background-color: dodgerblue;
+}
+.Table {
+  font-size: 16px;
+  margin-top: 2rem;
+  color: black;
+  display: grid;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+
+}
+.Table-self {
+  align-self: stretch;
+  background-color: transparent;
+  width: 60rem;
+  height: 5rem;
+  border-radius: 4px;
+  border-collapse: collapse;
+}
+.Table-thead {
+  border-bottom: 2px solid black;
+}
+.Table-thead-tr {
+  padding: 8px;
+}
+.Table-tbody {
+}
+.Table-tbody-tr {
+  border-bottom: 2px solid grey;
+  padding: 8px;
+}
+.Button-edit, .Button-delete, .Button-add {
+  background-color: #FFC107;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 0.25rem;
+  margin: 6px;
+  box-shadow: 1px 1px 1px rgb(82, 82, 82);
+  transition: 0.5s box-shadow;
+}
+.Button-delete {
+  background-color: #DC3545;
+}
+.Button-add {
+  background-color: #0D6EFD;
+  color: aliceblue;
+  margin: 0 1.5rem;
+}
+.Button-edit:hover, .Button-delete:hover, .Button-add:hover {
+  box-shadow: none;
+}
+.Productos {
+  text-align: center;
 }

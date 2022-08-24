@@ -12,7 +12,7 @@ const NavBar = () => {
                     <Link className='NavBar-item-link' to="/rubros">Rubros</Link>
                 </Accordion>
                 <Accordion title="Pedidos">
-                    <Link className='NavBar-item-link' to="/pedidos">Pedidoss</Link>
+                    <Link className='NavBar-item-link' to="/pedidos">Pedidos</Link>
                     <Link className='NavBar-item-link' to="/presupuestos">Presupuestos</Link>
                     <Link className='NavBar-item-link' to="/reclamos">Reclamos</Link>
                 </Accordion>
@@ -24,7 +24,7 @@ const NavBar = () => {
                     <Link className='NavBar-item-link' to="/cierres-caja">Cierres de Caja</Link>
                 </Accordion>
                 <Accordion title="Administrar">
-                    <Link className='NavBar-item-link' to="/personal">Peronal</Link>
+                    <Link className='NavBar-item-link' to="/personal">Personal</Link>
                     <Link className='NavBar-item-link' to="/clientes">Clientes</Link>
                     <Link className='NavBar-item-link' to="/produccion">Produccion</Link>
                     <Link className='NavBar-item-link' to="/deliverys">Deliverys</Link>
