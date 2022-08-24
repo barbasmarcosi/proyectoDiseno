@@ -29,11 +29,9 @@ function Pedidos() {
       <div>
       </div>
       <form className="Pedidos-form">
-
         <LabeledDataList options={clientes} input={client} onChangeInput={onChangeClient} hidden={false} text='Cliente' />
-        
         <Labeler text="Envio">
-          <Switch />
+          <Switch active={conEnvio} onChangeSwitch={() => (setConEnvio(!conEnvio))} />
         </Labeler>
         <LabeledInput type={'text'} input={name} onChangeInput={onChangeName} text="Nombre" hidden={false} />
         <LabeledInput type={'text'} input={name} onChangeInput={onChangeName} text="Apellido" hidden={false} />
@@ -43,8 +41,8 @@ function Pedidos() {
         <LabeledInput type={'text'} input={name} onChangeInput={onChangeName} text="Telefono" hidden={false} />
         <LabeledInput type={'text'} input={name} onChangeInput={onChangeName} text="Costo de envio" hidden={conEnvio} />
         <LabeledInput type={'text'} input={name} onChangeInput={onChangeName} text="Observaciones" hidden={false} />
-        <input type="button" value="Generar Pedido" className="Pedidos-cliente" />
       </form>
+      <input type="button" value="Generar Pedido" className="Pedidos-cliente" />
     </div>
   )
 }

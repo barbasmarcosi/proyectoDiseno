@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
+import Message from '../components/Message';
 import Modal from '../components/Modal'
 import Table from '../components/Table'
 
 function Productos() {
   const [openModal, setOpenModal] = useState(false);
+  const [succesMessage, setSuccessMessage] = useState(true);
+  const handleAcceptButton = () => {
+    setOpenModal(!openModal);
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
   const body = [{
     Producto: 'Empanada',
     Precio: 12,
@@ -40,9 +49,11 @@ function Productos() {
         <Table body={body} edit={false} del={false} />
         <div className="Button-container">
           <button onClick={() => setOpenModal(!openModal)} type="button" className='Button-cancel'>Cancelar</button>
-          <button onClick={() => setOpenModal(!openModal)} type="button" className='Button-accept'>Agregar</button>
-  </div>*/}
+          <button onClick={handleAcceptButton} type="button" className='Button-accept'>Agregar</button>
+          <button onClick={() => setOpenModal(!!openModal)} type="button" className='Button-accept'>Seguir agregando</button>
+        </div>
       </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Producto agregado correctamente</Message>
     </div>
   )
 }

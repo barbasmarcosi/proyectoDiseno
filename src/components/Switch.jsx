@@ -1,9 +1,6 @@
-import { useState } from "react";
-
-const Switch = () => {
-    const [active, setActive] = useState(false)
+const Switch = ({ active, onChangeSwitch }) => {
     return (
-        <div onClick={() => setActive(!active)} className={`Switch-bar ${active ? 'Switch-bar--active' : ''}`}>
+        <div onClick={onChangeSwitch} className={`Switch-bar ${active ? 'Switch-bar--active' : ''}`}>
             <div className={`Switch-ball ${active ? 'Switch-ball--active' : ''}`}></div>
         </div>
     );

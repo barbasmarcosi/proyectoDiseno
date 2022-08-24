@@ -98,21 +98,22 @@ body {
 }
 .Pedidos {
   margin: 2rem;
-  display: grid;
-  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   width: 80%;
 }
 
 .Pedidos-form {
-  grid-template-columns: 50% 50%;
-  column-gap: 4rem;
-  row-gap: 4rem;
-  margin: 2rem;
-  display: grid;
-  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  text-align: center;
+  justify-content: center;
   width: 100%;
 }
 .LabeledInput {
+  margin: 2rem;
   display: grid;
   justify-content: stretch;
   border: 1px solid black;
@@ -122,9 +123,7 @@ body {
   border-radius: 0.3rem;
 }
 .LabeledInput--hidden {
-  position: absolute;
-  top: -100vw;
-  left: -100vw;
+  visibility: hidden;
 }
 .LabeledInput-label {
   position: block;
@@ -156,6 +155,8 @@ body {
   background-color: aqua;
 }
 .Labeler {
+  margin: 2rem;
+
   display: grid;
   border: 1px solid black;
   width: max-content;
