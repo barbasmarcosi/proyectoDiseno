@@ -261,3 +261,60 @@ body {
 .Productos {
   text-align: center;
 }
+.Modal {
+  z-index: 3;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  width: 100%;
+  min-height: 100%;
+  height: max-content;
+  justify-content: center;
+  opacity: 98%;
+}
+.Modal-container-hidden {
+  display: flex;
+  justify-content: flex-start;
+  visibility: hidden;
+  height: 0vh;
+  width: 0vw;
+}
+.Modal-container {
+  padding: 3rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 5%;
+  display: flex;
+  background-color: gainsboro;
+  width: 80%;
+  height: max-content;
+  border-radius: 2rem;
+  box-shadow: 3px 3px 3px 0 black;
+}
+.Button-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem;
+}
+.Button-cancel, .Button-accept {
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 16px;
+  height: 3rem;
+  width: 6rem;
+  border-radius: 0.5rem;
+  margin: 6px;
+  box-shadow: 3px 3px 3px rgb(82, 82, 82);
+  transition: 0.5s box-shadow;
+}
+.Button-accept {
+  background-color: dodgerblue;
+  color: aliceblue;
+}
+.Button-cancel:hover, .Button-accept:hover {
+  box-shadow: none;
+  cursor: pointer;
+}

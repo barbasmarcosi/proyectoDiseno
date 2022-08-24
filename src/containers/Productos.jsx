@@ -1,20 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from '../components/Modal'
 import Table from '../components/Table'
 
 function Productos() {
-const body = [{
-  Producto: 'Empanada',
-  Precio: 12,
-},
-{
-  Producto: 'Vino',
-  Precio: 8,
-}]
+  const [openModal, setOpenModal] = useState(false);
+  const body = [{
+    Producto: 'Empanada',
+    Precio: 12,
+  },
+  {
+    Producto: 'Vino',
+    Precio: 8,
+  }]
   return (
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Productos</h1>
-      <input className='Button-add' type='button' value="Agregar Producto"/>
+      <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Producto</button>
       <Table body={body} edit={false} del={false} />
+      <Modal open={openModal} setClosed={() => setOpenModal(false)}>
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <Table body={body} edit={false} del={false} />
+        <div className="Button-container">
+          <button onClick={() => setOpenModal(!openModal)} type="button" className='Button-cancel'>Cancelar</button>
+          <button onClick={() => setOpenModal(!openModal)} type="button" className='Button-accept'>Agregar</button>
+  </div>*/}
+      </Modal>
     </div>
   )
 }
