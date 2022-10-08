@@ -1,9 +1,4 @@
 import React from 'react'
 
-function Home() {
-  return (
-    <div className='Home'>Home</div>
-  )
-}
-
+const Home = () => <h1>Bienvenido al Sistema de Gestion de la Empanaderia</h1>
 export default Home

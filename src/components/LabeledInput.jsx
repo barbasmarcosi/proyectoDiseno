@@ -1,18 +1,19 @@
 import Labeler from "./Labeler"
 
-const LabeledInput = ({ type, input, onChangeInput, hidden, text }) => {
-  const onChangeValue = (event) => {
-    onChangeInput(event.target.value)
-  }
+const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, onModal = true }) => {
 
   return (
-    <Labeler hidden={hidden} text={text}>
+    <Labeler 
+      hidden={hidden} 
+      text={text}
+      onModal={onModal}
+      >
       <input
-        value={input}
-        onChange={onChangeValue}
+        value={value}
+        onChange={onChange}
         type={type}
         name="LabeledInput"
-        className={`LabeledInput-text${!!input ? ' LabeledInput-text--filled' : ''}`} />
+        className={`LabeledInput-text${!!value ? ' LabeledInput-text--filled' : ''}`} />
     </Labeler>
   );
 }

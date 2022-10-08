@@ -1,8 +1,62 @@
 import React from 'react'
+import { useState } from 'react';
+import Form from '../components/Form';
+import LabeledInput from '../components/LabeledInput';
+import Message from '../components/Message';
+import Modal from '../components/Modal';
+import Table from '../components/Table';
+import useInputValue from '../hooks/useInputValue';
 
-function CierresCaja() {
+const CierresCaja = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [succesMessage, setSuccessMessage] = useState(true);
+  const cierreCaja = useInputValue((new Date(Date.now())).toISOString().slice(0, 10));
+  const retiros = useInputValue('');
+  const gastosExtras = useInputValue('');
+  const ingresosExtra = useInputValue('');
+
+
+  const handleAcceptButton = () => {
+    setOpenModal(!openModal);
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const body = [{
+    'Fecha de Cierre': '07/10/2022',
+    Retiros: 2531.25,
+    'Gastos Extras': 365.20,
+    'Ingresos Extras': 2987.22,
+    Total: 25899.75
+  },
+  {
+    'Fecha de Cierre': '07/10/2022',
+    Retiros: 1231.25,
+    'Gastos Extras': 985.22,
+    'Ingresos Extras': 278.14,
+    Total: 32900.25,
+  }]
   return (
-    <div>CierresCaja</div>
+    <div className='Productos'>
+      <h1 className='Productos-title'>Listado de Cierres de Caja</h1>
+      <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Generar Cierre de Caja</button>
+      <Table body={body} edit={false} del={false} />
+      <Modal open={openModal} setClosed={() => setOpenModal(false)}>
+        <Form
+          title={'Generar Cierre de Caja'}
+          multiple={true}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModal(!openModal)}>
+          <LabeledInput {...cierreCaja} type='date' text="Fecha de Cierre de Caja" />
+          <LabeledInput {...retiros} text="Retiros" />
+          <LabeledInput {...gastosExtras} text="Gastos Extras" />
+          <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Cierre de caja generado correctamente</Message>
+    </div>
   )
 }
 

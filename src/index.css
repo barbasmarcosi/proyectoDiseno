@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   color: aliceblue;
-  background-color: rgb(157, 157, 157);
+  background-color: #9d9d9d;
 }
 .Layout {
   display: grid;
@@ -103,8 +103,15 @@ body {
   text-align: center;
   width: 80%;
 }
-
 .Pedidos-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+.Form-self {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
@@ -156,7 +163,6 @@ body {
 }
 .Labeler {
   margin: 2rem;
-
   display: grid;
   border: 1px solid black;
   width: max-content;
@@ -173,7 +179,6 @@ body {
   padding: 0 0.5rem;
   margin: -0.5rem;
   margin-left: 0.5rem;
-  background-color: rgb(157, 157, 157);
   font-size: 12px;
   color: black;
 }
@@ -273,7 +278,7 @@ body {
   min-height: 100%;
   height: max-content;
   justify-content: center;
-  opacity: 98%;
+  opacity: 100%;
 }
 .Modal-container-hidden {
   display: flex;
@@ -288,7 +293,7 @@ body {
   flex-wrap: wrap;
   margin: 5%;
   display: flex;
-  background-color: gainsboro;
+  background-color: #dcdcdc;
   width: 80%;
   height: max-content;
   border-radius: 2rem;
