@@ -10,12 +10,23 @@ import useInputValue from '../hooks/useInputValue';
 const RemitosCompra = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const proveedor = useInputValue('');
   const facturaCompra = useInputValue('');
   const montoTotal = useInputValue('');
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Remito de proveedor agregado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal);
+    setMessage('Datos de remito de proveedor modificado correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -33,7 +44,7 @@ const RemitosCompra = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Remitos de Proveedor</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Remito de Proveedor</button>
-      <Table body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Remito de Proveedor'}
@@ -46,7 +57,21 @@ const RemitosCompra = () => {
           <LabeledInput {...montoTotal} text="Monto Total" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Remito de proveedor agregado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar datos de remito de proveedor'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...proveedor} text="Proveedor" />
+          <LabeledInput {...facturaCompra} text="Factura de Compra" />
+          <LabeledInput {...montoTotal} text="Monto Total" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

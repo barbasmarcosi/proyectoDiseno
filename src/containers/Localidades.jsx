@@ -10,12 +10,23 @@ import useInputValue from '../hooks/useInputValue';
 const Localidades = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const localidad = useInputValue('');
   const provincia = useInputValue('');
   const codigoPostal = useInputValue('');
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Localidad agregada correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Localidad modificada correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -33,7 +44,7 @@ const Localidades = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Localidades</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Localidad</button>
-      <Table body={body} edit={false} del={false} />
+      <Table body={body} onEdit={() => setOpenModifyModal(!openModifyModal)} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Localidad'}
@@ -46,7 +57,21 @@ const Localidades = () => {
           <LabeledInput {...codigoPostal} text="Codigo Postal" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Localidad agregada correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Agregar Localidad'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...localidad} text="Localidad" />
+          <LabeledInput {...provincia} text="Provincia" />
+          <LabeledInput {...codigoPostal} text="Codigo Postal" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

@@ -10,12 +10,23 @@ import useInputValue from '../hooks/useInputValue';
 const Reclamos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const pedidoCliente = useInputValue('');
   const descripcion = useInputValue('');
 
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Reclamo generado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Reclamo modificado correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -33,7 +44,7 @@ const Reclamos = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Reclamos</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Generar Reclamo</button>
-      <Table body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Generar Reclamo'}
@@ -45,7 +56,20 @@ const Reclamos = () => {
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Reclamo generado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar Reclamo'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...pedidoCliente} text="Pedido de Cliente" />
+          <LabeledInput {...descripcion} text="Descripcion" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

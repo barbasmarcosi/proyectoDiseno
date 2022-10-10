@@ -10,6 +10,8 @@ import useInputValue from '../hooks/useInputValue';
 const Presupuestos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const cliente = useInputValue('');
   const fechaVencimiento = useInputValue('');
   const costoTotal = useInputValue('');
@@ -19,6 +21,15 @@ const Presupuestos = () => {
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Presupuesto agregado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Presupuesto modificado correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -36,7 +47,7 @@ const Presupuestos = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Presupuestos</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Presupuesto</button>
-      <Table body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Presupuesto'}
@@ -51,7 +62,23 @@ const Presupuestos = () => {
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Presupuesto agregado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar Presupuesto'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...cliente} text="Cliente" />
+          <LabeledInput {...fechaVencimiento} type='date' text="Fecha de Vencimiento" />
+          <LabeledInput {...costoTotal} text="Costo Total" />
+          <LabeledInput {...descuento} text="Descuento" />
+          <LabeledInput {...observaciones} text="Observaciones" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

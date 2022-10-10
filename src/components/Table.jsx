@@ -1,4 +1,4 @@
-const Table = ({ body, edit, del }) => {
+const Table = ({ body, edit, del, onEdit }) => {
     return (
         <div className="Table">
             <table className="Table-self">
@@ -13,7 +13,7 @@ const Table = ({ body, edit, del }) => {
                         <tr className="Table-tbody-tr">
                             {Object.keys(tr).map(key => <td className="Table-tbody-tr-td">{tr[key]}</td>)}
                             <td>
-                                <input className="Button-edit" type='button' value="Editar" hidden={edit} />
+                                <input className="Button-edit" onClick={onEdit} type='button' value="Editar" hidden={edit} />
                                 <input className="Button-delete" type='button' value="Eliminar" hidden={del}/>
                             </td>
                         </tr>

@@ -9,6 +9,8 @@ import useInputValue from '../hooks/useInputValue';
 
 const Calles = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState(true);
   const calle = useInputValue('');
   const localidad = useInputValue('');
@@ -16,6 +18,15 @@ const Calles = () => {
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Calle agregada correctamente');
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleEditButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Calle modificada correctamente');
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -33,7 +44,7 @@ const Calles = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Calles</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Calle</button>
-      <Table body={body} edit={false} del={false} />
+      <Table body={body} edit={false} onEdit={() => setOpenModifyModal(!openModifyModal)} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Calle'}
@@ -45,7 +56,18 @@ const Calles = () => {
           <LabeledInput {...localidad} text="Localidad" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Calle agregado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModal(false)}>
+        <Form
+          edit={true}
+          title={'Modificar Calle'}
+          multiple={true}
+          onEdit={() => handleEditButton()}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...calle} text="Calle" />
+          <LabeledInput {...localidad} text="Localidad" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

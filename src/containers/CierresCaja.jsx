@@ -10,6 +10,8 @@ import useInputValue from '../hooks/useInputValue';
 const CierresCaja = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const cierreCaja = useInputValue((new Date(Date.now())).toISOString().slice(0, 10));
   const retiros = useInputValue('');
   const gastosExtras = useInputValue('');
@@ -18,6 +20,15 @@ const CierresCaja = () => {
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Cierre de caja generado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal);
+    setMessage('Cierre de caja modificado correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -41,7 +52,7 @@ const CierresCaja = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Cierres de Caja</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Generar Cierre de Caja</button>
-      <Table body={body} edit={false} del={false} />
+      <Table body={body} onEdit={() => setOpenModifyModal(!openModifyModal)} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Generar Cierre de Caja'}
@@ -55,7 +66,20 @@ const CierresCaja = () => {
           <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Cierre de caja generado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar Cierre de Caja'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...cierreCaja} type='date' text="Fecha de Cierre de Caja" />
+          <LabeledInput {...retiros} text="Retiros" />
+          <LabeledInput {...gastosExtras} text="Gastos Extras" />
+          <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

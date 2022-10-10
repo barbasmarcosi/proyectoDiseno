@@ -10,11 +10,22 @@ import useInputValue from '../hooks/useInputValue';
 function TiposResponsable() {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const descripcion = useInputValue('');
 
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Tipo de responsable agregado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Tipo de responsable modifcado correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -32,7 +43,7 @@ function TiposResponsable() {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Tipos de Responsable</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Tipo de Responsable</button>
-      <Table body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Tipo de Responsable'}
@@ -43,7 +54,19 @@ function TiposResponsable() {
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Tipo de responsable agregado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar Tipo de Responsable'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...descripcion} text="Descripcion" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }

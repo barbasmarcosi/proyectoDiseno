@@ -10,6 +10,8 @@ import useInputValue from '../hooks/useInputValue';
 const Personal = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [message, setMessage] = useState('');
   const nombre = useInputValue('');
   const apellido = useInputValue('');
   const dni = useInputValue('');
@@ -25,6 +27,15 @@ const Personal = () => {
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessage('Personal agregado correctamente')
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true)
+    }, 5000);
+  }
+  const handleModifyButton = () => {
+    setOpenModifyModal(!openModifyModal)
+    setMessage('Datos de personal modificados correctamente')
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true)
@@ -42,7 +53,7 @@ const Personal = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Personal</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Personal</button>
-      <Table body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Personal'}
@@ -63,7 +74,29 @@ const Personal = () => {
           <LabeledInput {...sueldo} text="Sueldo" />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >Personal agregado correctamente</Message>
+      <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
+        <Form
+          title={'Modificar Datos de Personal'}
+          multiple={true}
+          edit={true}
+          onEdit={() => handleModifyButton()}
+          onAdd={() => handleAcceptButton()}
+          onAddMultiple={() => setOpenModal(!!openModal)}
+          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          <LabeledInput {...nombre} text="Nombres" />
+          <LabeledInput {...apellido} text="Apellidos" />
+          <LabeledInput {...dni} text="DNI" />
+          <LabeledInput {...cuil} text="CUIL" />
+          <LabeledInput {...calle} text="Calle" />
+          <LabeledInput {...altura} text="Altura" />
+          <LabeledInput {...depto} text="Departamento" />
+          <LabeledInput {...telefono} text="Telefono" />
+          <LabeledInput {...mail} text="Mail" />
+          <LabeledInput {...puesto} text="Puesto" />
+          <LabeledInput {...sueldo} text="Sueldo" />
+        </Form>
+      </Modal>
+      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
     </div>
   )
 }
