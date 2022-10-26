@@ -1,6 +1,6 @@
 import Labeler from "./Labeler"
 
-const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, onModal = true }) => {
+const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, onModal = true, toShowId = false }) => {
 
   return (
     <Labeler 
@@ -13,7 +13,9 @@ const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, on
         onChange={onChange}
         type={type}
         name="LabeledInput"
-        className={`LabeledInput-text${!!value ? ' LabeledInput-text--filled' : ''}`} />
+        className={`LabeledInput-text${!!value ? ' LabeledInput-text--filled' : ''}`} 
+        style={toShowId ? {width : '5rem'} : {}}
+        />
     </Labeler>
   );
 }

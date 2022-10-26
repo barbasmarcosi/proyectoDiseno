@@ -10,17 +10,21 @@ const NavBar = () => {
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/productos">Productos</Link>
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/recetas">Recetas</Link>
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/rubros">Rubros</Link>
+                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/marcas">Marcas</Link>
                 </Accordion>
-                <Accordion title="Pedidos">
+                <Accordion title="Ventas">
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/pedidos">Pedidos</Link>
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/presupuestos">Presupuestos</Link>
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/reclamos">Reclamos</Link>
+                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/ventas">Comprobantes de Venta</Link>
+                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/remitosEntrega">Remitos de Entrega</Link>
+                </Accordion>
+                <Accordion title="Compras">
+                <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/ordenes-compra">Ordenes de Compra</Link>
+                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/facturas-compra">Facturas de Compra</Link>
+                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/remitos-compra">Remitos de Proveedor</Link>
                 </Accordion>
                 <Accordion title="Finanzas">
-                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/ordenes-compra">Ordenes de Compra</Link>
-                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/facturas-compra">Facutras de Compra</Link>
-                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/remitos-compra">Remitos de Proveedor</Link>
-                    <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/ventas">Ventas</Link>
                     <Link onClick={(e) => e.stopPropagation()} className='NavBar-item-link' to="/cierres-caja">Cierres de Caja</Link>
                 </Accordion>
                 <Accordion title="Administrar">

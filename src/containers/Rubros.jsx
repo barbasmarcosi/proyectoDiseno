@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Modal from '../components/Modal';
 import Table from '../components/Table';
 import useInputValue from '../hooks/useInputValue';
+import modulo_productos from '../initialState/modulo_productos';
 
 const Rubros = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -31,19 +32,11 @@ const Rubros = () => {
       setSuccessMessage(true)
     }, 5000);
   }
-  const body = [{
-    Calle: 'Villegas',
-    Localidad: 'Trenque Lauquen',
-  },
-  {
-    Calle: 'Wilde',
-    Localidad: 'Trenque Lauquen',
-  }]
   return (
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Rubros</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Rubro</button>
-      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={modulo_productos.rubros} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Rubro'}

@@ -231,17 +231,19 @@ body {
   border-radius: 4px;
   border-collapse: collapse;
 }
+.Table-tbody-tr-td {
+  border-right: 1px solid grey;
+  padding: 2px;
+}
 .Table-thead {
   border-bottom: 2px solid black;
 }
-.Table-thead-tr {
-  padding: 8px;
-}
-.Table-tbody {
+.Table-thead-tr-th {
+  text-overflow: wrap;
+  border-right: 1px solid black;
 }
 .Table-tbody-tr {
   border-bottom: 2px solid grey;
-  padding: 8px;
 }
 .Button-edit, .Button-delete, .Button-add {
   background-color: #FFC107;

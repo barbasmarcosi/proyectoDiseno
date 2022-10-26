@@ -24,6 +24,8 @@ import Provincias from "../containers/Provincias";
 import Localidades from "../containers/Localidades";
 import Calles from "../containers/Calles";
 import FormasPago from "../containers/FormasPago";
+import Marcas from "../containers/Marcas";
+import RemitosEntrega from "../containers/RemitosEntrega";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
             <Route path="/productos" element={<Productos />} />
             <Route path="/recetas" element={<Recetas />} />
             <Route path="/rubros" element={<Rubros />} />
+            <Route path="/marcas" element={<Marcas />} />
             <Route path="/pedidos" element={<Pedidos />} />
             <Route path="/presupuestos" element={<Presupuestos />} />
             <Route path="/reclamos" element={<Reclamos />} />
@@ -55,6 +58,7 @@ function App() {
             <Route path="/localidades" element={<Localidades />} />
             <Route path="/calles" element={<Calles />} />
             <Route path="/formas-pago" element={<FormasPago />} />
+            <Route path="/remitosEntrega" element={<RemitosEntrega />} />
           </Routes>
         </Layout>
       </Router>

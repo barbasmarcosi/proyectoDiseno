@@ -6,6 +6,8 @@ import Message from '../components/Message';
 import Modal from '../components/Modal';
 import Table from '../components/Table';
 import useInputValue from '../hooks/useInputValue';
+import modulo_ventas from '../initialState/modulo_ventas';
+import LabeledDataList from '../components/LabeledDataList';
 
 const Reclamos = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -13,6 +15,7 @@ const Reclamos = () => {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState('');
   const pedidoCliente = useInputValue('');
+  const fechaReclamo = useInputValue('');
   const descripcion = useInputValue('');
 
 
@@ -32,19 +35,11 @@ const Reclamos = () => {
       setSuccessMessage(true)
     }, 5000);
   }
-  const body = [{
-    Calle: 'Villegas',
-    Localidad: 'Trenque Lauquen',
-  },
-  {
-    Calle: 'Wilde',
-    Localidad: 'Trenque Lauquen',
-  }]
   return (
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Reclamos</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Generar Reclamo</button>
-      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={modulo_ventas.reclamos} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Generar Reclamo'}
@@ -52,7 +47,9 @@ const Reclamos = () => {
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}>
-          <LabeledInput {...pedidoCliente} text="Pedido de Cliente" />
+          <LabeledInput value={modulo_ventas.reclamos.length + 1} toShowId={true} text="Nro. Reclamo" />
+          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={'id'} text="Pedido de Cliente" />
+          <LabeledInput {...fechaReclamo} type="datetime-local" text="Fecha de Reclamo" />
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>
       </Modal>
@@ -65,7 +62,9 @@ const Reclamos = () => {
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}>
-          <LabeledInput {...pedidoCliente} text="Pedido de Cliente" />
+          <LabeledInput value={modulo_ventas.reclamos.length + 1} toShowId={true} text="Nro. Reclamo" />
+          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={'id'} text="Pedido de Cliente" />
+          <LabeledInput {...fechaReclamo} type="datetime-local" text="Fecha de Reclamo" />
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>
       </Modal>

@@ -6,6 +6,8 @@ import Message from '../components/Message';
 import Modal from '../components/Modal';
 import Table from '../components/Table';
 import useInputValue from '../hooks/useInputValue';
+import modulo_ventas from '../initialState/modulo_ventas';
+import LabeledDataList from '../components/LabeledDataList';
 
 const Ventas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -13,14 +15,12 @@ const Ventas = () => {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState('');
   const pedido = useInputValue('');
-  const montoTotal = useInputValue('');
   const fechaHora = useInputValue('');
-  const tipoFactura = useInputValue('');
   const nroFactura = useInputValue('');
-  const razonSocial = useInputValue('');
-  const domicilioComercial = useInputValue('');
-  const inicioActividad = useInputValue('');
-  const ingresosBrutos = useInputValue('');
+  const tipoFactura = useInputValue('');
+  const montoTotal = useInputValue('');
+  const productos = useInputValue('');
+
 
 
   const handleAcceptButton = () => {
@@ -49,9 +49,9 @@ const Ventas = () => {
   }]
   return (
     <div className='Productos'>
-      <h1 className='Productos-title'>Listado de Ventas</h1>
+      <h1 className='Productos-title'>Listado de Comprobantes de venta</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Comprobante de Venta</button>
-      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
+      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={modulo_ventas.comprobantesVenta} exceptions={['productos']} edit={false} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Comprobante de Venta'}
@@ -59,14 +59,21 @@ const Ventas = () => {
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}>
-          <LabeledInput {...pedido} text="Pedido" />
-          <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledInput {...nroFactura} text="Numero de Factura" />
-          <LabeledInput {...tipoFactura} text="Tipo de Factura" />
-          <LabeledInput {...razonSocial} text="Razon Social" />
-          <LabeledInput {...domicilioComercial} text="Domicilio Comercial" />
-          <LabeledInput {...inicioActividad} type='date' text="Inicio de Actividad" />
-          <LabeledInput {...ingresosBrutos} text="Ingresos Brutos" />
+          <LabeledInput value={modulo_ventas.comprobantesVenta.length + 1} toShowId={true} text="Nro. Comprobante" />
+          <LabeledDataList {...pedido} options={modulo_ventas.pedidos} which={'id'} text="Nro.Pedido" />
+          <LabeledInput {...fechaHora} text="Fecha de Comprobante" />
+          <LabeledDataList options={modulo_ventas.comprobantesVenta} which={'nroFactura'} {...nroFactura} text="Nro. de Factura" />
+          <LabeledDataList
+            {...tipoFactura}
+            options={[
+              { tipoFactura: "A" },
+              { tipoFactura: "B" },
+              { tipoFactura: "C" },
+            ]}
+            which={"tipoFactura"}
+            text="Tipo de factura"
+          />
+          <LabeledInput {...montoTotal} text="Monto total" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -78,14 +85,21 @@ const Ventas = () => {
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}>
-          <LabeledInput {...pedido} text="Pedido" />
-          <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledInput {...nroFactura} text="Numero de Factura" />
-          <LabeledInput {...tipoFactura} text="Tipo de Factura" />
-          <LabeledInput {...razonSocial} text="Razon Social" />
-          <LabeledInput {...domicilioComercial} text="Domicilio Comercial" />
-          <LabeledInput {...inicioActividad} type='date' text="Inicio de Actividad" />
-          <LabeledInput {...ingresosBrutos} text="Ingresos Brutos" />
+          <LabeledInput value={modulo_ventas.comprobantesVenta.length + 1} toShowId={true} text="Nro. Comprobante" />
+          <LabeledDataList {...pedido} options={modulo_ventas.pedidos} which={'id'} text="Nro.Pedido" />
+          <LabeledInput {...fechaHora} text="Fecha de Comprobante" />
+          <LabeledDataList options={modulo_ventas.comprobantesVenta} which={'nroFactura'} {...nroFactura} text="Nro. de Factura" />
+          <LabeledDataList
+            {...tipoFactura}
+            options={[
+              { tipoFactura: "A" },
+              { tipoFactura: "B" },
+              { tipoFactura: "C" },
+            ]}
+            which={"tipoFactura"}
+            text="Tipo de factura"
+          />
+          <LabeledInput {...montoTotal} text="Monto total" />
         </Form>
       </Modal>
       <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>

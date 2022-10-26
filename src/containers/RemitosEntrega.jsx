@@ -1,25 +1,23 @@
-import React from "react";
-import { useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_compras from "../initialState/modulo_compras";
+import modulo_ventas from "../initialState/modulo_ventas";
 import LabeledDataList from "../components/LabeledDataList";
+import { useState } from "react";
 
-const RemitosCompra = () => {
+const RemitosEntrega = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
+  const pedido = useInputValue("");
+  const fechaRemito = useInputValue("");
   const nroFactura = useInputValue("");
   const tipoFactura = useInputValue("");
-  const fechaRemito = useInputValue("");
   const montoTotal = useInputValue("");
-  const condicionVenta = useInputValue("");
-  const observaciones = useInputValue("");
   const productos = useInputValue("");
 
   const handleAcceptButton = () => {
@@ -50,7 +48,7 @@ const RemitosCompra = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_compras.remitosProveedor}
+        body={modulo_ventas.remitosEntrega}
         exceptions={["productos"]}
         edit={false}
         del={false}
@@ -63,35 +61,31 @@ const RemitosCompra = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}
         >
+          <LabeledInput value={modulo_ventas.remitosEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledDataList
+            {...pedido}
+            options={modulo_ventas.pedidos}
+            which={"id"}
+            text="Nro. Pedido"
+          />
+          <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
           <LabeledDataList
             {...nroFactura}
-            options={modulo_compras.facturasCompra}
+            options={modulo_ventas.comprobantesVenta}
             which={"nroFactura"}
-            text="Nro de factura"
+            text="Nro. Factura"
           />
           <LabeledDataList
             {...tipoFactura}
             options={[
               { tipoFactura: "A" },
-              { tipoFactura: "C" },
+              { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
             which={"tipoFactura"}
             text="Tipo de factura"
           />
-          <LabeledInput
-            {...fechaRemito}
-            type="datetime-local"
-            text="Fecha y hora de la factura"
-          />
           <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledDataList
-            {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
-            which={"id"}
-            text="Condicion de venta"
-          />
-          <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -104,35 +98,31 @@ const RemitosCompra = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
+          <LabeledInput value={modulo_ventas.remitosEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledDataList
+            {...pedido}
+            options={modulo_ventas.pedidos}
+            which={"id"}
+            text="Nro. Pedido"
+          />
+          <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
           <LabeledDataList
             {...nroFactura}
-            options={modulo_compras.facturasCompra}
+            options={modulo_ventas.comprobantesVenta}
             which={"nroFactura"}
-            text="Nro de factura"
+            text="Nro. Factura"
           />
           <LabeledDataList
             {...tipoFactura}
             options={[
               { tipoFactura: "A" },
-              { tipoFactura: "C" },
+              { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
             which={"tipoFactura"}
             text="Tipo de factura"
           />
-          <LabeledInput
-            {...fechaRemito}
-            type="datetime-local"
-            text="Fecha y hora de la factura"
-          />
           <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledDataList
-            {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
-            which={"id"}
-            text="Condicion de venta"
-          />
-          <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
       <Message
@@ -146,4 +136,4 @@ const RemitosCompra = () => {
   );
 };
 
-export default RemitosCompra;
+export default RemitosEntrega;
