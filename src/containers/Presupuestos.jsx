@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
@@ -7,12 +6,14 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import modulo_ventas from "../initialState/modulo_ventas";
+import modulo_productos from "../initialState/modulo_productos";
 import LabeledDataList from "../components/LabeledDataList";
 
 const Presupuestos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
+  const [detailsModal, setDetailsModal] = useState(false);
   const [message, setMessage] = useState("");
   const cliente = useInputValue("");
   const fechaEmision = useInputValue("");
@@ -22,12 +23,45 @@ const Presupuestos = () => {
   const descuento = useInputValue("");
   const costoTotal = useInputValue("");
   const observaciones = useInputValue("");
-  const productos = useInputValue("");
+  const producto = useInputValue("");
+  const cantidadProducto = useInputValue("");
+  const unidadMedida = useInputValue("");
+  const precioUnitario = useInputValue("");
+  const [importe, setImporte] = useState("");
+  const detailRef = useRef();
+  let detallePresupuesto = JSON.parse(
+    localStorage.getItem("presupuestoDetalle")
+  )
+    ? JSON.parse(localStorage.getItem("presupuestoDetalle"))
+    : [];
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Presupuesto agregado correctamente");
     setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true);
+    }, 5000);
+  };
+  const handleAcceptIngredientButton = () => {
+    setDetailsModal(!detailsModal);
+    setMessage("Producto agregado correctamente");
+    setSuccessMessage(!succesMessage);
+    detallePresupuesto.push({
+      producto: detailRef.current.children[0].children[1].children[0].value,
+      cantidad: detailRef.current.children[1].children[1].children[0].value,
+      unidadMedida: detailRef.current.children[2].children[1].children[0].value,
+      precioUnitario:
+        detailRef.current.children[3].children[1].children[0].value,
+      importe:
+        detailRef.current.children[1].children[1].children[0].value *
+        detailRef.current.children[3].children[1].children[0].value,
+    });
+    localStorage.setItem(
+      "presupuestoDetalle",
+      JSON.stringify(detallePresupuesto)
+    );
+    detallePresupuesto = JSON.parse(localStorage.getItem("presupuestoDetalle"));
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
@@ -53,7 +87,7 @@ const Presupuestos = () => {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_ventas.presupuestos}
-        exceptions={["productos"]}
+        exceptions={[]}
         edit={false}
         del={false}
       />
@@ -74,7 +108,7 @@ const Presupuestos = () => {
             {...cliente}
             text="Cliente"
             options={modulo_ventas.presupuestos}
-            which={"cliente"}
+            which={["cliente"]}
           />
           <LabeledInput
             {...fechaEmision}
@@ -91,6 +125,24 @@ const Presupuestos = () => {
           <LabeledInput {...descuento} text="Descuento" />
           <LabeledInput {...costoTotal} text="Costo Total" />
           <LabeledInput {...observaciones} text="Observaciones" />
+          <Table
+            onEdit={() => setDetailsModal(!detailsModal)}
+            body={detallePresupuesto}
+            edit={false}
+            del={false}
+          />
+          <button
+            style={{
+              width: "max-content",
+              marginBottom: "2rem",
+              marginTop: "2rem",
+            }}
+            onClick={() => setDetailsModal(true)}
+            type="button"
+            className="Button-cancel"
+          >
+            Seleccionar Producto
+          </button>
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -112,7 +164,7 @@ const Presupuestos = () => {
             {...cliente}
             text="Cliente"
             options={modulo_ventas.presupuestos}
-            which={"cliente"}
+            which={["cliente"]}
           />
           <LabeledInput
             {...fechaEmision}
@@ -129,6 +181,62 @@ const Presupuestos = () => {
           <LabeledInput {...descuento} text="Descuento" />
           <LabeledInput {...costoTotal} text="Costo Total" />
           <LabeledInput {...observaciones} text="Observaciones" />
+          <Table
+            onEdit={() => setDetailsModal(!detailsModal)}
+            body={detallePresupuesto}
+            edit={false}
+            del={false}
+          />
+          <button
+            style={{
+              width: "max-content",
+              marginBottom: "2rem",
+              marginTop: "2rem",
+            }}
+            onClick={() => setDetailsModal(true)}
+            type="button"
+            className="Button-cancel"
+          >
+            Seleccionar Producto
+          </button>
+        </Form>
+      </Modal>
+      <Modal open={detailsModal} setClosed={() => setDetailsModal(false)}>
+        <Form
+          title={"Seleccionar Productos"}
+          multiple={true}
+          edit={false}
+          //onEdit={() => handleModifyIngredientButton()}
+          onAdd={() => handleAcceptIngredientButton()}
+          onAddMultiple={() => setDetailsModal(!!detailsModal)}
+          onCancel={() => setDetailsModal(!detailsModal)}
+        >
+          <div
+            ref={detailRef}
+            onChange={() =>
+              setImporte(
+                () =>
+                  detailRef.current.children[1].children[1].children[0].value *
+                  detailRef.current.children[3].children[1].children[0].value
+              )
+            }
+          >
+            <LabeledDataList
+              {...producto}
+              options={modulo_productos.productos}
+              which={["descripcion"]}
+              text="Producto"
+            />
+            <LabeledInput {...cantidadProducto} text="Cantidad" />
+            <LabeledDataList
+              {...unidadMedida}
+              options={modulo_productos.recetas[2].materiaPrima}
+              which={["unidadMedida"]}
+              text="Unidad de medida"
+            />
+            <LabeledInput {...precioUnitario} text="Precio Unitario" />
+            <LabeledInput value={importe} text="Importe" />
+          </div>
         </Form>
       </Modal>
       <Message

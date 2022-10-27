@@ -48,7 +48,7 @@ const Reclamos = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}>
           <LabeledInput value={modulo_ventas.reclamos.length + 1} toShowId={true} text="Nro. Reclamo" />
-          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={'id'} text="Pedido de Cliente" />
+          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={['id']} text="Pedido de Cliente" />
           <LabeledInput {...fechaReclamo} type="datetime-local" text="Fecha de Reclamo" />
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>
@@ -63,7 +63,7 @@ const Reclamos = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}>
           <LabeledInput value={modulo_ventas.reclamos.length + 1} toShowId={true} text="Nro. Reclamo" />
-          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={'id'} text="Pedido de Cliente" />
+          <LabeledDataList {...pedidoCliente} options={modulo_ventas.pedidos} which={['id']} text="Pedido de Cliente" />
           <LabeledInput {...fechaReclamo} type="datetime-local" text="Fecha de Reclamo" />
           <LabeledInput {...descripcion} text="Descripcion" />
         </Form>

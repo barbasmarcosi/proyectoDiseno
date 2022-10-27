@@ -49,7 +49,7 @@ const RemitosEntrega = () => {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_ventas.remitosEntrega}
-        exceptions={["productos"]}
+        exceptions={[]}
         edit={false}
         del={false}
       />
@@ -65,14 +65,14 @@ const RemitosEntrega = () => {
           <LabeledDataList
             {...pedido}
             options={modulo_ventas.pedidos}
-            which={"id"}
+            which={["id"]}
             text="Nro. Pedido"
           />
           <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
           <LabeledDataList
             {...nroFactura}
             options={modulo_ventas.comprobantesVenta}
-            which={"nroFactura"}
+            which={["nroFactura"]}
             text="Nro. Factura"
           />
           <LabeledDataList
@@ -82,7 +82,7 @@ const RemitosEntrega = () => {
               { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
@@ -102,14 +102,14 @@ const RemitosEntrega = () => {
           <LabeledDataList
             {...pedido}
             options={modulo_ventas.pedidos}
-            which={"id"}
+            which={["id"]}
             text="Nro. Pedido"
           />
           <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
           <LabeledDataList
             {...nroFactura}
             options={modulo_ventas.comprobantesVenta}
-            which={"nroFactura"}
+            which={["nroFactura"]}
             text="Nro. Factura"
           />
           <LabeledDataList
@@ -119,7 +119,7 @@ const RemitosEntrega = () => {
               { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />

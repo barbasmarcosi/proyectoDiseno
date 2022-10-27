@@ -21,17 +21,24 @@ const LabeledDataList = ({
         list={text}
       />
       <datalist id={text}>
-        {nullable ? <option
-          className="LabeledInput-option"
-          value={`Sin ${text[0].toLowerCase() + text.slice(1, text.length)}`}
-        /> : false}
+        {nullable ? (
+          <option
+            className="LabeledInput-option"
+            value={`Sin ${text[0].toLowerCase() + text.slice(1, text.length)}`}
+          />
+        ) : (
+          false
+        )}
         {options.map((opt) => {
-          console.log(`${opt[`${which}`]}`);
           return (
             <option
               key={opt.id}
               className="LabeledInput-option"
-              value={`${opt[`${which}`]}`}
+              value={
+                which.length > 1
+                  ? which.map((one) => ` ${opt[one]}`)
+                  : `${opt[which]}`
+              }
             />
           );
         })}

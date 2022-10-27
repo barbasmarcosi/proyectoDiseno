@@ -51,7 +51,7 @@ const RemitosCompra = () => {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_compras.remitosProveedor}
-        exceptions={["productos"]}
+        exceptions={[]}
         edit={false}
         del={false}
       />
@@ -66,7 +66,7 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...nroFactura}
             options={modulo_compras.facturasCompra}
-            which={"nroFactura"}
+            which={["nroFactura"]}
             text="Nro de factura"
           />
           <LabeledDataList
@@ -76,7 +76,7 @@ const RemitosCompra = () => {
               { tipoFactura: "C" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput
@@ -88,7 +88,7 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...condicionVenta}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />
@@ -107,7 +107,7 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...nroFactura}
             options={modulo_compras.facturasCompra}
-            which={"nroFactura"}
+            which={["nroFactura"]}
             text="Nro de factura"
           />
           <LabeledDataList
@@ -117,7 +117,7 @@ const RemitosCompra = () => {
               { tipoFactura: "C" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput
@@ -129,7 +129,7 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...condicionVenta}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />

@@ -73,34 +73,34 @@ const Productos = () => {
           <LabeledDataList
             {...rubro}
             options={modulo_productos.rubros}
-            which={"descripcion"}
+            which={["descripcion"]}
             text="Rubro"
           />
           <LabeledDataList
             {...marca}
             nullable={true}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Marca"
           />
           <LabeledDataList
             {...proveedor}
             nullable={true}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...receta}
             nullable={true}
             options={modulo_productos.recetas}
-            which={"descripcion"}
+            which={["descripcion"]}
             text="Receta"
           />
           <LabeledDataList
             {...tipoIVA}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Tipo de IVA"
           />
           <LabeledInput {...stock} text="Stock" />
@@ -128,31 +128,31 @@ const Productos = () => {
           <LabeledDataList
             {...rubro}
             options={modulo_productos.rubros}
-            which={"descripcion"}
+            which={["descripcion"]}
             text="Rubro"
           />
           <LabeledDataList
             {...marca}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Marca"
           />
           <LabeledDataList
             {...proveedor}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...receta}
             options={modulo_productos.recetas}
-            which={"descripcion"}
+            which={["descripcion"]}
             text="Receta"
           />
           <LabeledDataList
             {...tipoIVA}
             options={modulo_productos.marcas}
-            which={"nombre"}
+            which={["nombre"]}
             text="Tipo de IVA"
           />
           <LabeledInput {...stock} text="Stock" />

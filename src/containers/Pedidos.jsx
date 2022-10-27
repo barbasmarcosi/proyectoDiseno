@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import LabeledInput from "../components/LabeledInput";
 import LabeledDataList from "../components/LabeledDataList";
 import Switch from "../components/Switch";
@@ -9,13 +9,14 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import Labeler from "../components/Labeler";
 import modulo_ventas from "../initialState/modulo_ventas";
+import modulo_productos from "../initialState/modulo_productos";
 
 function Pedidos() {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [detailsModal, setDetailsModal] = useState(false);
   const cliente = useInputValue("");
   const personal = useInputValue("");
   const fechaHoraPedido = useInputValue("");
@@ -33,12 +34,40 @@ function Pedidos() {
   const tipoVenta = useInputValue("");
   const observaciones = useInputValue("");
   const montoTotal = useInputValue("");
-  const productos = useInputValue("");
+  const producto = useInputValue("");
+  const cantidadProducto = useInputValue("");
+  const unidadMedida = useInputValue("");
+  const precioUnitario = useInputValue("");
+  const [importe, setImporte] = useState("");
+  const detailRef = useRef();
+  let detallePedido = JSON.parse(localStorage.getItem("detallePedido"))
+    ? JSON.parse(localStorage.getItem("detallePedido"))
+    : [];
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Pedido agregado correctamente");
     setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true);
+    }, 5000);
+  };
+  const handleAcceptIngredientButton = () => {
+    setDetailsModal(!detailsModal);
+    setMessage("Producto agregado correctamente");
+    setSuccessMessage(!succesMessage);
+    detallePedido.push({
+      producto: detailRef.current.children[0].children[1].children[0].value,
+      cantidad: detailRef.current.children[1].children[1].children[0].value,
+      unidadMedida: detailRef.current.children[2].children[1].children[0].value,
+      precioUnitario:
+        detailRef.current.children[3].children[1].children[0].value,
+      importe:
+        detailRef.current.children[1].children[1].children[0].value *
+        detailRef.current.children[3].children[1].children[0].value,
+    });
+    localStorage.setItem("detallePedido", JSON.stringify(detallePedido));
+    detallePedido = JSON.parse(localStorage.getItem("detallePedido"));
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
@@ -64,7 +93,7 @@ function Pedidos() {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_ventas.pedidos}
-        exceptions={["productos"]}
+        exceptions={[]}
         edit={false}
         del={false}
       />
@@ -85,13 +114,13 @@ function Pedidos() {
           <LabeledDataList
             {...cliente}
             options={modulo_ventas.pedidos}
-            which={"cliente"}
+            which={["cliente", "calle", "altura", "depto", "telefonoEntrega"]}
             text="Cliente"
           />
           <LabeledDataList
             {...personal}
             options={modulo_ventas.pedidos}
-            which={"encargado"}
+            which={["encargado"]}
             text="Encargado"
           />
           <LabeledInput
@@ -108,13 +137,13 @@ function Pedidos() {
             {...presupuesto}
             nullable={true}
             options={modulo_ventas.pedidos}
-            which={"id"}
+            which={["id"]}
             text="Presupuesto"
           />
           <LabeledDataList
             {...tipoVenta}
             options={[{ tipoVenta: "Minorista" }, { tipoVenta: "Mayorista" }]}
-            which={"tipoVenta"}
+            which={["tipoVenta"]}
             text="Tipo de Venta"
           />
           <LabeledDataList
@@ -124,7 +153,7 @@ function Pedidos() {
               { estado: "En entrega" },
               { estado: "Lista para entregar" },
             ]}
-            which={"estado"}
+            which={["estado"]}
             text="Estado"
           />
           <Labeler text="Envio">
@@ -142,7 +171,7 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...calle}
             options={modulo_ventas.pedidos}
-            which={"calle"}
+            which={["calle"]}
             text="Calle"
           />
           <LabeledInput hidden={!entregaDomicilio} {...altura} text="Altura" />
@@ -160,7 +189,7 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...delivery}
             options={modulo_ventas.pedidos}
-            which={"delivery"}
+            which={["delivery"]}
             text="Delivery"
           />
           <LabeledInput
@@ -174,6 +203,24 @@ function Pedidos() {
             text="Observaciones"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <Table
+            onEdit={() => setDetailsModal(!detailsModal)}
+            body={detallePedido}
+            edit={false}
+            del={false}
+          />
+          <button
+            style={{
+              width: "max-content",
+              marginBottom: "2rem",
+              marginTop: "2rem",
+            }}
+            onClick={() => setDetailsModal(true)}
+            type="button"
+            className="Button-cancel"
+          >
+            Seleccionar Producto
+          </button>
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -194,13 +241,13 @@ function Pedidos() {
           <LabeledDataList
             {...cliente}
             options={modulo_ventas.pedidos}
-            which={"cliente"}
+            which={["cliente"]}
             text="Cliente"
           />
           <LabeledDataList
             {...personal}
             options={modulo_ventas.pedidos}
-            which={"encargado"}
+            which={["encargado"]}
             text="Encargado"
           />
           <LabeledInput
@@ -216,13 +263,13 @@ function Pedidos() {
           <LabeledDataList
             {...presupuesto}
             options={modulo_ventas.pedidos}
-            which={"id"}
+            which={["id"]}
             text="Presupuesto"
           />
           <LabeledDataList
             {...tipoVenta}
             options={[{ tipoVenta: "Minorista" }, { tipoVenta: "Mayorista" }]}
-            which={"tipoVenta"}
+            which={["tipoVenta"]}
             text="Tipo de Venta"
           />
           <LabeledDataList
@@ -232,7 +279,7 @@ function Pedidos() {
               { estado: "En entrega" },
               { estado: "Lista para entregar" },
             ]}
-            which={"estado"}
+            which={["estado"]}
             text="Estado"
           />
           <Labeler text="Envio">
@@ -250,7 +297,7 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...calle}
             options={modulo_ventas.pedidos}
-            which={"calle"}
+            which={["calle"]}
             text="Calle"
           />
           <LabeledInput hidden={!entregaDomicilio} {...altura} text="Altura" />
@@ -268,7 +315,7 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...delivery}
             options={modulo_ventas.pedidos}
-            which={"delivery"}
+            which={["delivery"]}
             text="Delivery"
           />
           <LabeledInput
@@ -282,6 +329,62 @@ function Pedidos() {
             text="Observaciones"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <Table
+            onEdit={() => setDetailsModal(!detailsModal)}
+            body={detallePedido}
+            edit={false}
+            del={false}
+          />
+          <button
+            style={{
+              width: "max-content",
+              marginBottom: "2rem",
+              marginTop: "2rem",
+            }}
+            onClick={() => setDetailsModal(true)}
+            type="button"
+            className="Button-cancel"
+          >
+            Seleccionar Producto
+          </button>
+        </Form>
+      </Modal>
+      <Modal open={detailsModal} setClosed={() => setDetailsModal(false)}>
+        <Form
+          title={"Seleccionar Productos"}
+          multiple={true}
+          edit={false}
+          //onEdit={() => handleModifyIngredientButton()}
+          onAdd={() => handleAcceptIngredientButton()}
+          onAddMultiple={() => setDetailsModal(!!detailsModal)}
+          onCancel={() => setDetailsModal(!detailsModal)}
+        >
+          <div
+            ref={detailRef}
+            onChange={() =>
+              setImporte(
+                () =>
+                  detailRef.current.children[1].children[1].children[0].value *
+                  detailRef.current.children[3].children[1].children[0].value
+              )
+            }
+          >
+            <LabeledDataList
+              {...producto}
+              options={modulo_productos.productos}
+              which={["descripcion"]}
+              text="Producto"
+            />
+            <LabeledInput {...cantidadProducto} text="Cantidad" />
+            <LabeledDataList
+              {...unidadMedida}
+              options={modulo_productos.recetas[2].materiaPrima}
+              which={["unidadMedida"]}
+              text="Unidad de medida"
+            />
+            <LabeledInput {...precioUnitario} text="Precio Unitario" />
+            <LabeledInput value={importe} text="Importe" />
+          </div>
         </Form>
       </Modal>
       <Message

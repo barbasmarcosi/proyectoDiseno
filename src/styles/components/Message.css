@@ -1,4 +1,5 @@
 .Message {
+    z-index: 10000;
     position: absolute;
     color: aliceblue;
     bottom: 4px;

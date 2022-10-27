@@ -50,7 +50,7 @@ const OrdenesCompra = () => {
       </button>
       <Table
         body={modulo_compras.ordenesCompra}
-        exceptions={["productos"]}
+        exceptions={['id', 'encargado', 'termino']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         edit={false}
         del={false}
@@ -66,13 +66,13 @@ const OrdenesCompra = () => {
           <LabeledDataList
             {...proveedor}
             options={modulo_compras.ordenesCompra}
-            which={"proveedor"}
+            which={["proveedor"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
             options={modulo_compras.ordenesCompra}
-            which={"encargado"}
+            which={["encargado"]}
             text="Encargado"
           />
           <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la orden" />
@@ -94,13 +94,13 @@ const OrdenesCompra = () => {
           <LabeledDataList
             {...proveedor}
             options={modulo_compras.ordenesCompra}
-            which={"proveedor"}
+            which={["proveedor"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
             options={modulo_compras.ordenesCompra}
-            which={"encargado"}
+            which={["encargado"]}
             text="Encargado"
           />
           <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la orden" />

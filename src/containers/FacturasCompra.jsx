@@ -52,7 +52,7 @@ const FacturasCompra = () => {
       </button>
       <Table
         body={modulo_compras.facturasCompra}
-        exceptions={["productos"]}
+        exceptions={[]}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         edit={false}
         del={false}
@@ -68,13 +68,13 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...ordenCompra}
             options={modulo_compras.ordenesCompra}
-            which={"id"}
+            which={["id"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Remito de proveedor"
           />
           <LabeledInput {...nroFactura} text="Numero de Factura" />
@@ -85,7 +85,7 @@ const FacturasCompra = () => {
               { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la factura" />
@@ -93,7 +93,7 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...condicionVenta}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />
@@ -112,13 +112,13 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...ordenCompra}
             options={modulo_compras.ordenesCompra}
-            which={"id"}
+            which={["id"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Remito de proveedor"
           />
           <LabeledInput {...nroFactura} text="Numero de Factura" />
@@ -129,7 +129,7 @@ const FacturasCompra = () => {
               { tipoFactura: "B" },
               { tipoFactura: "C" },
             ]}
-            which={"tipoFactura"}
+            which={["tipoFactura"]}
             text="Tipo de factura"
           />
           <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la factura" />
@@ -137,7 +137,7 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...condicionVenta}
             options={modulo_compras.remitosProveedor}
-            which={"id"}
+            which={["id"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />

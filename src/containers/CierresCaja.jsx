@@ -12,7 +12,7 @@ const CierresCaja = () => {
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState('');
-  const cierreCaja = useInputValue((new Date(Date.now())).toISOString().slice(0, 10));
+  const cierreCaja = useInputValue((new Date(Date.now())).toISOString().slice(0, 16));
   const retiros = useInputValue('');
   const gastosExtras = useInputValue('');
   const ingresosExtra = useInputValue('');
@@ -60,7 +60,7 @@ const CierresCaja = () => {
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}>
-          <LabeledInput {...cierreCaja} type='date' text="Fecha de Cierre de Caja" />
+          <LabeledInput {...cierreCaja} type='datetime-local' text="Fecha de Cierre de Caja" />
           <LabeledInput {...retiros} text="Retiros" />
           <LabeledInput {...gastosExtras} text="Gastos Extras" />
           <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
