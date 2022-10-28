@@ -3,8 +3,8 @@ export default {
       {
         id: 1,
         proveedor: "Juan Cortes",
-        encargado: "Federico Franchini",
         fecha: "24/05/2022",
+        encargado: "Federico Franchini",
         hora: "10:00",
         terminoEntrega: "Entrega en local y pago en efectivo",
         montoTotal: 14876,

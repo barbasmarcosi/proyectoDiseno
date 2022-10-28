@@ -1,64 +1,64 @@
 .Message {
-    z-index: 10000;
-    position: absolute;
-    color: aliceblue;
-    bottom: 4px;
-    left: 4px;
-    opacity: 95%;
-    text-align: center;
-    border-radius: 8px;
-    display: flex;
-    height: 4rem;
-    box-shadow: 3px 3px 3px gray;
-    align-items: center;
-    align-content: center;
-  }
-  .Message-alert {
-      background-color: red;
-    }
-    .Message-alert:hover {
-      background-color: rgb(255, 17, 17);
-    }
-    .Message-warning {
-      background-color: darkorange;
-    }
-    .Message-warning:hover {
-      background-color: rgb(255, 149, 20);
-    }
-    .Message-info {
-      background-color: dodgerblue;
-    }
-    .Message-info:hover {
-      background-color: rgb(60, 158, 255);
-    }
-    .Message-success {
-      background-color: green;
-    }
-    .Message-success:hover {
-      background-color: rgb(0, 146, 0);
-    }
-  .Message-self {
-    font-size: 16px;
-    font-weight: lighter;
-    margin-left: 4px;
-  }
-  .Message-icon {
-    margin-left: 1rem;
-  }
-  .Message-close {
-    background-color: inherit;
-    border: none;
-    height: 2rem;
-    width: 2rem;
-    color: aliceblue;
-    margin-top: -1.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: 0.5 color;
-  }
-  .Message-close:hover {
-    color: black;
-  }
-  .Message-hidden {
-      visibility: hidden;
-  }
+  z-index: 10000;
+  position: fixed;
+  color: aliceblue;
+  bottom: 0;
+  left: 0;
+  opacity: 95%;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  height: 4rem;
+  box-shadow: 3px 3px 3px gray;
+  align-items: center;
+  align-content: center;
+}
+.Message-alert {
+  background-color: red;
+}
+.Message-alert:hover {
+  background-color: rgb(255, 17, 17);
+}
+.Message-warning {
+  background-color: darkorange;
+}
+.Message-warning:hover {
+  background-color: rgb(255, 149, 20);
+}
+.Message-info {
+  background-color: dodgerblue;
+}
+.Message-info:hover {
+  background-color: rgb(60, 158, 255);
+}
+.Message-success {
+  background-color: green;
+}
+.Message-success:hover {
+  background-color: rgb(0, 146, 0);
+}
+.Message-self {
+  font-size: 16px;
+  font-weight: lighter;
+  margin-left: 4px;
+}
+.Message-icon {
+  margin-left: 1rem;
+}
+.Message-close {
+  background-color: inherit;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  color: aliceblue;
+  margin-top: -1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.5 color;
+}
+.Message-close:hover {
+  color: black;
+}
+.Message-hidden {
+  visibility: hidden;
+}

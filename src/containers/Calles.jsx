@@ -44,7 +44,8 @@ const Calles = () => {
     <div className='Productos'>
       <h1 className='Productos-title'>Listado de Calles</h1>
       <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Calle</button>
-      <Table body={body} edit={false} onEdit={() => setOpenModifyModal(!openModifyModal)} del={false} />
+      <Table body={body}
+      edit={false} onEdit={() => setOpenModifyModal(!openModifyModal)} del={false} />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
           title={'Agregar Calle'}

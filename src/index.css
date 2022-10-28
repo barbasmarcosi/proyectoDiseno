@@ -281,7 +281,7 @@ body {
   background-color: grey;
   width: 100%;
   min-height: 100%;
-  height: max-content;
+  height: 100em;
   justify-content: center;
   opacity: 100%;
 }
@@ -301,6 +301,7 @@ body {
   background-color: #dcdcdc;
   width: 80%;
   height: max-content;
+  width: max-content;
   border-radius: 2rem;
   box-shadow: 3px 3px 3px 0 black;
 }

@@ -10,6 +10,7 @@ import useInputValue from "../hooks/useInputValue";
 import Labeler from "../components/Labeler";
 import modulo_ventas from "../initialState/modulo_ventas";
 import modulo_productos from "../initialState/modulo_productos";
+import formValidator from "../vistas/usefullFunctions/formValidator";
 
 function Pedidos() {
   const [openModal, setOpenModal] = useState(false);
@@ -38,39 +39,46 @@ function Pedidos() {
   const cantidadProducto = useInputValue("");
   const unidadMedida = useInputValue("");
   const precioUnitario = useInputValue("");
-  const [importe, setImporte] = useState("");
+  const importe = useInputValue("");
   const detailRef = useRef();
-  let detallePedido = JSON.parse(localStorage.getItem("detallePedido"))
+  const [messageType, setMessageType] = useState('success')
+  const toGetValue = (index) => detailRef.current.children[index].children[1].children[0].value;
+  let detallePedido = localStorage.getItem("detallePedido").length
     ? JSON.parse(localStorage.getItem("detallePedido"))
     : [];
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
+    setMessageType('success')
     setMessage("Pedido agregado correctamente");
-    setSuccessMessage(!succesMessage);
+    setSuccessMessage(false);
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
   };
-  const handleAcceptIngredientButton = () => {
-    setDetailsModal(!detailsModal);
-    setMessage("Producto agregado correctamente");
-    setSuccessMessage(!succesMessage);
-    detallePedido.push({
-      producto: detailRef.current.children[0].children[1].children[0].value,
-      cantidad: detailRef.current.children[1].children[1].children[0].value,
-      unidadMedida: detailRef.current.children[2].children[1].children[0].value,
-      precioUnitario:
-        detailRef.current.children[3].children[1].children[0].value,
-      importe:
-        detailRef.current.children[1].children[1].children[0].value *
-        detailRef.current.children[3].children[1].children[0].value,
-    });
-    localStorage.setItem("detallePedido", JSON.stringify(detallePedido));
-    detallePedido = JSON.parse(localStorage.getItem("detallePedido"));
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+  const handleAcceptIngredientButton = (multiple = false) => {
+    const valid = formValidator(setDetailsModal, setMessage, setMessageType, setSuccessMessage, 'Producto agregado correctamente',detailRef, multiple)
+    console.log(valid)
+    if (valid) {
+      let index = 0;
+      detallePedido.push({
+        producto: toGetValue(index++),
+        cantidad: toGetValue(index++),
+        unidadMedida: toGetValue(index++),
+        precioUnitario:
+          toGetValue(index),
+        importe:
+          toGetValue(1) *
+          toGetValue(3),
+      });
+      localStorage.setItem("detallePedido", JSON.stringify(detallePedido));
+      detallePedido = JSON.parse(localStorage.getItem("detallePedido"));
+      producto.setValue('');
+      cantidadProducto.setValue('');
+      unidadMedida.setValue('');
+      precioUnitario.setValue('');
+      importe.setValue('')
+    }
   };
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
@@ -93,7 +101,7 @@ function Pedidos() {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_ventas.pedidos}
-        exceptions={[]}
+        exceptions={['encargado', 'presupuesto', 'tipoVenta', 'observaciones', 'fechaPedido', 'horaPedido', 'delivery']}
         edit={false}
         del={false}
       />
@@ -356,17 +364,13 @@ function Pedidos() {
           edit={false}
           //onEdit={() => handleModifyIngredientButton()}
           onAdd={() => handleAcceptIngredientButton()}
-          onAddMultiple={() => setDetailsModal(!!detailsModal)}
+          onAddMultiple={() => handleAcceptIngredientButton(true)}
           onCancel={() => setDetailsModal(!detailsModal)}
         >
           <div
             ref={detailRef}
             onChange={() =>
-              setImporte(
-                () =>
-                  detailRef.current.children[1].children[1].children[0].value *
-                  detailRef.current.children[3].children[1].children[0].value
-              )
+              importe.setValue(toGetValue(1) * toGetValue(3))
             }
           >
             <LabeledDataList
@@ -383,12 +387,12 @@ function Pedidos() {
               text="Unidad de medida"
             />
             <LabeledInput {...precioUnitario} text="Precio Unitario" />
-            <LabeledInput value={importe} text="Importe" />
+            <LabeledInput value={importe.value} text="Importe" />
           </div>
         </Form>
       </Modal>
       <Message
-        type="success"
+        type={messageType}
         hide={succesMessage}
         onCLickClose={() => setSuccessMessage(!succesMessage)}
       >

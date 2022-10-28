@@ -52,7 +52,7 @@ const FacturasCompra = () => {
       </button>
       <Table
         body={modulo_compras.facturasCompra}
-        exceptions={[]}
+        exceptions={['id']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         edit={false}
         del={false}
