@@ -1,3 +1,4 @@
+import messageTimeOut from "./messageTimeOut";
 import toGetFormValues from "./toGetFormValues";
 
 const formValidator = (
@@ -7,7 +8,7 @@ const formValidator = (
   messageVisible,
   successMessage,
   ref,
-  multiple,
+  multiple
 ) => {
   const formLength = ref.current.children.length;
   let isNotComplete = false;
@@ -23,17 +24,13 @@ const formValidator = (
     messageType("success");
     message(successMessage);
     messageVisible(false);
-    setTimeout(() => {
-      messageVisible(true);
-    }, 5000);
+    messageTimeOut(messageVisible);
     return true;
   } else {
     messageType("warning");
     message("Hay campos sin completar");
     messageVisible(false);
-    setTimeout(() => {
-      messageVisible(true);
-    }, 5000);
+    messageTimeOut(messageVisible);
     return false;
   }
 };

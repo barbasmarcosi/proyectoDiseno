@@ -248,7 +248,7 @@ body {
 .Table-tbody-tr {
   border-bottom: 2px solid grey;
 }
-.Button-edit, .Button-delete, .Button-add {
+.Button-edit, .Button-delete, .Button-add, .Button-generate {
   background-color: #FFC107;
   border: none;
   cursor: pointer;
@@ -265,6 +265,9 @@ body {
   background-color: #0D6EFD;
   color: aliceblue;
   margin: 0 1.5rem;
+}
+.Button-generate {
+  background-color: lightsteelblue;
 }
 .Button-edit:hover, .Button-delete:hover, .Button-add:hover {
   box-shadow: none;

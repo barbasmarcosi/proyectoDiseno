@@ -52,6 +52,7 @@ const OrdenesCompra = () => {
         body={modulo_compras.ordenesCompra}
         exceptions={['id', 'encargado', 'termino']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
+        isDocument={true}
         edit={false}
         del={false}
       />

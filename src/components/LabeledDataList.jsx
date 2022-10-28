@@ -4,17 +4,23 @@ const LabeledDataList = ({
   options,
   which,
   value = "",
+  setValue,
   onChange,
   hidden,
   text,
   onModal = true,
   nullable = false,
+  getValue,
+  selected,
 }) => {
   return (
     <Labeler hidden={hidden} text={text} onModal={onModal}>
       <input
+        ref={getValue}
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
         className={`LabeledInput-text${
           !!value ? " LabeledInput-text--filled" : ""
         }`}
@@ -23,6 +29,7 @@ const LabeledDataList = ({
       <datalist id={text}>
         {nullable ? (
           <option
+            key={0}
             className="LabeledInput-option"
             value={`Sin ${text[0].toLowerCase() + text.slice(1, text.length)}`}
           />

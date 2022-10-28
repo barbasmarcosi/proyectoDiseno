@@ -1,8 +1,14 @@
 import Details from "./Details";
 
-const Table = ({ body, edit, del, onEdit, exceptions = [] }) => {
-  return body.length > 0 ? 
-   (
+const Table = ({
+  body,
+  edit,
+  del,
+  onEdit,
+  exceptions = [],
+  isDocument = false,
+}) => {
+  return body.length > 0 ? (
     <div className="Table">
       <table className="Table-self">
         <thead className="Table-thead">
@@ -30,6 +36,7 @@ const Table = ({ body, edit, del, onEdit, exceptions = [] }) => {
             ) : (
               false
             )}
+            {isDocument ? <th className="Table-thead-tr-th">Emitir</th> : false}
             {!edit || !del ? <th>Acciones</th> : false}
           </tr>
         </thead>
@@ -64,7 +71,27 @@ const Table = ({ body, edit, del, onEdit, exceptions = [] }) => {
                 })}
                 {exceptions.length ? (
                   <td className="Table-tbody-tr-td">
-                    <Details title={"Ver mas"} table={body} buttonColor={"dodgerblue"} />
+                    <Details
+                      title={"Ver mas"}
+                      table={body}
+                      buttonColor={"rgb(60, 158, 255)"}
+                    />
+                  </td>
+                ) : (
+                  false
+                )}
+                {isDocument ? (
+                  <td className="Table-tbody-tr-td">
+                    <Details
+                      title={"Factura"}
+                      table={body}
+                      buttonClass='Button-generate'
+                    />
+                    <Details
+                      title={"Remito"}
+                      table={body}
+                      buttonClass='Button-generate'
+                    />
                   </td>
                 ) : (
                   false
@@ -90,7 +117,9 @@ const Table = ({ body, edit, del, onEdit, exceptions = [] }) => {
         </tbody>
       </table>
     </div>
-  ) : false
+  ) : (
+    false
+  );
 };
 
 export default Table;

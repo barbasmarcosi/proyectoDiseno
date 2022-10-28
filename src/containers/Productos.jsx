@@ -22,7 +22,8 @@ const Productos = () => {
   const stock = useInputValue("");
   const precioVenta = useInputValue("");
   const precioCosto = useInputValue("");
-
+  let proveedores = [];
+  console.log(proveedores);
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Producto agregado correctamente");
@@ -85,9 +86,9 @@ const Productos = () => {
           />
           <LabeledDataList
             {...proveedor}
-            nullable={true}
-            options={modulo_productos.marcas}
-            which={["nombre"]}
+            pushElement={(value) => proveedores.push(value)}
+            options={modulo_productos.productos[2].proveedores}
+            which={["razonSocial", "cuit"]}
             text="Proveedor"
           />
           <LabeledDataList
@@ -139,8 +140,8 @@ const Productos = () => {
           />
           <LabeledDataList
             {...proveedor}
-            options={modulo_productos.marcas}
-            which={["nombre"]}
+            options={modulo_productos.productos[2].proveedores}
+            which={["razonSocial", "cuit"]}
             text="Proveedor"
           />
           <LabeledDataList
