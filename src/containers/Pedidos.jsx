@@ -13,9 +13,11 @@ import modulo_productos from "../initialState/modulo_productos";
 import formValidator from "../usefullFunctions/formValidator";
 import messageTimeOut from "../usefullFunctions/messageTimeOut";
 import toGetFormValues from "../usefullFunctions/toGetFormValues";
+import ClientesAdd from "./Clientes/ClientesAdd";
 
 function Pedidos() {
   const [openModal, setOpenModal] = useState(false);
+  const [openClientModal, setOpenClientModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
@@ -101,13 +103,13 @@ function Pedidos() {
     const val = clienteRef.current.value;
     console.log(val);
     if (val) {
-      const data = val.split(",");
+      const data = val.split(", ");
       console.log(data);
-      cliente.setValue(data[0]);
-      calleCliente.setValue(data[1]);
-      alturaCliente.setValue(data[2]);
-      deptoCliente.setValue(data[3]);
-      telefonoCliente.setValue(data[4]);
+      data[0] !== 'null' ? cliente.setValue(data[0]) : cliente.setValue('');
+      data[1] !== 'null' ? calleCliente.setValue(data[1]) : calleCliente.setValue('');
+      data[2] !== 'null' ? alturaCliente.setValue(data[2]) : alturaCliente.setValue('');
+      data[3] !== 'null' ? deptoCliente.setValue(data[3]) : deptoCliente.setValue('');
+      data[4] !== 'null' ? telefonoCliente.setValue(data[4]) : telefonoCliente.setValue('');
     } else {
       calleCliente.setValue("");
       alturaCliente.setValue("");
@@ -175,6 +177,8 @@ function Pedidos() {
             which={["cliente", "calle", "altura", "depto", "telefonoEntrega"]}
             text="Cliente"
           />
+          <button type='button' onClick={() => setOpenClientModal(!openClientModal)} className="Button-add" style={{ height: '3.5rem', marginTop: '2rem' }}>Agregar Cliente</button>
+          <ClientesAdd setMessage={setMessage} setMessageState={setSuccessMessage} setOpenModal={setOpenClientModal} openModal={openClientModal} />
           <LabeledDataList
             {...calleCliente}
             options={modulo_ventas.pedidos}

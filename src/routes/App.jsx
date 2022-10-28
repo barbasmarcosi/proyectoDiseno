@@ -13,7 +13,7 @@ import FacturasCompra from "../containers/FacturasCompra";
 import RemitosCompra from "../containers/RemitosCompra";
 import CierresCaja from "../containers/CierresCaja";
 import Personal from "../containers/Personal";
-import Clientes from "../containers/Clientes";
+import Clientes from "../containers/Clientes/Clientes";
 import Produccion from "../containers/Produccion";
 import Deliverys from "../containers/Deliverys";
 import Proveedores from "../containers/Proveedores";

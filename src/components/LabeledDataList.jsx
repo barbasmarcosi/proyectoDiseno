@@ -4,8 +4,8 @@ const LabeledDataList = ({
   options,
   which,
   value = "",
-  setValue,
   onChange,
+  setValue,
   hidden,
   text,
   onModal = true,
@@ -18,12 +18,12 @@ const LabeledDataList = ({
       <input
         ref={getValue}
         value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
+        onChange={onChange}
+        onClick={() => {
+          setValue('')
         }}
-        className={`LabeledInput-text${
-          !!value ? " LabeledInput-text--filled" : ""
-        }`}
+        className={`LabeledInput-text${!!value ? " LabeledInput-text--filled" : ""
+          }`}
         list={text}
       />
       <datalist id={text}>
