@@ -7,6 +7,7 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import modulo_productos from "../initialState/modulo_productos";
 import LabeledDataList from "../components/LabeledDataList";
+import LabeledSelector from "../components/LabeledSelector";
 
 const Productos = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -84,11 +85,11 @@ const Productos = () => {
             which={["nombre"]}
             text="Marca"
           />
-          <LabeledDataList
+          <LabeledSelector
             {...proveedor}
-            pushElement={(value) => proveedores.push(value)}
+            multiple={true}
             options={modulo_productos.productos[2].proveedores}
-            which={["razonSocial", "cuit"]}
+            which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
@@ -138,10 +139,11 @@ const Productos = () => {
             which={["nombre"]}
             text="Marca"
           />
-          <LabeledDataList
+          <LabeledSelector
             {...proveedor}
+            multiple={true}
             options={modulo_productos.productos[2].proveedores}
-            which={["razonSocial", "cuit"]}
+            which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
