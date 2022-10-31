@@ -54,6 +54,7 @@ const Productos = () => {
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={modulo_productos.productos}
+        exceptions={["precioCosto","tipoIva","stockMinimo"]}
         edit={false}
         del={false}
       />

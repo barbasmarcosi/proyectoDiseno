@@ -1,4 +1,8 @@
 import React from 'react'
 
-const Home = () => <h1>Bienvenido al Sistema de Gestion de la Empanaderia</h1>
+const Home = () => {
+    return (
+        <h1 className='Home-content'>Bienvenido al Sistema de Gestion de la Empanaderia</h1>
+    )
+}
 export default Home

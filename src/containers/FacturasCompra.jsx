@@ -19,6 +19,7 @@ const FacturasCompra = () => {
   const nroFactura = useInputValue("");
   const tipoFactura = useInputValue("");
   const fecha = useInputValue("");
+  const proveedor = useInputValue("");
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
@@ -52,9 +53,7 @@ const FacturasCompra = () => {
       </button>
       <Table
         body={modulo_compras.facturasCompra}
-        exceptions={['id']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        edit={false}
         del={false}
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
@@ -95,6 +94,12 @@ const FacturasCompra = () => {
             options={modulo_compras.remitosProveedor}
             which={["id"]}
             text="Condicion de venta"
+          />
+          <LabeledDataList
+            {...proveedor}
+            text="Proveedor"
+            options={modulo_compras.remitosProveedor}
+            which={["proveedor"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
@@ -139,6 +144,12 @@ const FacturasCompra = () => {
             options={modulo_compras.remitosProveedor}
             which={["id"]}
             text="Condicion de venta"
+          />
+          <LabeledDataList
+            {...proveedor}
+            text="Proveedor"
+            options={modulo_compras.remitosProveedor}
+            which={["proveedor"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>

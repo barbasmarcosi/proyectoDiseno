@@ -50,7 +50,7 @@ const OrdenesCompra = () => {
       </button>
       <Table
         body={modulo_compras.ordenesCompra}
-        exceptions={['id', 'encargado', 'termino']}
+        exceptions={['terminoEntrega']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         isDocument={true}
         edit={false}
