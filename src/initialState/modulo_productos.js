@@ -3,28 +3,40 @@ export default {
     {
       id: 1,
       descripcion: "Comidas",
+      porcentajeAumento: 2,
+      ultimoAumento: "22/10/2022",
     },
     {
       id: 2,
       descripcion: "Bebidas",
+      porcentajeAumento: 5,
+      ultimoAumento: "30/10/2022",
     },
     {
       id: 3,
       descripcion: "Envasados",
+      porcentajeAumento: 3,
+      ultimoAumento: "17/10/2022",
     },
   ],
   marcas: [
     {
       id: 1,
       nombre: "Trapiche",
+      porcentajeAumento: 2,
+      ultimoAumento: "22/10/2022",
     },
     {
       id: 2,
       nombre: "Cocinero",
+      porcentajeAumento: 5,
+      ultimoAumento: "30/10/2022",
     },
     {
       id: 3,
       nombre: "Don Silvestre",
+      porcentajeAumento: 5,
+      ultimoAumento: "30/10/2022",
     },
   ],
   productos: [
@@ -52,7 +64,7 @@ export default {
       stockMinimo: 2,
       proveedores: [
         { id: 1, razonSocial: "Codeana S.A", cuit: "31-35665513-7" },
-      ], 
+      ],
     },
     {
       id: 3,

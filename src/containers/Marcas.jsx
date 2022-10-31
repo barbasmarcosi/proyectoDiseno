@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
+import LabeledSelector from "../components/LabeledSelector";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
@@ -10,14 +11,24 @@ import modulo_productos from "../initialState/modulo_productos";
 
 const Marcas = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [infalcionModal, setInfalcionModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const descripcion = useInputValue("");
+  const montoAumento = useInputValue("");
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Marca agregada correctamente");
+    setSuccessMessage(!succesMessage);
+    setTimeout(() => {
+      setSuccessMessage(true);
+    }, 5000);
+  };
+  const handleAcceptRaiseButton = () => {
+    setInfalcionModal(!infalcionModal);
+    setMessage("Aumento de precio por marca generado correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true);
@@ -40,6 +51,18 @@ const Marcas = () => {
         type="button"
       >
         Agregar Rubro
+      </button>
+      <button
+        onClick={() => setInfalcionModal(!infalcionModal)}
+        style={{
+          width: "max-content",
+          background: "whitesmoke",
+          color: "black",
+        }}
+        className="Button-add"
+        type="button"
+      >
+        Aumentar precios por marca
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
@@ -69,6 +92,27 @@ const Marcas = () => {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput {...descripcion} text="Nombre" />
+        </Form>
+      </Modal>
+      <Modal open={infalcionModal} setClosed={() => setInfalcionModal(false)}>
+        <Form
+          title={"Aumentar precios por marca"}
+          onAdd={() => handleAcceptRaiseButton()}
+          onCancel={() => setInfalcionModal(!infalcionModal)}
+          generate={true}
+        >
+          <LabeledSelector
+            options={modulo_productos.marcas}
+            which={"nombre"}
+            {...descripcion}
+            text="Marcas"
+          />
+          <LabeledInput {...montoAumento} text="Procentaje de aumento" />
+          <LabeledInput
+            type="datetime-local"
+            value={new Date(Date.now()).toISOString().slice(0, 16)}
+            text="Fecha actual"
+          />
         </Form>
       </Modal>
       <Message

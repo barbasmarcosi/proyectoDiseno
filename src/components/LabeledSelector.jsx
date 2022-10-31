@@ -1,27 +1,11 @@
 import { useState } from "react";
 import Labeler from "./Labeler";
 
-const LabeledSelector = ({
-  options,
-  which,
-  value = "",
-  setValue,
-  onChange,
-  hidden,
-  text,
-  onModal = true,
-  nullable = false,
-  getValue,
-}) => {
+const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
   const totalSelected = (val) => {
-    console.log(val);
-    if (val) {
-      setCount((count) => count + 1);
-    } else {
-      setCount((count) => count - 1);
-    }
+    setCount(val ? (count) => count + 1 : (count) => count - 1);
   };
   return (
     <Labeler hidden={hidden} text={text} onModal={onModal}>
@@ -30,8 +14,8 @@ const LabeledSelector = ({
           <select style={{ width: "20rem" }} className="LabeledInput-text">
             <option style={{ display: "none" }}>
               {count
-                ? `${count} proveedor/es seleccionados`
-                : "Sin proveedores seleccioandos"}
+                ? `${count} ${text.toLowerCase()} seleccionados`
+                : `Sin ${text.toLowerCase()} seleccionados`}
             </option>
           </select>
         </div>
@@ -45,7 +29,6 @@ const LabeledSelector = ({
                 textAlign: "left",
                 borderRadius: "4px",
                 padding: "4px",
-
               }}
             >
               <label className="LabeledInput-option" for={`${opt[which]}`}>

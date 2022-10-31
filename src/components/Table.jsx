@@ -7,6 +7,7 @@ const Table = ({
   onEdit,
   exceptions = [],
   isDocument = false,
+  canEdit,
 }) => {
   return body.length > 0 ? (
     <div className="Table">
@@ -85,12 +86,12 @@ const Table = ({
                     <Details
                       title={"Factura"}
                       table={body}
-                      buttonClass='Button-generate'
+                      buttonClass="Button-generate"
                     />
                     <Details
                       title={"Remito"}
                       table={body}
-                      buttonClass='Button-generate'
+                      buttonClass="Button-generate"
                     />
                   </td>
                 ) : (
@@ -99,7 +100,7 @@ const Table = ({
                 <td>
                   <input
                     className="Button-edit"
-                    onClick={onEdit}
+                    onClick={() => console.log(tr)}
                     type="button"
                     value="Editar"
                     hidden={edit}
