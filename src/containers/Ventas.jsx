@@ -21,6 +21,7 @@ const Ventas = () => {
   const nroFactura = useInputValue("");
   const tipoFactura = useInputValue("");
   const montoTotal = useInputValue("");
+  const observaciones = useInputValue("");
   const producto = useInputValue("");
   const cantidadProducto = useInputValue("");
   const unidadMedida = useInputValue("");
@@ -73,7 +74,7 @@ const Ventas = () => {
   };
   return (
     <div className="Productos">
-      <h1 className="Productos-title">Listado de Comprobantes de venta</h1>
+      <h1 className="Productos-title">Listado de Comprobantes de Venta</h1>
       <button
         onClick={() => setOpenModal(!openModal)}
         className="Button-add"
@@ -125,6 +126,7 @@ const Ventas = () => {
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <LabeledInput {...observaciones} text="Observaciones" />
           <Table
             onEdit={() => setDetailsModal(!detailsModal)}
             body={detalleComprobanteVenta}
@@ -184,6 +186,7 @@ const Ventas = () => {
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <LabeledInput {...observaciones} text="Observaciones" />
           <Table
             onEdit={() => setDetailsModal(!detailsModal)}
             body={detalleComprobanteVenta}

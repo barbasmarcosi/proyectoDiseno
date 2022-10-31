@@ -14,9 +14,8 @@ const RemitosCompra = () => {
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
-  const nroFactura = useInputValue("");
-  const tipoFactura = useInputValue("");
   const fechaRemito = useInputValue("");
+  const proveedor = useInputValue("");
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
@@ -63,26 +62,16 @@ const RemitosCompra = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}
         >
-          <LabeledDataList
-            {...nroFactura}
-            options={modulo_compras.facturasCompra}
-            which={["nroFactura"]}
-            text="Nro de factura"
-          />
-          <LabeledDataList
-            {...tipoFactura}
-            options={[
-              { tipoFactura: "A" },
-              { tipoFactura: "C" },
-              { tipoFactura: "C" },
-            ]}
-            which={["tipoFactura"]}
-            text="Tipo de factura"
-          />
           <LabeledInput
             {...fechaRemito}
             type="datetime-local"
             text="Fecha y hora de la factura"
+          />
+          <LabeledDataList
+            {...proveedor}
+            text="Proveedor"
+            options={modulo_compras.remitosProveedor}
+            which={["proveedor"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
@@ -104,26 +93,16 @@ const RemitosCompra = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
-          <LabeledDataList
-            {...nroFactura}
-            options={modulo_compras.facturasCompra}
-            which={["nroFactura"]}
-            text="Nro de factura"
-          />
-          <LabeledDataList
-            {...tipoFactura}
-            options={[
-              { tipoFactura: "A" },
-              { tipoFactura: "C" },
-              { tipoFactura: "C" },
-            ]}
-            which={["tipoFactura"]}
-            text="Tipo de factura"
-          />
           <LabeledInput
             {...fechaRemito}
             type="datetime-local"
             text="Fecha y hora de la factura"
+          />
+          <LabeledDataList
+            {...proveedor}
+            text="Proveedor"
+            options={modulo_compras.remitosProveedor}
+            which={["proveedor"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList

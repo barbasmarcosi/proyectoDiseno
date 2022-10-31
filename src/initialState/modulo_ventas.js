@@ -89,12 +89,12 @@ export default {
   presupuestos: [
     {
       id: 1,
-      cliente: "Juan Arias",
       fechaEmision: "10/05/2020",
       horaEmision: "12:10",
       fechaEvento: "30/05/2020",
       horaEvento: "",
       validez: 10,
+      cliente: "Juan Arias",
       subTotal: 10800,
       descuento: 1080,
       costoTotal: 9720, 
@@ -107,12 +107,12 @@ export default {
     },
     {
       id: 2,
-      cliente: "Damian Gonzales",
       fechaEmision: "04/06/2021",
       horaEmision: "12:10",
       fechaEvento: "04/07/2020",
       horaEvento: "",
       validez: 7,
+      cliente: "Damian Gonzales",
       subTotal: 9280,
       descuento: 0,
       costoTotal: 9280,
@@ -127,32 +127,33 @@ export default {
   reclamos: [
     {
       id: 1,
-      pedidoCliente: 1,
       fecha: "12/10/2018",
+      pedidoCliente: 1,
       descripcion: "Faltaron dos empanadas de hongos",
     },
     {
       id: 2,
-      pedidoCliente: 2,
       fecha: "12/10/2020",
+      pedidoCliente: 2,
       descripcion: "Las canastitas de brocoli llegaron frias",
     },
     {
-      id: 2,
-      pedidoCliente: 5,
+      id: 3,
       fecha: "12/10/2020",
+      pedidoCliente: 5,
       descripcion: "El cliente pidió empanadas de atun y no se le enviaron",
     },
   ],
   comprobantesVenta: [
     {
       id: 1,
-      pedido: 1,
-      fecha: "15/05/2022",
-      hora: "22:00",
       tipoFactura: "B",
       nroFactura: "001/2022",
+      fecha: "15/05/2022",
+      hora: "22:00",
+      pedido: 1,
       montoTotal: 1380,
+      observaciones: "",
       productos: [
         { producto: "Empanada de Carne", cantidad: 5, unidadMedida: "unidades", precioUnitario: 120, importe: 600 },
         { producto: "Canastita de Queso y Cebolla", cantidad: 3, unidadMedida: "unidades", precioUnitario: 100, importe: 300 },
@@ -161,12 +162,13 @@ export default {
     },
     {
       id: 2,
-      pedido: 3,
-      fecha: "08/07/2022",
-      hora: "10:05",
       tipoFactura: "A",
       nroFactura: "002/2022",
+      fecha: "08/07/2022",
+      hora: "10:05",
+      pedido: 3,
       montoTotal: 21160,
+      observaciones: "",
       productos: [
         { producto: "Vino Malbec Benjamin x 750", cantidad: 10, unidadMedida: "unidades", precioUnitario: 700, importe: 7000 },
         { producto: "Empanada de Jamon y Queso", cantidad: 36, unidadMedida: "unidad",  precioUnitario: 110, importe: 3960 },
@@ -178,12 +180,13 @@ export default {
     },
     {
       id: 3,
-      pedido: 5,
-      fecha: "05/10/2022",
-      hora: "21:00",
       tipoFactura: "B",
       nroFactura: "003/2022",
+      fecha: "05/10/2022",
+      hora: "21:00",
+      pedido: 5,
       montoTotal: 1380,
+      observaciones: "",
       productos: [
         { producto: "Empanada de Carne", cantidad: 6, unidadMedida: "unidades", precioUnitario: 120, importe: 720 },
         { producto: "Empanada de Jamon y Queso", cantidad: 6, unidadMedida: "unidades", precioUnitario: 110, importe: 660, }
@@ -193,12 +196,12 @@ export default {
   remitosEntrega: [
     {
       id: 1,
-      pedido: 1,
       fecha: "15/05/2022",
       hora: "22:00",
-      tipoFactura: "B",
-      nroFactura: "001/2022",
+      pedido: 1,
       montoTotal: 1380,
+      condicionVenta: 'contado efectivo',
+      observaciones: '',
       productos: [
         { producto: "Empanada de Carne", cantidad: 5, unidadMedida: "unidades", precioUnitario: 120, importe: 600 },
         { producto: "Canastita de Queso y Cebolla", cantidad: 3, unidadMedida: "unidades", precioUnitario: 100, importe: 300 },
@@ -207,12 +210,12 @@ export default {
     },
     {
       id: 2,
-      pedido: 3,
       fecha: "08/07/2022",
       hora: "10:05",
-      tipoFactura: "A",
-      nroFactura: "002/2022",
+      pedido: 3,
       montoTotal: 21160,
+      condicionVenta: 'contado efectivo',
+      observaciones: '',
       productos: [
         { producto: "Vino Malbec Benjamin x 750", cantidad: 10, unidadMedida: "unidades", precioUnitario: 700, importe: 7000 },
         { producto: "Empanada de Jamon y Queso", cantidad: 36, unidadMedida: "unidad",  precioUnitario: 110, importe: 3960 },
@@ -224,12 +227,12 @@ export default {
     },
     {
       id: 3,
-      pedido: 5,
       fecha: "05/10/2022",
       hora: "21:00",
-      tipoFactura: "B",
-      nroFactura: "003/2022",
+      pedido: 5,
       montoTotal: 1380,
+      condicionVenta: 'contado efectivo',
+      observaciones: '',
       productos: [
         { producto: "Empanada de Carne", cantidad: 6, unidadMedida: "unidades", precioUnitario: 120, importe: 720 },
         { producto: "Empanada de Jamon y Queso", cantidad: 6, unidadMedida: "unidades", precioUnitario: 110, importe: 660, }

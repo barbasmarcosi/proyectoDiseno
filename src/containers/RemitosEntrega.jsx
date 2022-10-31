@@ -15,14 +15,14 @@ const RemitosEntrega = () => {
   const [message, setMessage] = useState("");
   const pedido = useInputValue("");
   const fechaRemito = useInputValue("");
-  const nroFactura = useInputValue("");
-  const tipoFactura = useInputValue("");
   const montoTotal = useInputValue("");
+  const condicionVenta = useInputValue("");
+  const observaciones = useInputValue("");
   const productos = useInputValue("");
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
-    setMessage("Remito de proveedor agregado correctamente");
+    setMessage("Remito de entrega agregado correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true);
@@ -30,7 +30,7 @@ const RemitosEntrega = () => {
   };
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
-    setMessage("Datos de remito de proveedor modificado correctamente");
+    setMessage("Datos de remito de entrega modificado correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true);
@@ -38,13 +38,13 @@ const RemitosEntrega = () => {
   };
   return (
     <div className="Productos">
-      <h1 className="Productos-title">Listado de Remitos de Proveedor</h1>
+      <h1 className="Productos-title">Listado de Remitos de Entrega</h1>
       <button
         onClick={() => setOpenModal(!openModal)}
         className="Button-add"
         type="button"
       >
-        Agregar Remito de Proveedor
+        Agregar Remito de Entrega
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
@@ -55,7 +55,7 @@ const RemitosEntrega = () => {
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
-          title={"Agregar Remito de Proveedor"}
+          title={"Agregar Remito de Entrega"}
           multiple={true}
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
@@ -69,28 +69,19 @@ const RemitosEntrega = () => {
             text="Nro. Pedido"
           />
           <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
-          <LabeledDataList
-            {...nroFactura}
-            options={modulo_ventas.comprobantesVenta}
-            which={["nroFactura"]}
-            text="Nro. Factura"
-          />
-          <LabeledDataList
-            {...tipoFactura}
-            options={[
-              { tipoFactura: "A" },
-              { tipoFactura: "B" },
-              { tipoFactura: "C" },
-            ]}
-            which={["tipoFactura"]}
-            text="Tipo de factura"
-          />
           <LabeledInput {...montoTotal} text="Monto Total" />
+          <LabeledDataList
+            {...condicionVenta}
+            options={modulo_ventas.remitosEntrega}
+            which={["id"]}
+            text="Condicion de venta"
+          />
+          <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
         <Form
-          title={"Modificar datos de remito de proveedor"}
+          title={"Modificar datos de remito de entrega"}
           multiple={true}
           edit={true}
           onEdit={() => handleModifyButton()}
@@ -106,23 +97,14 @@ const RemitosEntrega = () => {
             text="Nro. Pedido"
           />
           <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
-          <LabeledDataList
-            {...nroFactura}
-            options={modulo_ventas.comprobantesVenta}
-            which={["nroFactura"]}
-            text="Nro. Factura"
-          />
-          <LabeledDataList
-            {...tipoFactura}
-            options={[
-              { tipoFactura: "A" },
-              { tipoFactura: "B" },
-              { tipoFactura: "C" },
-            ]}
-            which={["tipoFactura"]}
-            text="Tipo de factura"
-          />
           <LabeledInput {...montoTotal} text="Monto Total" />
+          <LabeledDataList
+            {...condicionVenta}
+            options={modulo_ventas.remitosEntrega}
+            which={["id"]}
+            text="Condicion de venta"
+          />
+          <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
       <Message
