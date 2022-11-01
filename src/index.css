@@ -104,6 +104,15 @@ body {
   justify-self: center;
   text-shadow: 1px 1px 1px #c5c5c5;
 }
+.home-image {
+  position: absolute;
+  width: 100%;
+  opacity: 15%;
+  z-index: -1000;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
 .Main {
   display: grid;
   justify-content: stretch;
@@ -113,7 +122,16 @@ body {
   justify-content: center;
 }
 .Home-content {
-  margin-top: 40px;
+  position: absolute;
+  top: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-size: 3.5rem;
+  width: 70%;
+  text-shadow: 0 0 5px rgb(175, 10, 10);
+  text-align: center;
 }
 .Pedidos {
   margin: 2rem;
