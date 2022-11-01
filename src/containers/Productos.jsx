@@ -5,7 +5,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import LabeledSelector from "../components/LabeledSelector";
 
@@ -26,10 +26,10 @@ const Productos = () => {
   const stock = useInputValue("");
   const precioVenta = useInputValue("");
   const precioCosto = useInputValue("");
-  const rubros = useInputValue("");
-  const marcas = useInputValue("");
-  const productos = useInputValue("");
+  const aumentoSobre = useInputValue("");
   const montoAumento = useInputValue("");
+  const aumentoPor = useInputValue("");
+
   let proveedores = [];
   console.log(proveedores);
   const handleAcceptButton = () => {
@@ -40,25 +40,9 @@ const Productos = () => {
       setSuccessMessage(true);
     }, 5000);
   };
-  const handleAcceptProductRaiseButton = () => {
-    setProductModal(!productoModal);
-    setMessage("Aumento de precio por producto generado correctamente");
-    setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
-  };
-  const handleAcceptCategoryRaiseButton = () => {
-    setCategoryModal(!categoryModal);
-    setMessage("Aumento de precio por rubro generado correctamente");
-    setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
-  };
-  const handleAcceptBrandRaiseButton = () => {
+  const handleAcceptRaiseButton = () => {
     setBrandModal(!brandModal);
-    setMessage("Aumento de precio por marca generado correctamente");
+    setMessage("Aumento de precios generado correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
       setSuccessMessage(true);
@@ -83,18 +67,6 @@ const Productos = () => {
         Agregar Producto
       </button>
       <button
-        onClick={() => setCategoryModal(!categoryModal)}
-        style={{
-          width: "max-content",
-          background: "whitesmoke",
-          color: "black",
-        }}
-        className="Button-add"
-        type="button"
-      >
-        Aumentar precios por rubro
-      </button>
-      <button
         onClick={() => setBrandModal(!brandModal)}
         style={{
           width: "max-content",
@@ -104,23 +76,11 @@ const Productos = () => {
         className="Button-add"
         type="button"
       >
-        Aumentar precios por marca
-      </button>
-      <button
-        onClick={() => setProductModal(!productoModal)}
-        style={{
-          width: "max-content",
-          background: "whitesmoke",
-          color: "black",
-        }}
-        className="Button-add"
-        type="button"
-      >
-        Aumentar precios por producto
+        Aumentar precios
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_productos.productos}
+        body={initialState.producto}
         exceptions={["precioCosto", "tipoIva", "stockMinimo"]}
         edit={false}
         del={false}
@@ -134,7 +94,7 @@ const Productos = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput
-            value={modulo_productos.productos.length + 1}
+            value={initialState.producto.length + 1}
             disabled={true}
             toShowId={true}
             text="Nro. Producto"
@@ -142,34 +102,34 @@ const Productos = () => {
           <LabeledInput {...product} text="Nombre del producto" />
           <LabeledDataList
             {...rubro}
-            options={modulo_productos.rubros}
+            options={initialState.rubro}
             which={["descripcion"]}
             text="Rubro"
           />
           <LabeledDataList
             {...marca}
             nullable={true}
-            options={modulo_productos.marcas}
+            options={initialState.marca}
             which={["nombre"]}
             text="Marca"
           />
           <LabeledSelector
             {...proveedor}
             multiple={true}
-            options={modulo_productos.productos[2].proveedores}
+            options={initialState.producto[2].proveedores}
             which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...receta}
             nullable={true}
-            options={modulo_productos.recetas}
+            options={initialState.receta}
             which={["descripcion"]}
             text="Receta"
           />
           <LabeledDataList
             {...tipoIVA}
-            options={modulo_productos.marcas}
+            options={initialState.marca}
             which={["nombre"]}
             text="Tipo de IVA"
           />
@@ -189,7 +149,7 @@ const Productos = () => {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput
-            value={modulo_productos.productos.length + 1}
+            value={initialState.producto.length + 1}
             disabled={true}
             toShowId={true}
             text="Nro. Producto"
@@ -197,32 +157,32 @@ const Productos = () => {
           <LabeledInput {...product} text="Nombre del producto" />
           <LabeledDataList
             {...rubro}
-            options={modulo_productos.rubros}
+            options={initialState.rubro}
             which={["descripcion"]}
             text="Rubro"
           />
           <LabeledDataList
             {...marca}
-            options={modulo_productos.marcas}
+            options={initialState.marca}
             which={["nombre"]}
             text="Marca"
           />
           <LabeledSelector
             {...proveedor}
             multiple={true}
-            options={modulo_productos.productos[2].proveedores}
+            options={initialState.producto[2].proveedores}
             which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...receta}
-            options={modulo_productos.recetas}
+            options={initialState.receta}
             which={["descripcion"]}
             text="Receta"
           />
           <LabeledDataList
             {...tipoIVA}
-            options={modulo_productos.marcas}
+            options={initialState.marca}
             which={["nombre"]}
             text="Tipo de IVA"
           />
@@ -233,58 +193,30 @@ const Productos = () => {
       </Modal>
       <Modal open={brandModal} setClosed={() => setBrandModal(false)}>
         <Form
-          title={"Aumentar precios por marca"}
-          onAdd={() => handleAcceptBrandRaiseButton()}
+          title={"Generar aumento"}
+          onAdd={() => handleAcceptRaiseButton()}
           onCancel={() => setBrandModal(!brandModal)}
           generate={true}
         >
+          <LabeledDataList
+            options={[
+              { aumentoPor: "Marca" },
+              { aumentoPor: "Rubro" },
+              { aumentoPor: "Producto" },
+            ]}
+            which={["aumentoPor"]}
+            {...aumentoPor}
+            text="Aumento Por"
+          />
           <LabeledSelector
-            options={modulo_productos.marcas}
-            which={"nombre"}
-            {...marcas}
-            text="Marcas"
-          />
-          <LabeledInput {...montoAumento} text="Procentaje de aumento" />
-          <LabeledInput
-            type="datetime-local"
-            value={new Date(Date.now()).toISOString().slice(0, 16)}
-            text="Fecha actual"
-          />
-        </Form>
-      </Modal>
-      <Modal open={categoryModal} setClosed={() => setCategoryModal(false)}>
-        <Form
-          title={"Aumentar precios por rubro"}
-          onAdd={() => handleAcceptCategoryRaiseButton()}
-          onCancel={() => setCategoryModal(!categoryModal)}
-          generate={true}
-        >
-          <LabeledSelector
-            options={modulo_productos.rubros}
-            which={"descripcion"}
-            {...rubros}
-            text="Rubros"
-          />
-          <LabeledInput {...montoAumento} text="Procentaje de aumento" />
-          <LabeledInput
-            type="datetime-local"
-            value={new Date(Date.now()).toISOString().slice(0, 16)}
-            text="Fecha actual"
-          />
-        </Form>
-      </Modal>
-      <Modal open={productoModal} setClosed={() => setProductModal(false)}>
-        <Form
-          title={"Aumentar precios por producto"}
-          onAdd={() => handleAcceptProductRaiseButton()}
-          onCancel={() => setProductModal(!productoModal)}
-          generate={true}
-        >
-          <LabeledSelector
-            options={modulo_productos.productos}
-            which={"descripcion"}
-            {...productos}
-            text="Productos"
+            options={
+              aumentoPor.value
+                ? initialState[`${aumentoPor.value.toLowerCase()}`]
+                : []
+            }
+            which={[aumentoPor.value === "Marcas" ? "nombre" : "descripcion"]}
+            {...aumentoSobre}
+            text={aumentoPor.value}
           />
           <LabeledInput {...montoAumento} text="Procentaje de aumento" />
           <LabeledInput

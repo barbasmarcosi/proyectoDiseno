@@ -4,7 +4,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_ventas from "../initialState/modulo_ventas";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import { useState } from "react";
 
@@ -48,10 +48,11 @@ const RemitosEntrega = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_ventas.remitosEntrega}
+        body={initialState.remitoEntrega}
         exceptions={[]}
         edit={false}
         del={false}
+        searchingFor={['pedido']}
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
@@ -61,10 +62,10 @@ const RemitosEntrega = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}
         >
-          <LabeledInput value={modulo_ventas.remitosEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledInput value={initialState.remitoEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
           <LabeledDataList
             {...pedido}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Nro. Pedido"
           />
@@ -72,7 +73,7 @@ const RemitosEntrega = () => {
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_ventas.remitosEntrega}
+            options={initialState.remitoEntrega}
             which={["id"]}
             text="Condicion de venta"
           />
@@ -89,10 +90,10 @@ const RemitosEntrega = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
-          <LabeledInput value={modulo_ventas.remitosEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledInput value={initialState.remitoEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
           <LabeledDataList
             {...pedido}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Nro. Pedido"
           />
@@ -100,7 +101,7 @@ const RemitosEntrega = () => {
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_ventas.remitosEntrega}
+            options={initialState.remitoEntrega}
             which={["id"]}
             text="Condicion de venta"
           />

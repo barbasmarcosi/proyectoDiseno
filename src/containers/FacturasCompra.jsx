@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_compras from "../initialState/modulo_compras";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 
 const FacturasCompra = () => {
@@ -52,9 +52,10 @@ const FacturasCompra = () => {
         Agregar Factura de Compra
       </button>
       <Table
-        body={modulo_compras.facturasCompra}
+        body={initialState.facturaCompra}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         del={false}
+        searchingFor={["ordenCompra", "remitoProveedor"]}
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
@@ -66,13 +67,13 @@ const FacturasCompra = () => {
         >
           <LabeledDataList
             {...ordenCompra}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["id"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Remito de proveedor"
           />
@@ -87,18 +88,22 @@ const FacturasCompra = () => {
             which={["tipoFactura"]}
             text="Tipo de factura"
           />
-          <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la factura" />
+          <LabeledInput
+            {...fecha}
+            type="datetime-local"
+            text="Fecha y hora de la factura"
+          />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Condicion de venta"
           />
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["proveedor"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />
@@ -116,13 +121,13 @@ const FacturasCompra = () => {
         >
           <LabeledDataList
             {...ordenCompra}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["id"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Remito de proveedor"
           />
@@ -137,18 +142,22 @@ const FacturasCompra = () => {
             which={["tipoFactura"]}
             text="Tipo de factura"
           />
-          <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la factura" />
+          <LabeledInput
+            {...fecha}
+            type="datetime-local"
+            text="Fecha y hora de la factura"
+          />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Condicion de venta"
           />
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["proveedor"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />

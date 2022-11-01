@@ -6,8 +6,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_ventas from "../initialState/modulo_ventas";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 
 const Ventas = () => {
@@ -59,7 +58,9 @@ const Ventas = () => {
       "detalleComprobanteVenta",
       JSON.stringify(detalleComprobanteVenta)
     );
-    detalleComprobanteVenta = JSON.parse(localStorage.getItem("detalleComprobanteVenta"));
+    detalleComprobanteVenta = JSON.parse(
+      localStorage.getItem("detalleComprobanteVenta")
+    );
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
@@ -84,10 +85,11 @@ const Ventas = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_ventas.comprobantesVenta}
+        body={initialState.comprobanteVenta}
         exceptions={[]}
         edit={false}
         del={false}
+        searchingFor={["pedido"]}
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
@@ -98,19 +100,19 @@ const Ventas = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput
-            value={modulo_ventas.comprobantesVenta.length + 1}
+            value={initialState.comprobanteVenta.length + 1}
             toShowId={true}
             text="Nro. Comprobante"
           />
           <LabeledDataList
             {...pedido}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Nro.Pedido"
           />
           <LabeledInput {...fechaHora} text="Fecha de Comprobante" />
           <LabeledDataList
-            options={modulo_ventas.comprobantesVenta}
+            options={initialState.comprobanteVenta}
             which={["nroFactura"]}
             {...nroFactura}
             text="Nro. de Factura"
@@ -128,6 +130,7 @@ const Ventas = () => {
           <LabeledInput {...montoTotal} text="Monto total" />
           <LabeledInput {...observaciones} text="Observaciones" />
           <Table
+            searchingFor={["pedido"]}
             onEdit={() => setDetailsModal(!detailsModal)}
             body={detalleComprobanteVenta}
             edit={false}
@@ -158,19 +161,19 @@ const Ventas = () => {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput
-            value={modulo_ventas.comprobantesVenta.length + 1}
+            value={initialState.comprobanteVenta.length + 1}
             toShowId={true}
             text="Nro. Comprobante"
           />
           <LabeledDataList
             {...pedido}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Nro.Pedido"
           />
           <LabeledInput {...fechaHora} text="Fecha de Comprobante" />
           <LabeledDataList
-            options={modulo_ventas.comprobantesVenta}
+            options={initialState.comprobanteVenta}
             which={["nroFactura"]}
             {...nroFactura}
             text="Nro. de Factura"
@@ -229,14 +232,14 @@ const Ventas = () => {
           >
             <LabeledDataList
               {...producto}
-              options={modulo_productos.productos}
+              options={initialState.producto}
               which={["descripcion"]}
               text="Producto"
             />
             <LabeledInput {...cantidadProducto} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

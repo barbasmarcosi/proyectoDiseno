@@ -1,13 +1,13 @@
+import searchFor from "../usefullFunctions/searchFor";
 import Details from "./Details";
 
 const Table = ({
   body,
   edit,
   del,
-  onEdit,
   exceptions = [],
   isDocument = false,
-  canEdit,
+  searchingFor = [],
 }) => {
   return body.length > 0 ? (
     <div className="Table">
@@ -46,14 +46,33 @@ const Table = ({
             return (
               <tr className="Table-tbody-tr">
                 {Object.keys(tr).map((key) => {
+                  let search = false;
+                  searchingFor.map((searching) => {
+                    if (searching === key) {
+                      search = true;
+                    }
+                  });
                   let exc = true;
                   exceptions.map((exception) => {
-                    if (exception == key) {
+                    if (exception === key) {
                       exc = false;
                     }
                   });
                   if (exc) {
-                    if (tr[key] === true) {
+                    if (search && tr[key]) {
+                      return (
+                        <td className="Table-tbody-tr-td">
+                          <Details
+                            title={`Detalle ${key
+                              .match(/([A-Z]?[^A-Z]*)/g)
+                              .slice(0, -1)
+                              .join(" ")
+                              .toLowerCase()}`}
+                            table={[searchFor(key, tr[key])]}
+                          />
+                        </td>
+                      );
+                    } else if (tr[key] === true) {
                       return <td className="Table-tbody-tr-td">{"Si"}</td>;
                     } else if (tr[key] === false) {
                       return <td className="Table-tbody-tr-td">{"No"}</td>;
@@ -62,7 +81,14 @@ const Table = ({
                     } else if (typeof tr[key] === "object") {
                       return (
                         <td className="Table-tbody-tr-td">
-                          <Details title={"Detalle"} table={tr[key]} />
+                          <Details
+                            title={`Detalle ${key
+                              .match(/([A-Z]?[^A-Z]*)/g)
+                              .slice(0, -1)
+                              .join(" ")
+                              .toLowerCase()}`}
+                            table={tr[key]}
+                          />
                         </td>
                       );
                     } else {

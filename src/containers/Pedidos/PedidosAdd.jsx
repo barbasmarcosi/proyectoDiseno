@@ -7,8 +7,7 @@ import Modal from "../../components/Modal";
 import Table from "../../components/Table";
 import useInputValue from "../../hooks/useInputValue";
 import Labeler from "../../components/Labeler";
-import modulo_ventas from "../../initialState/modulo_ventas";
-import modulo_productos from "../../initialState/modulo_productos";
+import initialState from "../../initialState/initialState";
 import formValidator from "../../usefullFunctions/formValidator";
 import messageTimeOut from "../../usefullFunctions/messageTimeOut";
 import toGetFormValues from "../../usefullFunctions/toGetFormValues";
@@ -137,7 +136,7 @@ const PedidosAdd = ({
           onCancel={() => setOpenModal(false)}
         >
           <LabeledInput
-            value={modulo_ventas.pedidos.length + 1}
+            value={initialState.pedido.length + 1}
             text="Nro. Pedido"
             toShowId={true}
           />
@@ -150,7 +149,7 @@ const PedidosAdd = ({
               cliente.setValue(e.target.value);
               setClientData();
             }}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["cliente", "calle", "altura", "depto", "telefonoEntrega"]}
             text="Cliente"
           />
@@ -170,7 +169,7 @@ const PedidosAdd = ({
           />
           <LabeledDataList
             {...calleCliente}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -179,7 +178,7 @@ const PedidosAdd = ({
           <LabeledInput {...telefonoCliente} text="Telefono de Entrega" />
           <LabeledDataList
             {...personal}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["encargado"]}
             text="Encargado"
           />
@@ -196,7 +195,7 @@ const PedidosAdd = ({
           <LabeledDataList
             {...presupuesto}
             nullable={true}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Presupuesto"
           />
@@ -230,7 +229,7 @@ const PedidosAdd = ({
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...calle}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -248,7 +247,7 @@ const PedidosAdd = ({
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...delivery}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["delivery"]}
             text="Delivery"
           />
@@ -298,14 +297,14 @@ const PedidosAdd = ({
           >
             <LabeledDataList
               {...producto}
-              options={modulo_productos.productos}
+              options={initialState.producto}
               which={["descripcion"]}
               text="Producto"
             />
             <LabeledInput {...cantidadProducto} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

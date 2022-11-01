@@ -8,8 +8,7 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import Labeler from "../components/Labeler";
-import modulo_ventas from "../initialState/modulo_ventas";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 import formValidator from "../usefullFunctions/formValidator";
 import messageTimeOut from "../usefullFunctions/messageTimeOut";
 import toGetFormValues from "../usefullFunctions/toGetFormValues";
@@ -105,11 +104,19 @@ function Pedidos() {
     if (val) {
       const data = val.split(", ");
       console.log(data);
-      data[0] !== 'null' ? cliente.setValue(data[0]) : cliente.setValue('');
-      data[1] !== 'null' ? calleCliente.setValue(data[1]) : calleCliente.setValue('');
-      data[2] !== 'null' ? alturaCliente.setValue(data[2]) : alturaCliente.setValue('');
-      data[3] !== 'null' ? deptoCliente.setValue(data[3]) : deptoCliente.setValue('');
-      data[4] !== 'null' ? telefonoCliente.setValue(data[4]) : telefonoCliente.setValue('');
+      data[0] !== "null" ? cliente.setValue(data[0]) : cliente.setValue("");
+      data[1] !== "null"
+        ? calleCliente.setValue(data[1])
+        : calleCliente.setValue("");
+      data[2] !== "null"
+        ? alturaCliente.setValue(data[2])
+        : alturaCliente.setValue("");
+      data[3] !== "null"
+        ? deptoCliente.setValue(data[3])
+        : deptoCliente.setValue("");
+      data[4] !== "null"
+        ? telefonoCliente.setValue(data[4])
+        : telefonoCliente.setValue("");
     } else {
       calleCliente.setValue("");
       alturaCliente.setValue("");
@@ -137,10 +144,10 @@ function Pedidos() {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_ventas.pedidos}
+        body={initialState.pedido}
+        searchingFor={["presupuesto"]}
         exceptions={[
           "encargado",
-          "presupuesto",
           "tipoVenta",
           "observaciones",
           "fechaPedido",
@@ -160,7 +167,7 @@ function Pedidos() {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput
-            value={modulo_ventas.pedidos.length + 1}
+            value={initialState.pedido.length + 1}
             text="Nro. Pedido"
             toShowId={true}
           />
@@ -173,15 +180,27 @@ function Pedidos() {
               cliente.setValue(e.target.value);
               setClientData();
             }}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["cliente", "calle", "altura", "depto", "telefonoEntrega"]}
             text="Cliente"
           />
-          <button type='button' onClick={() => setOpenClientModal(!openClientModal)} className="Button-add" style={{ height: '3.5rem', marginTop: '2rem' }}>Agregar Cliente</button>
-          <ClientesAdd setMessage={setMessage} setMessageState={setSuccessMessage} setOpenModal={setOpenClientModal} openModal={openClientModal} />
+          <button
+            type="button"
+            onClick={() => setOpenClientModal(!openClientModal)}
+            className="Button-add"
+            style={{ height: "3.5rem", marginTop: "2rem" }}
+          >
+            Agregar Cliente
+          </button>
+          <ClientesAdd
+            setMessage={setMessage}
+            setMessageState={setSuccessMessage}
+            setOpenModal={setOpenClientModal}
+            openModal={openClientModal}
+          />
           <LabeledDataList
             {...calleCliente}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -190,7 +209,7 @@ function Pedidos() {
           <LabeledInput {...telefonoCliente} text="Telefono de Entrega" />
           <LabeledDataList
             {...personal}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["encargado"]}
             text="Encargado"
           />
@@ -207,7 +226,7 @@ function Pedidos() {
           <LabeledDataList
             {...presupuesto}
             nullable={true}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Presupuesto"
           />
@@ -241,7 +260,7 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...calle}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -259,7 +278,7 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...delivery}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["delivery"]}
             text="Delivery"
           />
@@ -305,19 +324,19 @@ function Pedidos() {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput
-            value={modulo_ventas.pedidos.length + 1}
+            value={initialState.pedido.length + 1}
             text="Nro. Pedido"
             toShowId={true}
           />
           <LabeledDataList
             {...cliente}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["cliente"]}
             text="Cliente"
           />
           <LabeledDataList
             {...calleCliente}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -326,7 +345,7 @@ function Pedidos() {
           <LabeledInput {...telefonoCliente} text="Telefono de Entrega" />
           <LabeledDataList
             {...personal}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["encargado"]}
             text="Encargado"
           />
@@ -342,7 +361,7 @@ function Pedidos() {
           />
           <LabeledDataList
             {...presupuesto}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["id"]}
             text="Presupuesto"
           />
@@ -376,7 +395,7 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...calle}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["calle"]}
             text="Calle"
           />
@@ -394,7 +413,7 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...delivery}
-            options={modulo_ventas.pedidos}
+            options={initialState.pedido}
             which={["delivery"]}
             text="Delivery"
           />
@@ -445,14 +464,14 @@ function Pedidos() {
           >
             <LabeledDataList
               {...producto}
-              options={modulo_productos.productos}
+              options={initialState.producto}
               which={["descripcion"]}
               text="Producto"
             />
             <LabeledInput {...cantidadProducto} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

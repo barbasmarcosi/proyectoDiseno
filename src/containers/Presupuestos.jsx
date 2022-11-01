@@ -5,8 +5,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_ventas from "../initialState/modulo_ventas";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 
 const Presupuestos = () => {
@@ -86,7 +85,7 @@ const Presupuestos = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_ventas.presupuestos}
+        body={initialState.presupuesto}
         exceptions={[]}
         edit={false}
         del={false}
@@ -100,14 +99,14 @@ const Presupuestos = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput
-            value={modulo_ventas.presupuestos.length + 1}
+            value={initialState.presupuesto.length + 1}
             text="Nro. Presupuesto"
             toShowId={true}
           />
           <LabeledDataList
             {...cliente}
             text="Cliente"
-            options={modulo_ventas.presupuestos}
+            options={initialState.presupuesto}
             which={["cliente"]}
           />
           <LabeledInput
@@ -156,14 +155,14 @@ const Presupuestos = () => {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput
-            value={modulo_ventas.presupuestos.length + 1}
+            value={initialState.presupuesto.length + 1}
             text="Nro. Presupuesto"
             toShowId={true}
           />
           <LabeledDataList
             {...cliente}
             text="Cliente"
-            options={modulo_ventas.presupuestos}
+            options={initialState.presupuesto}
             which={["cliente"]}
           />
           <LabeledInput
@@ -223,14 +222,14 @@ const Presupuestos = () => {
           >
             <LabeledDataList
               {...producto}
-              options={modulo_productos.productos}
+              options={initialState.producto}
               which={["descripcion"]}
               text="Producto"
             />
             <LabeledInput {...cantidadProducto} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

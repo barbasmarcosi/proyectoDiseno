@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_compras from "../initialState/modulo_compras";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 
 const OrdenesCompra = () => {
@@ -49,7 +49,7 @@ const OrdenesCompra = () => {
         Agregar Orden de Compra
       </button>
       <Table
-        body={modulo_compras.ordenesCompra}
+        body={initialState.ordenCompra}
         exceptions={['terminoEntrega']}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         isDocument={true}
@@ -66,13 +66,13 @@ const OrdenesCompra = () => {
         >
           <LabeledDataList
             {...proveedor}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["proveedor"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["encargado"]}
             text="Encargado"
           />
@@ -94,13 +94,13 @@ const OrdenesCompra = () => {
         >
           <LabeledDataList
             {...proveedor}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["proveedor"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
-            options={modulo_compras.ordenesCompra}
+            options={initialState.ordenCompra}
             which={["encargado"]}
             text="Encargado"
           />

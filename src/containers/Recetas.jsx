@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -79,7 +79,8 @@ const Recetas = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_productos.recetas}
+        body={initialState.receta}
+        searchingFor={["producto"]}
         detail="materiaPrima"
         edit={false}
         del={false}
@@ -94,7 +95,7 @@ const Recetas = () => {
         >
           <LabeledDataList
             {...producto}
-            options={modulo_productos.productos}
+            options={initialState.producto}
             which={["descripcion"]}
             text="Producto"
           />
@@ -133,7 +134,7 @@ const Recetas = () => {
         >
           <LabeledDataList
             {...producto}
-            options={modulo_productos.productos}
+            options={initialState.producto}
             which={["descripcion"]}
             text="Producto"
           />
@@ -163,14 +164,14 @@ const Recetas = () => {
           <div ref={detailRef}>
             <LabeledDataList
               {...nombreIngrediente}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["nombre"]}
               text="Ingrediente"
             />
             <LabeledInput {...cantidadIngrediente} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={modulo_productos.recetas[2].materiaPrima}
+              options={initialState.receta[2].materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

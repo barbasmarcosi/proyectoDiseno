@@ -2,12 +2,25 @@ import { useState } from "react";
 import Modal from "./Modal";
 import Table from "./Table";
 
-const Details = ({ table, title, buttonColor='', buttonClass = "Button-cancel"}) => {
+const Details = ({
+  table,
+  title,
+  buttonColor = "",
+  buttonClass = "Button-cancel",
+}) => {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div style={{ display: 'flex', textAlign: "center", justifyContent: 'center' }}>
+    <div
+      style={{ display: "flex", textAlign: "center", justifyContent: "center" }}
+    >
       <button
-        style={{ width: "max-content", alignSelf: 'center', backgroundColor: buttonColor}}
+        style={{
+          width: "6.5rem",
+          alignSelf: "center",
+          backgroundColor: buttonColor,
+          height: "max-content",
+          textWrap: "column",
+        }}
         className={buttonClass}
         onClick={() => setOpenModal(!openModal)}
       >

@@ -29,6 +29,7 @@ const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
                 textAlign: "left",
                 borderRadius: "4px",
                 padding: "4px",
+                zIndex: "1000"
               }}
             >
               <label className="LabeledInput-option" for={`${opt[which]}`}>

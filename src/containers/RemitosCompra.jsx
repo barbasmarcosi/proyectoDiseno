@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_compras from "../initialState/modulo_compras";
+import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 
 const RemitosCompra = () => {
@@ -49,7 +49,7 @@ const RemitosCompra = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_compras.remitosProveedor}
+        body={initialState.remitoProveedor}
         exceptions={[]}
         edit={false}
         del={false}
@@ -70,13 +70,13 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["proveedor"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Condicion de venta"
           />
@@ -101,13 +101,13 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["proveedor"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={modulo_compras.remitosProveedor}
+            options={initialState.remitoProveedor}
             which={["id"]}
             text="Condicion de venta"
           />

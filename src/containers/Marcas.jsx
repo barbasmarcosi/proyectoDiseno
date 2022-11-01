@@ -7,7 +7,7 @@ import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
-import modulo_productos from "../initialState/modulo_productos";
+import initialState from "../initialState/initialState";
 
 const Marcas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -66,7 +66,7 @@ const Marcas = () => {
       </button>
       <Table
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={modulo_productos.marcas}
+        body={initialState.marca}
         edit={false}
         del={false}
       />
@@ -102,7 +102,7 @@ const Marcas = () => {
           generate={true}
         >
           <LabeledSelector
-            options={modulo_productos.marcas}
+            options={initialState.marca}
             which={"nombre"}
             {...descripcion}
             text="Marcas"
