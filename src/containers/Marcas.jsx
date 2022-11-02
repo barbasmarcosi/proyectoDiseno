@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
@@ -8,6 +9,7 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Marcas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +19,10 @@ const Marcas = () => {
   const [message, setMessage] = useState("");
   const descripcion = useInputValue("");
   const montoAumento = useInputValue("");
+  const entity = "marca";
+  const [marcas, setMarcas] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [marcas]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -65,8 +71,11 @@ const Marcas = () => {
         Aumentar precios por marca
       </button>
       <Table
+        onDelete={(id) =>
+          setMarcas(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.marca}
+        body={marcas}
         edit={false}
         del={false}
       />

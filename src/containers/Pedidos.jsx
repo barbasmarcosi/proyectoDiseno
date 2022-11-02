@@ -13,6 +13,8 @@ import formValidator from "../usefullFunctions/formValidator";
 import messageTimeOut from "../usefullFunctions/messageTimeOut";
 import toGetFormValues from "../usefullFunctions/toGetFormValues";
 import ClientesAdd from "./Clientes/ClientesAdd";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 function Pedidos() {
   const [openModal, setOpenModal] = useState(false);
@@ -52,11 +54,15 @@ function Pedidos() {
   const detailRef = useRef();
   const clienteRef = useRef();
   const [messageType, setMessageType] = useState("success");
+  const entity = "pedido";
+  const [pedidos, setPedidos] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [pedidos]);
 
   const toGetValue = (index) =>
     detailRef.current.children[index].children[1].children[0].value;
 
-  let detallePedido = localStorage.getItem("detallePedido").length
+  let detallePedido = localStorage.getItem("detallePedido")
     ? JSON.parse(localStorage.getItem("detallePedido"))
     : [];
 
@@ -143,8 +149,11 @@ function Pedidos() {
         Agregar Pedido
       </button>
       <Table
+        onDelete={(id) =>
+          setPedidos(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.pedido}
+        body={pedidos}
         searchingFor={["presupuesto"]}
         exceptions={[
           "encargado",

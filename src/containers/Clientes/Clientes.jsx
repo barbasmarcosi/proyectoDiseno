@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../../components/Form";
 import LabeledInput from "../../components/LabeledInput";
@@ -6,6 +7,7 @@ import Message from "../../components/Message";
 import Modal from "../../components/Modal";
 import Table from "../../components/Table";
 import useInputValue from "../../hooks/useInputValue";
+import manageLocalStorage from "../../usefullFunctions/manageLocalStorage";
 import ClientesAdd from "./ClientesAdd";
 import ClientesModify from "./ClientesModify";
 
@@ -26,6 +28,10 @@ const Clientes = () => {
   const fechaNacimiento = useInputValue("");
   const telefono = useInputValue("");
   const mail = useInputValue("");
+  const entity = "cliente";
+  const [clientes, setClientes] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [clientes]);
 
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
@@ -36,16 +42,6 @@ const Clientes = () => {
     }, 5000);
   };
 
-  const body = [
-    {
-      Calle: "Villegas",
-      Localidad: "Trenque Lauquen",
-    },
-    {
-      Calle: "Wilde",
-      Localidad: "Trenque Lauquen",
-    },
-  ];
   return (
     <div className="Productos">
       <h1 className="Productos-title">Listado de Clientes</h1>
@@ -57,7 +53,10 @@ const Clientes = () => {
         Agregar Cliente
       </button>
       <Table
-        body={body}
+        body={clientes}
+        onDelete={(id) =>
+          setClientes(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={(data) => {
           setOpenModifyModal(!openModifyModal);
           setEdit(data);

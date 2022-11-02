@@ -8,10 +8,12 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const FacturasCompra = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [succesMessage, setSuccessMessage] = useState(true);
+  const [successMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const ordenCompra = useInputValue("");
@@ -23,12 +25,17 @@ const FacturasCompra = () => {
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
-  const productos = useInputValue("");
+  const entity = 'facturaCompra'
+  const [facturasCompra, setFacturasCompra] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [facturasCompra]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Factura de compra agregada correctamente");
-    setSuccessMessage(!succesMessage);
+    setSuccessMessage(!successMessage);
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
@@ -36,7 +43,7 @@ const FacturasCompra = () => {
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
     setMessage("Factura de compra modificada correctamente");
-    setSuccessMessage(!succesMessage);
+    setSuccessMessage(!successMessage);
     setTimeout(() => {
       setSuccessMessage(true);
     }, 5000);
@@ -52,7 +59,12 @@ const FacturasCompra = () => {
         Agregar Factura de Compra
       </button>
       <Table
-        body={initialState.facturaCompra}
+        body={facturasCompra}
+        onDelete={(id) =>
+          setFacturasCompra(
+            manageLocalStorage("delete", entity, "", id)
+          )
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         del={false}
         searchingFor={["ordenCompra", "remitoProveedor"]}
@@ -165,8 +177,8 @@ const FacturasCompra = () => {
       </Modal>
       <Message
         type="success"
-        hide={succesMessage}
-        onCLickClose={() => setSuccessMessage(!succesMessage)}
+        hide={successMessage}
+        onCLickClose={() => setSuccessMessage(!successMessage)}
       >
         {message}
       </Message>

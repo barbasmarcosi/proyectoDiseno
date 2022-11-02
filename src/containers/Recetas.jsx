@@ -8,7 +8,8 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
-import useLocalStorage from "../hooks/useLocalStorage";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const Recetas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -27,6 +28,10 @@ const Recetas = () => {
     ? JSON.parse(localStorage.getItem("recetasDetalle"))
     : [];
   const detailRef = useRef();
+  const entity = "receta";
+  const [recetas, setRecetas] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [recetas]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -78,6 +83,9 @@ const Recetas = () => {
         Agregar Receta
       </button>
       <Table
+        onDelete={(id) =>
+          setRecetas(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         body={initialState.receta}
         searchingFor={["producto"]}

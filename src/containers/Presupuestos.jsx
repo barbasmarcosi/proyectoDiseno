@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
@@ -7,6 +7,7 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Presupuestos = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -33,6 +34,12 @@ const Presupuestos = () => {
   )
     ? JSON.parse(localStorage.getItem("presupuestoDetalle"))
     : [];
+  const entity = "presupuesto";
+  const [presupuestos, setPresupuestos] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [presupuestos]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -84,8 +91,11 @@ const Presupuestos = () => {
         Agregar Presupuesto
       </button>
       <Table
+        onDelete={(id) =>
+          setPresupuestos(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.presupuesto}
+        body={presupuestos}
         exceptions={[]}
         edit={false}
         del={false}

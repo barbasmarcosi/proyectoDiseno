@@ -5,6 +5,8 @@ const Table = ({
   body,
   edit,
   del,
+  onEdit,
+  onDelete,
   exceptions = [],
   isDocument = false,
   searchingFor = [],
@@ -126,13 +128,14 @@ const Table = ({
                 <td>
                   <input
                     className="Button-edit"
-                    onClick={() => console.log(tr)}
+                    onClick={onEdit}
                     type="button"
                     value="Editar"
                     hidden={edit}
                   />
                   <input
                     className="Button-delete"
+                    onClick={() => onDelete(tr.id)}
                     type="button"
                     value="Eliminar"
                     hidden={del}

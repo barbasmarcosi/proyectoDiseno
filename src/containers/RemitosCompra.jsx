@@ -8,6 +8,8 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const RemitosCompra = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,7 +21,12 @@ const RemitosCompra = () => {
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
-  const productos = useInputValue("");
+  const entity = "remitoProveedor";
+  const [remitosCompra, setRemitosCompra] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [remitosCompra]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -48,8 +55,11 @@ const RemitosCompra = () => {
         Agregar Remito de Proveedor
       </button>
       <Table
+        onDelete={(id) =>
+          setRemitosCompra(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.remitoProveedor}
+        body={remitosCompra}
         exceptions={[]}
         edit={false}
         del={false}

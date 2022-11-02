@@ -8,6 +8,8 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const Ventas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -32,6 +34,13 @@ const Ventas = () => {
   )
     ? JSON.parse(localStorage.getItem("detalleComprobanteVenta"))
     : [];
+  const entity = "comprobanteVenta";
+  const [comprobantesVenta, setComprobantesVentas] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [comprobantesVenta]);
+
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
     setMessage("Comprobante de venta agregado correctamente");
@@ -84,8 +93,11 @@ const Ventas = () => {
         Agregar Comprobante de Venta
       </button>
       <Table
+        onDelete={(id) =>
+          setComprobantesVentas(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.comprobanteVenta}
+        body={comprobantesVenta}
         exceptions={[]}
         edit={false}
         del={false}

@@ -1,77 +1,104 @@
-import React from 'react'
-import { useState } from 'react';
-import Form from '../components/Form';
-import LabeledInput from '../components/LabeledInput';
-import Message from '../components/Message';
-import Modal from '../components/Modal';
-import Table from '../components/Table';
-import useInputValue from '../hooks/useInputValue';
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import Form from "../components/Form";
+import LabeledInput from "../components/LabeledInput";
+import Message from "../components/Message";
+import Modal from "../components/Modal";
+import Table from "../components/Table";
+import useInputValue from "../hooks/useInputValue";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Produccion = () => {
   const [openModal, setOpenModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
-  const [message, setMessage] = useState('');
-  const ordenPedido = useInputValue('');
-  const encargadoProduccion = useInputValue('');
+  const [message, setMessage] = useState("");
+  const ordenPedido = useInputValue("");
+  const encargadoProduccion = useInputValue("");
+  const entity = "ordenProduccion";
+  const [ordenesProduccion, setOrdenesProduccion] = useState(
+    manageLocalStorage("get", entity)
+  );
 
+  useEffect(() => {}, [ordenesProduccion]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
-    setMessage('Orden de produccion agregada correctamente')
+    setMessage("Orden de produccion agregada correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
-      setSuccessMessage(true)
+      setSuccessMessage(true);
     }, 5000);
-  }
+  };
   const handleModifyButton = () => {
-    setOpenModifyModal(!openModifyModal)
-    setMessage('Orden de produccion modificada correctamente')
+    setOpenModifyModal(!openModifyModal);
+    setMessage("Orden de produccion modificada correctamente");
     setSuccessMessage(!succesMessage);
     setTimeout(() => {
-      setSuccessMessage(true)
+      setSuccessMessage(true);
     }, 5000);
-  }
-  const body = [{
-    Calle: 'Villegas',
-    Localidad: 'Trenque Lauquen',
-  },
-  {
-    Calle: 'Wilde',
-    Localidad: 'Trenque Lauquen',
-  }]
+  };
   return (
-    <div className='Productos'>
-      <h1 className='Productos-title'>Listado de Ordenes de Produccion</h1>
-      <button onClick={() => setOpenModal(!openModal)} className='Button-add' type='button'>Agregar Orden de Produccion</button>
-      <Table onEdit={() => setOpenModifyModal(!openModifyModal)} body={body} edit={false} del={false} />
+    <div className="Productos">
+      <h1 className="Productos-title">Listado de Ordenes de Produccion</h1>
+      <button
+        onClick={() => setOpenModal(!openModal)}
+        className="Button-add"
+        type="button"
+      >
+        Agregar Orden de Produccion
+      </button>
+      <Table
+        onDelete={(id) =>
+          setOrdenesProduccion(manageLocalStorage("delete", entity, "", id))
+        }
+        onEdit={() => setOpenModifyModal(!openModifyModal)}
+        body={ordenesProduccion}
+        edit={false}
+        del={false}
+      />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
-          title={'Agregar Orden de Produccion'}
+          title={"Agregar Orden de Produccion"}
           multiple={true}
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
-          onCancel={() => setOpenModal(!openModal)}>
+          onCancel={() => setOpenModal(!openModal)}
+        >
           <LabeledInput {...ordenPedido} text="Orden de Pedido" />
-          <LabeledInput {...encargadoProduccion} text="Encargado de Produccion" />
+          <LabeledInput
+            {...encargadoProduccion}
+            text="Encargado de Produccion"
+          />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
         <Form
-          title={'Modificar Orden de Produccion'}
+          title={"Modificar Orden de Produccion"}
           multiple={true}
           edit={true}
           onEdit={() => handleModifyButton()}
           onAdd={() => handleAcceptButton()}
           onAddMultiple={() => setOpenModal(!!openModal)}
-          onCancel={() => setOpenModifyModal(!openModifyModal)}>
+          onCancel={() => setOpenModifyModal(!openModifyModal)}
+        >
           <LabeledInput {...ordenPedido} text="Orden de Pedido" />
-          <LabeledInput {...encargadoProduccion} text="Encargado de Produccion" />
+          <LabeledInput
+            {...encargadoProduccion}
+            text="Encargado de Produccion"
+          />
         </Form>
       </Modal>
-      <Message type="success" hide={succesMessage} onCLickClose={() => setSuccessMessage(!succesMessage)} >{message}</Message>
+      <Message
+        type="success"
+        hide={succesMessage}
+        onCLickClose={() => setSuccessMessage(!succesMessage)}
+      >
+        {message}
+      </Message>
     </div>
-  )
-}
+  );
+};
 
-export default Produccion
+export default Produccion;

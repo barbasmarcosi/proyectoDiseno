@@ -8,12 +8,12 @@ import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import LabeledSelector from "../components/LabeledSelector";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const Productos = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [productoModal, setProductModal] = useState(false);
   const [brandModal, setBrandModal] = useState(false);
-  const [categoryModal, setCategoryModal] = useState(false);
   const [succesMessage, setSuccessMessage] = useState(true);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,6 +29,10 @@ const Productos = () => {
   const aumentoSobre = useInputValue("");
   const montoAumento = useInputValue("");
   const aumentoPor = useInputValue("");
+  const entity = "producto";
+  const [productos, setProductos] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [productos]);
 
   let proveedores = [];
   console.log(proveedores);
@@ -79,8 +83,11 @@ const Productos = () => {
         Aumentar precios
       </button>
       <Table
+        onDelete={(id) =>
+          setProductos(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.producto}
+        body={productos}
         exceptions={["precioCosto", "tipoIva", "stockMinimo"]}
         edit={false}
         del={false}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
@@ -8,6 +9,7 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Rubros = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +19,10 @@ const Rubros = () => {
   const [message, setMessage] = useState("");
   const descripcion = useInputValue("");
   const montoAumento = useInputValue("");
+  const entity = "rubro";
+  const [rubros, setRubros] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [rubros]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -65,8 +71,11 @@ const Rubros = () => {
         Aumentar precios por rubro
       </button>
       <Table
+        onDelete={(id) =>
+          setRubros(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.rubro}
+        body={rubros}
         edit={false}
         del={false}
       />

@@ -7,6 +7,8 @@ import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import { useState } from "react";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const RemitosEntrega = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -18,7 +20,12 @@ const RemitosEntrega = () => {
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
-  const productos = useInputValue("");
+  const entity = "remitoEntrega";
+  const [remitosEntrega, setRemitosEntrega] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [remitosEntrega]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -47,12 +54,15 @@ const RemitosEntrega = () => {
         Agregar Remito de Entrega
       </button>
       <Table
+        onDelete={(id) =>
+          setRemitosEntrega(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.remitoEntrega}
+        body={remitosEntrega}
         exceptions={[]}
         edit={false}
         del={false}
-        searchingFor={['pedido']}
+        searchingFor={["pedido"]}
       />
       <Modal open={openModal} setClosed={() => setOpenModal(false)}>
         <Form
@@ -62,14 +72,22 @@ const RemitosEntrega = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModal(!openModal)}
         >
-          <LabeledInput value={initialState.remitoEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledInput
+            value={initialState.remitoEntrega.length + 1}
+            toShowId={true}
+            text={"Nro. Remito"}
+          />
           <LabeledDataList
             {...pedido}
             options={initialState.pedido}
             which={["id"]}
             text="Nro. Pedido"
           />
-          <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
+          <LabeledInput
+            {...fechaRemito}
+            type="datetime-local"
+            text="Fecha de Remito"
+          />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
@@ -90,14 +108,22 @@ const RemitosEntrega = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
-          <LabeledInput value={initialState.remitoEntrega.length + 1} toShowId={true} text={'Nro. Remito'} />
+          <LabeledInput
+            value={initialState.remitoEntrega.length + 1}
+            toShowId={true}
+            text={"Nro. Remito"}
+          />
           <LabeledDataList
             {...pedido}
             options={initialState.pedido}
             which={["id"]}
             text="Nro. Pedido"
           />
-          <LabeledInput {...fechaRemito} type="datetime-local" text='Fecha de Remito'/>
+          <LabeledInput
+            {...fechaRemito}
+            type="datetime-local"
+            text="Fecha de Remito"
+          />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}

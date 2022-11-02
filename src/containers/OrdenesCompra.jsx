@@ -8,6 +8,8 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const OrdenesCompra = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +22,12 @@ const OrdenesCompra = () => {
   const terminoEntrega = useInputValue("");
   const montoTotal = useInputValue("");
   const observaciones = useInputValue("");
-  const productos = useInputValue("");
+  const entity = "ordenCompra";
+  const [ordenesCompra, setOrdenesCompra] = useState(
+    manageLocalStorage("get", entity)
+  );
+
+  useEffect(() => {}, [ordenesCompra]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -49,8 +56,11 @@ const OrdenesCompra = () => {
         Agregar Orden de Compra
       </button>
       <Table
-        body={initialState.ordenCompra}
-        exceptions={['terminoEntrega']}
+        onDelete={(id) =>
+          setOrdenesCompra(manageLocalStorage("delete", entity, "", id))
+        }
+        body={ordenesCompra}
+        exceptions={["terminoEntrega"]}
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         isDocument={true}
         edit={false}
@@ -76,7 +86,11 @@ const OrdenesCompra = () => {
             which={["encargado"]}
             text="Encargado"
           />
-          <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la orden" />
+          <LabeledInput
+            {...fecha}
+            type="datetime-local"
+            text="Fecha y hora de la orden"
+          />
           <LabeledInput {...terminoEntrega} text="Termino de Entrega" />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledInput {...observaciones} text="Observaciones" />
@@ -104,7 +118,11 @@ const OrdenesCompra = () => {
             which={["encargado"]}
             text="Encargado"
           />
-          <LabeledInput {...fecha} type="datetime-local" text="Fecha y hora de la orden" />
+          <LabeledInput
+            {...fecha}
+            type="datetime-local"
+            text="Fecha y hora de la orden"
+          />
           <LabeledInput {...terminoEntrega} text="Termino de Entrega" />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledInput {...observaciones} text="Observaciones" />

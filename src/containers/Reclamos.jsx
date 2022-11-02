@@ -8,6 +8,8 @@ import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
+import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import { useEffect } from "react";
 
 const Reclamos = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +19,10 @@ const Reclamos = () => {
   const pedidoCliente = useInputValue("");
   const fechaReclamo = useInputValue("");
   const descripcion = useInputValue("");
+  const entity = "reclamo";
+  const [reclamos, setReclamos] = useState(manageLocalStorage("get", entity));
+
+  useEffect(() => {}, [reclamos]);
 
   const handleAcceptButton = () => {
     setOpenModal(!openModal);
@@ -45,8 +51,11 @@ const Reclamos = () => {
         Generar Reclamo
       </button>
       <Table
+        onDelete={(id) =>
+          setReclamos(manageLocalStorage("delete", entity, "", id))
+        }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.reclamo}
+        body={reclamos}
         edit={false}
         del={false}
         searchingFor={["pedido"]}
