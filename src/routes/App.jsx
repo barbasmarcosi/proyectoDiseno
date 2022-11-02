@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../containers/Home";
 import Ventas from "../containers/Ventas";
 import Productos from "../containers/Productos";
-import Recetas from "../containers/Recetas";
-import Rubros from "../containers/Rubros";
+import Recetas from "../containers/Recetas/Recetas";
+import Rubros from "../containers/Rubros/Rubros";
 import Pedidos from "../containers/Pedidos";
 import Presupuestos from "../containers/Presupuestos";
 import Reclamos from "../containers/Reclamos";
@@ -24,7 +24,7 @@ import Provincias from "../containers/Provincias";
 import Localidades from "../containers/Localidades";
 import Calles from "../containers/Calles";
 import FormasPago from "../containers/FormasPago";
-import Marcas from "../containers/Marcas";
+import Marcas from "../containers/Marcas/Marcas";
 import RemitosEntrega from "../containers/RemitosEntrega";
 
 function App() {

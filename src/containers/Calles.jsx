@@ -8,26 +8,40 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import messageTimeOut from "../usefullFunctions/messageTimeOut";
 
 const Calles = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [messageType, setMessageType] = useState("success");
   const denominacion = useInputValue("");
   const localidad = useInputValue("");
+  //const localidades = manageLocalStorage("get", "localidad");
   const entity = "calle";
   const [calles, setCalles] = useState(manageLocalStorage("get", entity));
   useEffect(() => {}, [calles]);
 
   const handleAcceptButton = () => {
-    setOpenModal(!openModal);
-    setMessage("Calle agregada correctamente");
+    if (denominacion.value && localidad.value) {
+      setCalles(
+        manageLocalStorage("post", entity, {
+          calle: denominacion.value,
+          localidad: localidad.value,
+        })
+      );
+      setOpenModal(!openModal);
+      setMessageType("success");
+      setMessage("Calle agregada correctamente");
+    } else {
+      setMessageType("warning");
+      setMessage("Complete los datos del formulario");
+    }
     setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    messageTimeOut(setSuccessMessage);
   };
+
   const handleEditButton = () => {
     setOpenModifyModal(!openModifyModal);
     setMessage("Calle modificada correctamente");
@@ -36,6 +50,7 @@ const Calles = () => {
       setSuccessMessage(true);
     }, 5000);
   };
+
   return (
     <div className="Productos">
       <h1 className="Productos-title">Listado de Calles</h1>
@@ -80,7 +95,7 @@ const Calles = () => {
         </Form>
       </Modal>
       <Message
-        type="success"
+        type={messageType}
         hide={succesMessage}
         onCLickClose={() => setSuccessMessage(!succesMessage)}
       >

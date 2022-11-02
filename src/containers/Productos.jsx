@@ -10,11 +10,23 @@ import LabeledDataList from "../components/LabeledDataList";
 import LabeledSelector from "../components/LabeledSelector";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 import { useEffect } from "react";
+import messageTimeOut from "../usefullFunctions/messageTimeOut";
+import AddRubro from "./Rubros/AddRubro";
+import AddMarcas from "./Marcas/AddMarcas";
+import AddReceta from "./Recetas/AddReceta";
 
 const Productos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [brandModal, setBrandModal] = useState(false);
+  const [addRubro, setAddRubro] = useState(false);
+  const [addMarca, setAddMarca] = useState(false);
+  const [addReceta, setAddReceta] = useState(false);
+  const [detailsRecetaModal, setDetailsRecetaModal] = useState(false);
+  let detalleReceta = JSON.parse(localStorage.getItem("recetasDetalle"))
+    ? JSON.parse(localStorage.getItem("recetasDetalle"))
+    : [];
   const [succesMessage, setSuccessMessage] = useState(true);
+  const [messageType, setMessageType] = useState("success");
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const product = useInputValue("");
@@ -24,6 +36,7 @@ const Productos = () => {
   const receta = useInputValue("");
   const tipoIVA = useInputValue("");
   const stock = useInputValue("");
+  const stockMinimo = useInputValue("");
   const precioVenta = useInputValue("");
   const precioCosto = useInputValue("");
   const aumentoSobre = useInputValue("");
@@ -36,13 +49,47 @@ const Productos = () => {
 
   let proveedores = [];
   console.log(proveedores);
-  const handleAcceptButton = () => {
-    setOpenModal(!openModal);
-    setMessage("Producto agregado correctamente");
-    setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+  const handleAcceptButton = (multiple = false) => {
+    if (
+      product.value &&
+      rubro.value &&
+      precioVenta.value &&
+      precioCosto.value &&
+      tipoIVA.value &&
+      stock.value &&
+      stockMinimo.value
+    ) {
+      setProductos(
+        manageLocalStorage("post", entity, {
+          descripcion: product.value,
+          marca: marca.value,
+          rubro: rubro.value,
+          precioVenta: precioVenta.value,
+          precioCosto: precioCosto.value,
+          tipoIva: `${tipoIVA.value}%`,
+          stock: stock.value,
+          stockMinimo: stockMinimo.value,
+          proveedores: proveedores,
+        })
+      );
+      marca.setValue("");
+      product.setValue("");
+      rubro.setValue("");
+      precioVenta.setValue("");
+      precioCosto.setValue("");
+      tipoIVA.setValue("");
+      stock.setValue("");
+      stockMinimo.setValue("");
+      proveedores = [];
+      if (!multiple) setOpenModal(!openModal);
+      setMessageType("success");
+      setMessage("Factura agregada correctamente");
+    } else {
+      setMessageType("warning");
+      setMessage("Complete los datos del formulario");
+    }
+    setSuccessMessage(false);
+    messageTimeOut(setSuccessMessage);
   };
   const handleAcceptRaiseButton = () => {
     setBrandModal(!brandModal);
@@ -113,6 +160,14 @@ const Productos = () => {
             which={["descripcion"]}
             text="Rubro"
           />
+          <button
+            onClick={() => setAddRubro(true)}
+            className="Button-add"
+            type="button"
+            style={{ height: "3.5rem", marginTop: "2rem" }}
+          >
+            Agregar Rubro
+          </button>
           <LabeledDataList
             {...marca}
             nullable={true}
@@ -120,6 +175,14 @@ const Productos = () => {
             which={["nombre"]}
             text="Marca"
           />
+          <button
+            onClick={() => setAddMarca(true)}
+            className="Button-add"
+            type="button"
+            style={{ height: "3.5rem", marginTop: "2rem" }}
+          >
+            Agregar Marca
+          </button>
           <LabeledSelector
             {...proveedor}
             multiple={true}
@@ -134,6 +197,14 @@ const Productos = () => {
             which={["descripcion"]}
             text="Receta"
           />
+          <button
+            onClick={() => setAddReceta(true)}
+            className="Button-add"
+            type="button"
+            style={{ height: "3.5rem", marginTop: "2rem" }}
+          >
+            Agregar Receta
+          </button>
           <LabeledDataList
             {...tipoIVA}
             options={initialState.marca}
@@ -141,6 +212,7 @@ const Productos = () => {
             text="Tipo de IVA"
           />
           <LabeledInput {...stock} text="Stock" />
+          <LabeledInput {...stockMinimo} text="Stock minimo" />
           <LabeledInput {...precioVenta} text="Precio de Venta" />
           <LabeledInput {...precioCosto} text="Precio al Costo" />
         </Form>
@@ -233,8 +305,26 @@ const Productos = () => {
           />
         </Form>
       </Modal>
+      <AddRubro
+        handleAcceptButton={() => setAddRubro(false)}
+        openModal={addRubro}
+        setOpenModal={setAddRubro}
+      />
+      <AddMarcas
+        handleAcceptButton={() => setAddMarca(false)}
+        openModal={addMarca}
+        setOpenModal={setAddMarca}
+      />
+      <AddReceta
+        detailsModal={detailsRecetaModal}
+        detalleReceta={detalleReceta}
+        handleAcceptButton={() => setDetailsRecetaModal(false)}
+        openModal={addReceta}
+        setDetailsModal={setDetailsRecetaModal}
+        setOpenModal={setAddReceta}
+      />
       <Message
-        type="success"
+        type={messageType}
         hide={succesMessage}
         onCLickClose={() => setSuccessMessage(!succesMessage)}
       >

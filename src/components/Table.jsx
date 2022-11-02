@@ -65,11 +65,12 @@ const Table = ({
                       return (
                         <td className="Table-tbody-tr-td">
                           <Details
-                            title={`Detalle ${key
+                            /*title={`Detalle ${key
                               .match(/([A-Z]?[^A-Z]*)/g)
                               .slice(0, -1)
                               .join(" ")
-                              .toLowerCase()}`}
+                              .toLowerCase()}`}*/
+                            title="Visualizar Detalle"
                             table={[searchFor(key, tr[key])]}
                           />
                         </td>
@@ -84,11 +85,12 @@ const Table = ({
                       return (
                         <td className="Table-tbody-tr-td">
                           <Details
-                            title={`Detalle ${key
+                            /*title={`Detalle ${key
                               .match(/([A-Z]?[^A-Z]*)/g)
                               .slice(0, -1)
                               .join(" ")
-                              .toLowerCase()}`}
+                              .toLowerCase()}`}*/
+                            title="Visualizar Detalle"
                             table={tr[key]}
                           />
                         </td>

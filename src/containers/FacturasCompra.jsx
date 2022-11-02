@@ -10,10 +10,12 @@ import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 import { useEffect } from "react";
+import messageTimeOut from "../usefullFunctions/messageTimeOut";
 
 const FacturasCompra = () => {
   const [openModal, setOpenModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState(true);
+  const [messageType, setMessageType] = useState("success");
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const ordenCompra = useInputValue("");
@@ -25,23 +27,70 @@ const FacturasCompra = () => {
   const montoTotal = useInputValue("");
   const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
-  const entity = 'facturaCompra'
+  const entity = "facturaCompra";
   const [facturasCompra, setFacturasCompra] = useState(
     manageLocalStorage("get", entity)
   );
 
   useEffect(() => {}, [facturasCompra]);
 
-  const handleAcceptButton = () => {
-    setOpenModal(!openModal);
-    setMessage("Factura de compra agregada correctamente");
+  const handleAcceptButton = (multiple = false) => {
+    if (
+      tipoFactura.value &&
+      nroFactura.value &&
+      fecha.value &&
+      ordenCompra.value &&
+      remito.value &&
+      proveedor.value &&
+      condicionVenta.value &&
+      montoTotal.value
+    ) {
+      setFacturasCompra(
+        manageLocalStorage("post", entity, {
+          tipoFactura: tipoFactura.value,
+          nroFactura: nroFactura.value,
+          fecha: new Date(fecha.value).toLocaleString(),
+          ordenCompra: Number(ordenCompra.value),
+          remitoProveedor: Number(remito.value),
+          proveedor: proveedor.value,
+          condicionVenta: condicionVenta.value,
+          montoTotal: montoTotal.value,
+          observaciones: observaciones.value,
+          productos: [
+            {
+              materiaPrima: null,
+              producto: "Vino Benjamin",
+              cantidad: 10,
+              unidadMedida: "unidades",
+              costoUnitario: 718,
+              importe: 7180,
+            },
+          ],
+        })
+      );
+      tipoFactura.setValue("");
+      nroFactura.setValue("");
+      fecha.setValue("");
+      ordenCompra.setValue("");
+      remito.setValue("");
+      proveedor.setValue("");
+      condicionVenta.setValue("");
+      montoTotal.setValue("");
+      observaciones.setValue("");
+      if (!multiple) setOpenModal(!openModal);
+      setMessageType("success");
+      setMessage("Factura agregada correctamente");
+    } else {
+      setMessageType("warning");
+      setMessage("Complete los datos del formulario");
+    }
     setSuccessMessage(!successMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    messageTimeOut(setSuccessMessage);
   };
+
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
+    setMessageType("success");
     setMessage("Factura de compra modificada correctamente");
     setSuccessMessage(!successMessage);
     setTimeout(() => {
@@ -61,9 +110,7 @@ const FacturasCompra = () => {
       <Table
         body={facturasCompra}
         onDelete={(id) =>
-          setFacturasCompra(
-            manageLocalStorage("delete", entity, "", id)
-          )
+          setFacturasCompra(manageLocalStorage("delete", entity, "", id))
         }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
         del={false}
@@ -74,7 +121,7 @@ const FacturasCompra = () => {
           title={"Agregar Factura de Compra"}
           multiple={true}
           onAdd={() => handleAcceptButton()}
-          onAddMultiple={() => setOpenModal(!!openModal)}
+          onAddMultiple={() => handleAcceptButton(true)}
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledDataList
@@ -176,7 +223,7 @@ const FacturasCompra = () => {
         </Form>
       </Modal>
       <Message
-        type="success"
+        type={messageType}
         hide={successMessage}
         onCLickClose={() => setSuccessMessage(!successMessage)}
       >
