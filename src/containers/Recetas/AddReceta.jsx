@@ -24,7 +24,7 @@ const AddReceta = ({
       <Form
         title={"Agregar Receta"}
         multiple={true}
-        onAdd={() => handleAcceptButton()}
+        onAdd={handleAcceptButton}
         onAddMultiple={() => setOpenModal(!!openModal)}
         onCancel={() => setOpenModal(false)}
       >

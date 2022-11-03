@@ -10,6 +10,7 @@ import LabeledDataList from "../../components/LabeledDataList";
 import manageLocalStorage from "../../usefullFunctions/manageLocalStorage";
 import AddReceta from "./AddReceta";
 import AddDetalleReceta from "./AddDetalleReceta";
+import messageTimeOut from "../../usefullFunctions";
 
 const Recetas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -46,7 +47,7 @@ const Recetas = () => {
     setMessage("Ingrediente agregado correctamente");
     setSuccessMessage(!succesMessage);
     setDetalleReceta(
-      manageLocalStorage("post", {
+      manageLocalStorage("post", "recetasDetalle", {
         producto: producto.value,
         cantidad: cantidadIngrediente.value,
         unidadMedida: unidadMedida.value,
@@ -60,17 +61,13 @@ const Recetas = () => {
     setOpenModifyModal(!openModifyModal);
     setMessage("Receta modificada correctamente");
     setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    messageTimeOut(setSuccessMessage);
   };
   const handleModifyIngredientButton = () => {
     setDetailsModal(!detailsModal);
     setMessage("Ingrediente modificado correctamente");
     setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    messageTimeOut(setSuccessMessage);
   };
   return (
     <div className="Productos">

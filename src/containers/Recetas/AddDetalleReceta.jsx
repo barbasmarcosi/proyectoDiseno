@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Form from "../../components/Form";
 import LabeledDataList from "../../components/LabeledDataList";
 import LabeledInput from "../../components/LabeledInput";
@@ -22,8 +22,8 @@ const AddDetalleReceta = ({
         title={"Seleccionar Ingredientes"}
         multiple={true}
         edit={false}
-        onEdit={() => handleModifyIngredientButton()}
-        onAdd={() => handleAcceptIngredientButton()}
+        onEdit={handleModifyIngredientButton}
+        onAdd={handleAcceptIngredientButton}
         onAddMultiple={() => setDetailsModal(!!detailsModal)}
         onCancel={() => setDetailsModal(!detailsModal)}
       >
