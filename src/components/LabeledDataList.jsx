@@ -1,3 +1,4 @@
+import React from "react";
 import Labeler from "./Labeler";
 
 const LabeledDataList = ({

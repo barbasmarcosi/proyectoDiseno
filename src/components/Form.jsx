@@ -1,3 +1,5 @@
+import React from "react";
+
 const Form = ({ children, title, multiple = false, onAdd, onEdit, onAddMultiple, onCancel, generate = false, edit = false }) => {
     return (
         <div className='Form'>

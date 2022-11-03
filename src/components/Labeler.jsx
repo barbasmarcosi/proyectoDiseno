@@ -1,3 +1,5 @@
+import React from "react";
+
 const Labeler = ({ children, text, hidden, onModal = true }) => (
     <div className={`Labeler${hidden ? ' Labeler--hidden' : ''}`}>
         <label

@@ -1,3 +1,4 @@
+import React from "react";
 import Labeler from "./Labeler"
 
 const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, onModal = true, toShowId = false }) => {

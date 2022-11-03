@@ -1,3 +1,5 @@
+import React from "react";
+
 const Modal = ({ children, open, setClosed }) => {
     return (
         <div className={`${open ? 'Modal' : 'Modal-hidden'}`} onClick={setClosed}>

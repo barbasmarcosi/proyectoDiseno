@@ -1,3 +1,5 @@
+import React from "react";
+
 const Switch = ({ active, onChangeSwitch }) => {
     return (
         <div onClick={onChangeSwitch} className={`Switch-bar ${active ? 'Switch-bar--active' : ''}`}>

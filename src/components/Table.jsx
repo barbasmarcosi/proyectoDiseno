@@ -1,3 +1,4 @@
+import React from "react";
 import searchFor from "../usefullFunctions/searchFor";
 import Details from "./Details";
 

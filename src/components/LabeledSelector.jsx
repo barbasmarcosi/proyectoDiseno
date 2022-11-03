@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Labeler from "./Labeler";
 
 const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
