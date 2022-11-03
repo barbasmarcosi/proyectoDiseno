@@ -10,7 +10,7 @@ import LabeledDataList from "../../components/LabeledDataList";
 import manageLocalStorage from "../../usefullFunctions/manageLocalStorage";
 import AddReceta from "./AddReceta";
 import AddDetalleReceta from "./AddDetalleReceta";
-import messageTimeOut from "../../usefullFunctions";
+import messageTimeOut from "../../usefullFunctions/messageTimeOut";
 
 const Recetas = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -38,9 +38,7 @@ const Recetas = () => {
     setOpenModal(!openModal);
     setMessage("Receta agregada correctamente");
     setSuccessMessage(!succesMessage);
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    messageTimeOut(setSuccessMessage);
   };
   const handleAcceptIngredientButton = () => {
     setDetailsModal(!detailsModal);
@@ -48,14 +46,13 @@ const Recetas = () => {
     setSuccessMessage(!succesMessage);
     setDetalleReceta(
       manageLocalStorage("post", "recetasDetalle", {
-        producto: producto.value,
+        ingrediente: nombreIngrediente.value,
         cantidad: cantidadIngrediente.value,
         unidadMedida: unidadMedida.value,
       })
     );
-    setTimeout(() => {
-      setSuccessMessage(true);
-    }, 5000);
+    console.log(detalleReceta);
+    messageTimeOut(setSuccessMessage);
   };
   const handleModifyButton = () => {
     setOpenModifyModal(!openModifyModal);
@@ -84,7 +81,7 @@ const Recetas = () => {
           setRecetas(manageLocalStorage("delete", entity, "", id))
         }
         onEdit={() => setOpenModifyModal(!openModifyModal)}
-        body={initialState.receta}
+        body={recetas}
         searchingFor={["producto"]}
         detail="materiaPrima"
         edit={false}
@@ -97,6 +94,7 @@ const Recetas = () => {
         openModal={openModal}
         setDetailsModal={setDetailsModal}
         setOpenModal={setOpenModal}
+        setDetalleReceta={setDetalleReceta}
       />
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
         <Form
@@ -128,7 +126,6 @@ const Recetas = () => {
         </Form>
       </Modal>
       <AddDetalleReceta
-        detailRef={detailRef}
         detailsModal={detailsModal}
         handleAcceptIngredientButton={handleAcceptIngredientButton}
         handleModifyIngredientButton={handleModifyIngredientButton}

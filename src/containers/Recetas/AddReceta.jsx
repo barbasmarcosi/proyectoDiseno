@@ -1,11 +1,12 @@
-import React from "react";
-import { Table } from "@mui/material";
+import React, { useEffect } from "react";
+import Table from "../../components/Table";
 import Form from "../../components/Form";
 import LabeledDataList from "../../components/LabeledDataList";
 import LabeledInput from "../../components/LabeledInput";
 import Modal from "../../components/Modal";
 import useInputValue from "../../hooks/useInputValue";
 import initialState from "../../initialState/initialState";
+import manageLocalStorage from "../../usefullFunctions/manageLocalStorage";
 
 const AddReceta = ({
   openModal,
@@ -14,7 +15,11 @@ const AddReceta = ({
   setDetailsModal,
   detailsModal,
   detalleReceta,
+  setDetalleReceta,
 }) => {
+  
+  useEffect(() => {}, [detalleReceta]);
+  
   const producto = useInputValue("");
   const descripcion = useInputValue("");
   const tiempoElaboracion = useInputValue("");
@@ -39,6 +44,11 @@ const AddReceta = ({
         <LabeledInput {...cantidadProducto} text="Cantidad de Producto" />
         <Table
           onEdit={() => setDetailsModal(!detailsModal)}
+          onDelete={(id) =>
+            setDetalleReceta(
+              manageLocalStorage("delete", "recetasDetalle", "", id)
+            )
+          }
           body={detalleReceta}
           edit={false}
           del={false}

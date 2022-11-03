@@ -3,7 +3,6 @@ import Form from "../../components/Form";
 import LabeledDataList from "../../components/LabeledDataList";
 import LabeledInput from "../../components/LabeledInput";
 import Modal from "../../components/Modal";
-import useInputValue from "../../hooks/useInputValue";
 import initialState from "../../initialState/initialState";
 
 const AddDetalleReceta = ({
@@ -11,7 +10,6 @@ const AddDetalleReceta = ({
   setDetailsModal,
   handleModifyIngredientButton,
   handleAcceptIngredientButton,
-  detailRef,
   nombreIngrediente,
   cantidadIngrediente,
   unidadMedida,
@@ -27,7 +25,7 @@ const AddDetalleReceta = ({
         onAddMultiple={() => setDetailsModal(!!detailsModal)}
         onCancel={() => setDetailsModal(!detailsModal)}
       >
-        <div ref={detailRef}>
+        <div>
           <LabeledDataList
             {...nombreIngrediente}
             options={initialState.receta[2].materiaPrima}

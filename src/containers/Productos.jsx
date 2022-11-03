@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
@@ -9,11 +9,11 @@ import initialState from "../initialState/initialState";
 import LabeledDataList from "../components/LabeledDataList";
 import LabeledSelector from "../components/LabeledSelector";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
-import { useEffect } from "react";
 import messageTimeOut from "../usefullFunctions/messageTimeOut";
 import AddRubro from "./Rubros/AddRubro";
 import AddMarcas from "./Marcas/AddMarcas";
 import AddReceta from "./Recetas/AddReceta";
+import AddDetalleReceta from "./Recetas/AddDetalleReceta";
 
 const Productos = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -22,9 +22,6 @@ const Productos = () => {
   const [addMarca, setAddMarca] = useState(false);
   const [addReceta, setAddReceta] = useState(false);
   const [detailsRecetaModal, setDetailsRecetaModal] = useState(false);
-  let detalleReceta = JSON.parse(localStorage.getItem("recetasDetalle"))
-    ? JSON.parse(localStorage.getItem("recetasDetalle"))
-    : [];
   const [succesMessage, setSuccessMessage] = useState(true);
   const [messageType, setMessageType] = useState("success");
   const [openModifyModal, setOpenModifyModal] = useState(false);
@@ -42,8 +39,15 @@ const Productos = () => {
   const aumentoSobre = useInputValue("");
   const montoAumento = useInputValue("");
   const aumentoPor = useInputValue("");
+  const [detailsModal, setDetailsModal] = useState(false);
+  const nombreIngrediente = useInputValue("");
+  const cantidadIngrediente = useInputValue("");
+  const unidadMedida = useInputValue("");
   const entity = "producto";
   const [productos, setProductos] = useState(manageLocalStorage("get", entity));
+  const [detalleReceta, setDetalleReceta] = useState(
+    manageLocalStorage("get", "recetasDetalle")
+  );
 
   useEffect(() => {}, [productos]);
 
@@ -89,6 +93,26 @@ const Productos = () => {
       setMessage("Complete los datos del formulario");
     }
     setSuccessMessage(false);
+    messageTimeOut(setSuccessMessage);
+  };
+  const handleAcceptIngredientButton = () => {
+    setDetailsModal(!detailsModal);
+    setMessage("Ingrediente agregado correctamente");
+    setSuccessMessage(!succesMessage);
+    setDetalleReceta(
+      manageLocalStorage("post", "recetasDetalle", {
+        ingrediente: nombreIngrediente.value,
+        cantidad: cantidadIngrediente.value,
+        unidadMedida: unidadMedida.value,
+      })
+    );
+    console.log(detalleReceta);
+    messageTimeOut(setSuccessMessage);
+  };
+  const handleModifyIngredientButton = () => {
+    setDetailsModal(!detailsModal);
+    setMessage("Ingrediente modificado correctamente");
+    setSuccessMessage(!succesMessage);
     messageTimeOut(setSuccessMessage);
   };
   const handleAcceptRaiseButton = () => {
@@ -316,12 +340,22 @@ const Productos = () => {
         setOpenModal={setAddMarca}
       />
       <AddReceta
-        detailsModal={detailsRecetaModal}
+        detailsModal={detailsModal}
         detalleReceta={detalleReceta}
         handleAcceptButton={() => setDetailsRecetaModal(false)}
         openModal={addReceta}
-        setDetailsModal={setDetailsRecetaModal}
+        setDetailsModal={setDetailsModal}
         setOpenModal={setAddReceta}
+        setDetalleReceta={setDetalleReceta}
+      />
+      <AddDetalleReceta
+        detailsModal={detailsModal}
+        handleAcceptIngredientButton={handleAcceptIngredientButton}
+        handleModifyIngredientButton={handleModifyIngredientButton}
+        setDetailsModal={setDetailsModal}
+        nombreIngrediente={nombreIngrediente}
+        cantidadIngrediente={cantidadIngrediente}
+        unidadMedida={unidadMedida}
       />
       <Message
         type={messageType}
