@@ -251,7 +251,7 @@ const Ventas = () => {
             <LabeledInput {...cantidadProducto} text="Cantidad" />
             <LabeledDataList
               {...unidadMedida}
-              options={initialState.receta[2].materiaPrima}
+              options={initialState.materiaPrima}
               which={["unidadMedida"]}
               text="Unidad de medida"
             />

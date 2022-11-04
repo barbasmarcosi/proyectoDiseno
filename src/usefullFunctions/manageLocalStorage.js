@@ -10,6 +10,7 @@ const manageLocalStorage = (type, entity, changes, id) => {
         : JSON.stringify([])
     );
   }
+  console.log(initialState[entity]);
   if (type === "get") return JSON.parse(haveItems);
   if (type === "delete") {
     const newData = JSON.parse(haveItems).filter(

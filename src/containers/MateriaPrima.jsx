@@ -16,7 +16,7 @@ const MateriaPrima = () => {
   const descripcion = useInputValue("");
   const stockMinimo = useInputValue("");
   const precioCosto = useInputValue("");
-  const entity = "facturasCompra";
+  const entity = "materiaPrima";
   const [materiaPrima, setMateriaPrima] = useState(
     manageLocalStorage("get", entity)
   );

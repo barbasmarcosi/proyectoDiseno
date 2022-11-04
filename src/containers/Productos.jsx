@@ -210,7 +210,7 @@ const Productos = () => {
           <LabeledSelector
             {...proveedor}
             multiple={true}
-            options={initialState.producto[2].proveedores}
+            options={initialState.proveedor}
             which={["razonSocial"]}
             text="Proveedor"
           />
@@ -273,7 +273,7 @@ const Productos = () => {
           <LabeledSelector
             {...proveedor}
             multiple={true}
-            options={initialState.producto[2].proveedores}
+            options={initialState.proveedor}
             which={["razonSocial"]}
             text="Proveedor"
           />

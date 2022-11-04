@@ -28,15 +28,15 @@ const AddDetalleReceta = ({
         <div>
           <LabeledDataList
             {...nombreIngrediente}
-            options={initialState.receta[2].materiaPrima}
-            which={["nombre"]}
+            options={initialState.materiaPrima}
+            which={["descripcion"]}
             text="Ingrediente"
           />
           <LabeledInput {...cantidadIngrediente} text="Cantidad" />
           <LabeledDataList
             {...unidadMedida}
-            options={initialState.receta[2].materiaPrima}
-            which={["unidadMedida"]}
+            options={initialState.unidadMedida}
+            which={["descripcion"]}
             text="Unidad de medida"
           />
         </div>

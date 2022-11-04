@@ -24,7 +24,7 @@ body {
   border-radius: 0 0 12px 12px;
   box-shadow: 3px 3px 3px black;
   z-index: 1;
-}/*
+} /*
 .Header:hover {
   background-color: brown;
 }*/
@@ -179,7 +179,8 @@ body {
   font-size: 12px;
   color: black;
 }
-.LabeledInput-text {
+.LabeledInput-text,
+.LabeledInput-text-search {
   font-size: 1.3rem;
   text-align: center;
   align-self: center;
@@ -225,7 +226,8 @@ body {
   margin: 0.5rem;
   align-items: center;
 }
-.Switch-bar, .Switch-ball--active {
+.Switch-bar,
+.Switch-ball--active {
   display: grid;
   height: 0.5rem;
   width: 2rem;
@@ -243,7 +245,7 @@ body {
   width: 1rem;
   background-color: azure;
   border-radius: 2rem;
-  transition: .5s margin-left, .5s background-color;
+  transition: 0.5s margin-left, 0.5s background-color;
 }
 .Switch-ball--active {
   margin-left: 1rem;
@@ -258,7 +260,6 @@ body {
   width: 100%;
   justify-content: center;
   text-align: center;
-
 }
 .Table-self {
   align-self: stretch;
@@ -282,8 +283,11 @@ body {
 .Table-tbody-tr {
   border-bottom: 2px solid grey;
 }
-.Button-edit, .Button-delete, .Button-add, .Button-generate {
-  background-color: #FFC107;
+.Button-edit,
+.Button-delete,
+.Button-add,
+.Button-generate {
+  background-color: #ffc107;
   border: none;
   cursor: pointer;
   padding: 6px 12px;
@@ -293,17 +297,19 @@ body {
   transition: 0.5s box-shadow;
 }
 .Button-delete {
-  background-color: #DC3545;
+  background-color: #dc3545;
 }
 .Button-add {
-  background-color: #0D6EFD;
+  background-color: #0d6efd;
   color: aliceblue;
   margin: 0 1.5rem;
 }
 .Button-generate {
   background-color: lightsteelblue;
 }
-.Button-edit:hover, .Button-delete:hover, .Button-add:hover {
+.Button-edit:hover,
+.Button-delete:hover,
+.Button-add:hover {
   box-shadow: none;
 }
 .Productos {
@@ -317,7 +323,7 @@ body {
   left: 0;
   background-color: grey;
   width: 100%;
-  min-height: 100%;
+  height: 100vw;
   justify-content: center;
   opacity: 100%;
 }
@@ -347,7 +353,8 @@ body {
   justify-content: space-around;
   margin: 2rem;
 }
-.Button-cancel, .Button-accept {
+.Button-cancel,
+.Button-accept {
   border: none;
   cursor: pointer;
   padding: 6px 12px;
@@ -363,7 +370,8 @@ body {
   background-color: dodgerblue;
   color: aliceblue;
 }
-.Button-cancel:hover, .Button-accept:hover {
+.Button-cancel:hover,
+.Button-accept:hover {
   box-shadow: none;
   cursor: pointer;
 }

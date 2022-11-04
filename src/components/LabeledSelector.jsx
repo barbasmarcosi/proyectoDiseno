@@ -1,25 +1,22 @@
 import React, { useState } from "react";
+import useInputValue from "../hooks/useInputValue";
 import Labeler from "./Labeler";
 
 const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
   const [open, setOpen] = useState(false);
-  const [count, setCount] = useState(0);
+  const searching = useInputValue('')
   const totalSelected = (val) => {
     setCount(val ? (count) => count + 1 : (count) => count - 1);
   };
   return (
     <Labeler hidden={hidden} text={text} onModal={onModal}>
       <>
-        <div onClick={() => setOpen(!open)} class="selectBox">
-          <select style={{ width: "20rem" }} className="LabeledInput-text">
-            <option style={{ display: "none" }}>
-              {count
-                ? `${count} ${text.toLowerCase()} seleccionados`
-                : `Sin ${text.toLowerCase()} seleccionados`}
-            </option>
+        <div style={{ display: "flex", flexDirection: "column" }} onClick={() => setOpen(!open)} class="selectBox">
+          <input className="LabeledInput-text-search" style={{ zIndex: "101" }} type={"text"} {...searching} />
+          <select style={{ width: "18rem", height: "2.5rem", zIndex: "100", marginTop: "-2.5rem" }} className="LabeledInput-text">
           </select>
         </div>
-        {options.map((opt) =>
+        {options.filter(opt => opt[which].toLowerCase().includes(searching.value.toLowerCase())).map((opt) =>
           open ? (
             <div
               style={{
