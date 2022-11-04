@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import Accordion from "./Accordion";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 
-const NavBar = () => {
-  const [open, setOpen] = useState(true);
+const NavBar = ({ open }) => {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       {open && (
@@ -200,18 +199,6 @@ const NavBar = () => {
           </ul>
         </div>
       )}
-      <MenuIcon style={{ position: "absolute", top: "3rem", zIndex: "2"}}/>
-      {/*open ? (
-        <ArrowBackIosNewIcon
-          className="NavBar-hider"
-          onClick={() => setOpen(!open)}
-        />
-      ) : (
-        <ArrowForwardIosIcon
-          className="NavBar-hider"
-          onClick={() => setOpen(!open)}
-        />
-      )*/}
     </div>
   );
 };

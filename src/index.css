@@ -55,7 +55,7 @@ body {
 }
  /* menu hamburguesa */
 
-.burger {
+.Burger {
   position: absolute;
   height: 50px;
   width: 50px;
@@ -66,9 +66,10 @@ body {
   align-items: center;
   cursor: pointer;
   left: 0;
+  margin-left: 1rem;
 }
 
-.line {
+.Line {
   background-color: white;
   height: 3px;
   width: 30px;
@@ -76,16 +77,16 @@ body {
   transition: 0.5s;
 }
 
-.active .line:nth-child(1){
+.active .Line:nth-child(1){
   transform: translateY(12px) rotate(135deg);
 }
 
-.active .line:nth-child(2){
+.active .Line:nth-child(2){
   transform: scale(0);
 }
 
-.active .line:nth-child(3){
-  transform: translateY(-16px) rotate(-135deg);
+.active .Line:nth-child(3){
+  transform: translateY(-12px) rotate(-135deg);
 }
 
 .NavBar {
