@@ -8,8 +8,10 @@ const Layout = ({ children }) => {
   return (
     <div className="Layout">
       <Header setOpen={setOpen} open={open} />
-      <NavBar open={open} />
-      <div className="Main">{children}</div>
+      <div className="Middle">
+        <NavBar open={open} />
+        <div className="Main">{children}</div>
+      </div>
       <Footer />
     </div>
   );

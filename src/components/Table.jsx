@@ -1,6 +1,15 @@
 import React from "react";
 import searchFor from "../usefullFunctions/searchFor";
 import Details from "./Details";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import AlarmOnIcon from "@mui/icons-material/AlarmOn";
+import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
+import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { display } from "@mui/system";
 
 const Table = ({
   body,
@@ -82,6 +91,74 @@ const Table = ({
                       return <td className="Table-tbody-tr-td">{"No"}</td>;
                     } else if (tr[key] === null) {
                       return <td className="Table-tbody-tr-td">{"-"}</td>;
+                    } else if (tr[key] === "En proceso") {
+                      return (
+                        <td
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                          className="Table-tbody-tr-td"
+                        >
+                          {<OutdoorGrillIcon style={{ color: "yellow" }} />}{" "}
+                          {tr[key]}
+                        </td>
+                      );
+                    } else if (tr[key] === "En entrega") {
+                      return (
+                        <td
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                          className="Table-tbody-tr-td"
+                        >
+                          {<TwoWheelerIcon style={{ color: "blue" }} />}{" "}
+                          {tr[key]}
+                        </td>
+                      );
+                    } else if (tr[key] === "Con demora") {
+                      return (
+                        <td
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                          className="Table-tbody-tr-td"
+                        >
+                          {<AlarmOnIcon style={{ color: "red" }} />} {tr[key]}
+                        </td>
+                      );
+                    } else if (tr[key] === "Entregado") {
+                      return (
+                        <td
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                          className="Table-tbody-tr-td"
+                        >
+                          {<DoneAllIcon style={{ color: "lightgreen" }} />}{" "}
+                          {tr[key]}
+                        </td>
+                      );
+                    } else if (tr[key] === "Lista para entrega") {
+                      return (
+                        <td
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                          className="Table-tbody-tr-td"
+                        >
+                          {<AddTaskIcon style={{ color: "green" }} />} {tr[key]}
+                        </td>
+                      );
                     } else if (typeof tr[key] === "object") {
                       return (
                         <td className="Table-tbody-tr-td">

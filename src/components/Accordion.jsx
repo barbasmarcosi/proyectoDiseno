@@ -5,7 +5,7 @@ const Accordion = ({ children, title }) => {
     return (
         <ul onClick={() => setOpen(!open)} className="Accordion">
             {title}
-            <ul className={`{Accordion-children${open ? '-active' : ''}}`}>
+            <ul className={`Accordion-children${open ? '-active' : ''}}`}>
                 {open && children}
             </ul>
         </ul>
