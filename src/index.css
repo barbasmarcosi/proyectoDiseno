@@ -61,13 +61,13 @@ body {
   transition: 0.5s;
 }
 .active .Line:nth-child(1) {
-  transform: translateY(11.5px) rotate(135deg);
+  transform: translateY(11px) rotate(135deg);
 }
 .active .Line:nth-child(2) {
   transform: scale(0);
 }
 .active .Line:nth-child(3) {
-  transform: translateY(-11.5px) rotate(-135deg);
+  transform: translateY(-11px) rotate(-135deg);
 }
 .Middle {
   display: flex;
@@ -153,12 +153,17 @@ body {
   flex-direction: column;
   align-content: center;
 }
-.Home-content {
-  position: absolute;
-  top: 15vw;
+.home-content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 100px;
+}
+.home-content h1 {
+  /*position: absolute;
+  top: 20vw;*/
+  /*display: flex;
+  justify-content: center;
+  align-items: center;*/
   z-index: 1000;
   font-size: 3.5rem;
   width: 70%;
