@@ -162,6 +162,7 @@ function Pedidos() {
           "fechaPedido",
           "horaPedido",
           "delivery",
+          "costoEnvio"
         ]}
         isDocument={true}
         edit={false}
