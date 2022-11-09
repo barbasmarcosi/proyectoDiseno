@@ -176,13 +176,14 @@ const Table = ({
                     } else {
                       return <td className="Table-tbody-tr-td">{tr[key]}</td>;
                     }
+                    
                   }
                 })}
                 {exceptions.length ? (
                   <td className="Table-tbody-tr-td">
                     <Details
                       title={"Ver mas"}
-                      table={body}
+                      table={[tr]}
                       buttonColor={"rgb(60, 158, 255)"}
                     />
                   </td>
@@ -193,12 +194,12 @@ const Table = ({
                   <td className="Table-tbody-tr-td">
                     <Details
                       title={"Factura"}
-                      table={body}
+                      table={[tr]}
                       buttonClass="Button-generate"
                     />
                     <Details
                       title={"Remito"}
-                      table={body}
+                      table={[tr]}
                       buttonClass="Button-generate"
                     />
                   </td>
