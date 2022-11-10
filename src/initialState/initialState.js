@@ -68,6 +68,30 @@ export default {
     },
     {
       id: 3,
+      descripcion: "Empanada de Carne",
+      marca: null,
+      rubro: "Comidas",
+      precioVenta: 412,
+      precioCosto: null,
+      tipoIva: "4%",
+      stock: 32,
+      stockMinimo: 11,
+      proveedores: null,
+    },
+    {
+      id: 4,
+      descripcion: "Empanada de Jamon y Queso",
+      marca: null,
+      rubro: "Comidas",
+      precioVenta: 411,
+      precioCosto: null,
+      tipoIva: "4%",
+      stock: 33,
+      stockMinimo: 5,
+      proveedores: null,
+    },
+    {
+      id: 5,
       descripcion: "Aceite de Oliva 250ml",
       marca: "Cocinero",
       rubro: "Envasados",
@@ -774,7 +798,7 @@ export default {
       ],
     },
     {
-      id: 3,
+      id: 4,
       cliente: "Pedro Lopez",
       delivery: null,
       encargado: "Marcos Ozamis",
@@ -840,7 +864,7 @@ export default {
       ],
     },
     {
-      id: 3,
+      id: 5,
       cliente: "Luis Fernandez",
       delivery: null,
       encargado: "Marcos Ozamis",
@@ -1323,62 +1347,62 @@ export default {
   tipoDocumento: [
     {
       id: 1,
-      nombre: "dni",
+      nombre: "Dni",
     },
     {
       id: 2,
-      nombre: "cuil",
+      nombre: "Cuil",
     },
     {
       id: 3,
-      nombre: "cuit",
+      nombre: "Cuit",
     },
     {
       id: 4,
-      nombre: "pasaporte",
+      nombre: "Pasaporte",
     },
     {
       id: 5,
-      nombre: "libreta civica",
+      nombre: "Libreta civica",
     },
     {
       id: 6,
-      nombre: "libreta de enrolamiento",
+      nombre: "Libreta de enrolamiento",
     },
   ],
   tipoIVA: [
     {
       id: 1,
-      descripcion: "tasa general",
+      descripcion: "Tasa general",
       abreviatura: "21%",
     },
     {
       id: 2,
-      descripcion: "bienes de capital y primera necesidad",
+      descripcion: "Bienes de capital y primera necesidad",
       abreviatura: "10,5%",
     },
     {
       id: 3,
-      descripcion: "energía electrica y telecomunicaciones",
+      descripcion: "Energía electrica y telecomunicaciones",
       abreviatura: "27%",
     },
   ],
   formaPago: [
     {
       id: 1,
-      descripcion: "contado efectivo",
+      descripcion: "Contado efectivo",
     },
     {
       id: 2,
-      descripcion: "contado tarjeta debito",
+      descripcion: "Contado tarjeta debito",
     },
     {
       id: 3,
-      descripcion: "cuotas tarjeta credito",
+      descripcion: "Cuotas tarjeta credito",
     },
     {
       id: 4,
-      descripcion: "mercado pago",
+      descripcion: "Mercado pago",
     },
   ],
   ordenProduccion: [

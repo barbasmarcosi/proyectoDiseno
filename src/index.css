@@ -72,12 +72,13 @@ body {
 .Middle {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 .NavBar {
   display: flex;
   width: 22rem;
-  min-height: 100vh;
-  height: max-content;
+  min-height: calc(100vh - 70px);
+  height: auto;
   margin: -12px 0;
   background-color: #333333;
   border-right: 1px solid aliceblue;
@@ -159,11 +160,6 @@ body {
   margin-top: 100px;
 }
 .home-content h1 {
-  /*position: absolute;
-  top: 20vw;*/
-  /*display: flex;
-  justify-content: center;
-  align-items: center;*/
   z-index: 1000;
   font-size: 3.5rem;
   width: 70%;
@@ -281,10 +277,10 @@ body {
   background-color: dodgerblue;
 }
 .Table {
-  font-size: 16px;
+  font-size: 0.8vw;
   margin-top: 2rem;
   color: black;
-  display: grid;
+  display: flex;
   width: 100%;
   justify-content: center;
   text-align: center;
@@ -292,19 +288,21 @@ body {
 .Table-self {
   align-self: stretch;
   background-color: transparent;
-  width: 60rem;
-  height: 5rem;
+  width: 95%;
+  height: 90%;
+  margin-bottom: 5rem;
   border-radius: 4px;
   border-collapse: collapse;
 }
 .Table-tbody-tr-td {
+  padding: 0.25rem;
   border-right: 1px solid grey;
-  padding: 2px;
 }
 .Table-thead {
   border-bottom: 2px solid black;
 }
 .Table-thead-tr-th {
+  padding: 0.25rem;
   text-overflow: wrap;
   border-right: 1px solid black;
 }
@@ -318,9 +316,9 @@ body {
   background-color: #ffc107;
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 0.4rem 0.6rem;
   border-radius: 0.25rem;
-  margin: 6px;
+  margin: 0.2rem;
   box-shadow: 1px 1px 1px rgb(82, 82, 82);
   transition: 0.5s box-shadow;
 }
@@ -379,12 +377,13 @@ body {
 .Button-accept {
   border: none;
   cursor: pointer;
-  padding: 6px 12px;
-  font-size: 16px;
+  padding: 0.5vw 0.5vw;
+  font-size: 0.8vw;
   height: 3rem;
-  width: 6rem;
+  min-width: max-content;
+  width: 3rem;
   border-radius: 0.5rem;
-  margin: 6px;
+  margin: 4px;
   box-shadow: 3px 3px 3px rgb(82, 82, 82);
   transition: 0.5s box-shadow;
 }

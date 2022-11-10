@@ -15,7 +15,7 @@ const Details = ({
     >
       <button
         style={{
-          width: "6.5rem",
+          width: "max-content",
           alignSelf: "center",
           backgroundColor: buttonColor,
           height: "max-content",

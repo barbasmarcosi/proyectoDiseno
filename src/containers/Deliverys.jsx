@@ -2,11 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
+import LabeledDataList from "../components/LabeledDataList";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
+import initialState from "../initialState/initialState";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Deliverys = () => {
@@ -23,6 +25,7 @@ const Deliverys = () => {
   const fechaNacimiento = useInputValue("");
   const telefono = useInputValue("");
   const mail = useInputValue("");
+  const tipoDocumento = useInputValue("");
   const vehiculo = useInputValue("");
   const numeroHabilitacion = useInputValue("");
   const vencimientoHanilitacion = useInputValue("");
@@ -76,7 +79,16 @@ const Deliverys = () => {
         >
           <LabeledInput {...nombre} text="Nombres" />
           <LabeledInput {...apellido} text="Apellidos" />
-          <LabeledInput {...cuil} text="CUIL" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...cuil}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
           <LabeledInput
             {...fechaNacimiento}
             type="date"
@@ -84,7 +96,12 @@ const Deliverys = () => {
           />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" type="mail" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            {...calle}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...depto} text="Departamento" />
           <LabeledInput {...vehiculo} text="Vehiculo" />

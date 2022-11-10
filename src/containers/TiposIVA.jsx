@@ -14,6 +14,7 @@ const TiposIVA = () => {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const descripcion = useInputValue("");
+  const taza = useInputValue("");
   const entity = "tipoIVA";
   const [tiposIVA, setTiposIVA] = useState(manageLocalStorage("get", entity));
 
@@ -64,6 +65,7 @@ const TiposIVA = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput {...descripcion} text="Descripcion" />
+          <LabeledInput {...taza} text="Taza %" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>

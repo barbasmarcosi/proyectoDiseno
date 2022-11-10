@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
+import LabeledDataList from "../components/LabeledDataList";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
+import initialState from "../initialState/initialState";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const MateriaPrima = () => {
@@ -14,7 +16,10 @@ const MateriaPrima = () => {
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [message, setMessage] = useState("");
   const descripcion = useInputValue("");
+  const fechaIngreso = useInputValue(new Date(Date.now()).toISOString().slice(0, 16));
+  const stockDisponible = useInputValue("");
   const stockMinimo = useInputValue("");
+  const unidadMedida = useInputValue("");
   const precioCosto = useInputValue("");
   const entity = "materiaPrima";
   const [materiaPrima, setMateriaPrima] = useState(
@@ -67,7 +72,19 @@ const MateriaPrima = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput {...descripcion} text="Descripcion" />
+          <LabeledInput
+            {...fechaIngreso}
+            type="datetime-local"
+            text="Descripcion"
+          />
+          <LabeledInput {...stockDisponible} text="Stock Disponible" />
           <LabeledInput {...stockMinimo} text="Stock Minimo" />
+          <LabeledDataList
+            {...unidadMedida}
+            options={initialState.unidadMedida}
+            which={["descripcion"]}
+            text="Unidad de medida"
+          />
           <LabeledInput {...precioCosto} text="Precio Costo" />
         </Form>
       </Modal>

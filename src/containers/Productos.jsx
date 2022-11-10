@@ -95,6 +95,7 @@ const Productos = () => {
     setSuccessMessage(false);
     messageTimeOut(setSuccessMessage);
   };
+
   const handleAcceptIngredientButton = () => {
     setDetailsModal(!detailsModal);
     setMessage("Ingrediente agregado correctamente");
@@ -109,12 +110,14 @@ const Productos = () => {
     console.log(detalleReceta);
     messageTimeOut(setSuccessMessage);
   };
+
   const handleModifyIngredientButton = () => {
     setDetailsModal(!detailsModal);
     setMessage("Ingrediente modificado correctamente");
     setSuccessMessage(!succesMessage);
     messageTimeOut(setSuccessMessage);
   };
+
   const handleAcceptRaiseButton = () => {
     setBrandModal(!brandModal);
     setMessage("Aumento de precios generado correctamente");
@@ -131,6 +134,7 @@ const Productos = () => {
       setSuccessMessage(true);
     }, 5000);
   };
+  
   return (
     <div className="Productos">
       <h1 className="Productos-title">Listado de Productos</h1>

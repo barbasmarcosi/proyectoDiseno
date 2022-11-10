@@ -2,11 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
+import LabeledDataList from "../components/LabeledDataList";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
+import initialState from "../initialState/initialState";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 import messageTimeOut from "../usefullFunctions/messageTimeOut";
 
@@ -79,7 +81,12 @@ const Calles = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput {...denominacion} text="Calle" />
-          <LabeledInput {...localidad} text="Localidad" />
+          <LabeledDataList
+            {...localidad}
+            options={initialState.localidad}
+            which={["nombre", "provincia"]}
+            text="Localidad"
+          />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModal(false)}>

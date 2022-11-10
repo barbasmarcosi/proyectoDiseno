@@ -7,6 +7,8 @@ import Message from "../../components/Message";
 import Modal from "../../components/Modal";
 import Table from "../../components/Table";
 import useInputValue from "../../hooks/useInputValue";
+import LabeledDataList from "../../components/LabeledDataList";
+import initialState from "../../initialState/initialState";
 import manageLocalStorage from "../../usefullFunctions/manageLocalStorage";
 import ClientesAdd from "./ClientesAdd";
 import ClientesModify from "./ClientesModify";
@@ -28,6 +30,7 @@ const Clientes = () => {
   const fechaNacimiento = useInputValue("");
   const telefono = useInputValue("");
   const mail = useInputValue("");
+  const tipoDocumento = useInputValue("");
   const entity = "cliente";
   const [clientes, setClientes] = useState(manageLocalStorage("get", entity));
 
@@ -89,10 +92,27 @@ const Clientes = () => {
           onAddMultiple={() => setOpenModal(!!openModal)}
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
-          <LabeledInput {...nombre} text="Nombres" />
-          <LabeledInput {...apellido} text="Apellidos" />
+          {/*<LabeledInput {...nombre} text="Nombres" />
+          <LabeledInput {...apellido} text="Apellidos" />*/}
           <LabeledInput {...razonSocial} text="Razon Social" />
-          <LabeledInput {...cuit} text="CUIT" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...cuit}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
+          <LabeledDataList
+            {...calle}
+            options={initialState.calle}
+            which={["nombre"]}
+            text="Calle"
+          />
+          <LabeledInput {...altura} text="Altura" />
+          <LabeledInput {...depto} text="Departamento" />
           <LabeledInput
             {...fechaNacimiento}
             type="date"
@@ -100,10 +120,12 @@ const Clientes = () => {
           />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" type="mail" />
-          <LabeledInput {...calle} text="Calle" />
-          <LabeledInput {...altura} text="Altura" />
-          <LabeledInput {...depto} text="Departamento" />
-          <LabeledInput {...tipoResponsable} text="Tipo de Responsable" />
+          <LabeledDataList
+            {...tipoResponsable}
+            options={initialState.tipoResponsable}
+            which={["descripcion"]}
+            text="Tipo de Responabilidad"
+          />
         </Form>
       </Modal>
       <Message

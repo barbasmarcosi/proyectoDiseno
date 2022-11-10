@@ -8,6 +8,8 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import LabeledDataList from "../components/LabeledDataList";
+import initialState from "../initialState/initialState";
 
 const Personal = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -25,6 +27,7 @@ const Personal = () => {
   const mail = useInputValue("");
   const puesto = useInputValue("");
   const sueldo = useInputValue("");
+  const tipoDocumento = useInputValue("");
   const entity = "personal";
   const [personal, setPersonal] = useState(manageLocalStorage("get", entity));
 
@@ -75,14 +78,37 @@ const Personal = () => {
         >
           <LabeledInput {...nombre} text="Nombres" />
           <LabeledInput {...apellido} text="Apellidos" />
-          <LabeledInput {...dni} text="DNI" />
-          <LabeledInput {...cuil} text="CUIL" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...dni}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
+          <LabeledDataList
+            {...calle}
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...depto} text="Departamento" />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" />
-          <LabeledInput {...puesto} text="Puesto" />
+          <LabeledDataList
+            {...puesto}
+            options={[
+              { id: 1, nombre: "Recepcionista" },
+              { id: 2, nombre: "Administrativo" },
+              { id: 3, nombre: "Encargado de Compras" },
+              { id: 4, nombre: "Encargado de Produccion" },
+            ]}
+            which={["nombre"]}
+            text="Puesto"
+          />
           <LabeledInput {...sueldo} text="Sueldo" />
         </Form>
       </Modal>
@@ -98,14 +124,37 @@ const Personal = () => {
         >
           <LabeledInput {...nombre} text="Nombres" />
           <LabeledInput {...apellido} text="Apellidos" />
-          <LabeledInput {...dni} text="DNI" />
-          <LabeledInput {...cuil} text="CUIL" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...dni}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
+          <LabeledDataList
+            {...calle}
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...depto} text="Departamento" />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" />
-          <LabeledInput {...puesto} text="Puesto" />
+          <LabeledDataList
+            {...puesto}
+            options={[
+              { id: 1, nombre: "Recepcionista" },
+              { id: 2, nombre: "Administrativo" },
+              { id: 3, nombre: "Encargado de Compras" },
+              { id: 4, nombre: "Encargado de Produccion" },
+            ]}
+            which={["nombre"]}
+            text="Puesto"
+          />
           <LabeledInput {...sueldo} text="Sueldo" />
         </Form>
       </Modal>

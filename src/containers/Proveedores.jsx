@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
+import LabeledDataList from "../components/LabeledDataList";
 import LabeledInput from "../components/LabeledInput";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
+import initialState from "../initialState/initialState";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 function Proveedores() {
@@ -22,6 +24,7 @@ function Proveedores() {
   const mail = useInputValue("");
   const cbu = useInputValue("");
   const web = useInputValue("");
+  const tipoDocumento = useInputValue("");
   const entity = "proveedor";
   const [proveedores, setProveedores] = useState(
     manageLocalStorage("get", entity)
@@ -77,9 +80,28 @@ function Proveedores() {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput {...razonSocial} text="Razon Social" />
-          <LabeledInput {...cuit} text="CUIT" />
-          <LabeledInput {...tipoResponable} text="Tipo de Responsable" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...cuit}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
+          <LabeledDataList
+            {...tipoResponable}
+            options={initialState.tipoResponsable}
+            which={["descripcion"]}
+            text="Tipo de Responabilidad"
+          />
+          <LabeledDataList
+            {...calle}
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" />
@@ -98,9 +120,28 @@ function Proveedores() {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput {...razonSocial} text="Razon Social" />
-          <LabeledInput {...cuit} text="CUIT" />
-          <LabeledInput {...tipoResponable} text="Tipo de Responsable" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...cuit}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
+          <LabeledDataList
+            {...tipoResponable}
+            options={initialState.tipoResponsable}
+            which={["descripcion"]}
+            text="Tipo de Responabilidad"
+          />
+          <LabeledDataList
+            {...calle}
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" />

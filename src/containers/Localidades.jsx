@@ -8,6 +8,8 @@ import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import initialState from "../initialState/initialState";
+import LabeledDataList from "../components/LabeledDataList";
 
 const Localidades = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -68,7 +70,12 @@ const Localidades = () => {
           onCancel={() => setOpenModal(!openModal)}
         >
           <LabeledInput {...localidad} text="Localidad" />
-          <LabeledInput {...provincia} text="Provincia" />
+          <LabeledDataList
+            {...provincia}
+            options={initialState.provincia}
+            which={["nombre"]}
+            text="Provincia"
+          />
           <LabeledInput {...codigoPostal} text="Codigo Postal" />
         </Form>
       </Modal>
