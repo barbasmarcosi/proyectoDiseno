@@ -19,7 +19,6 @@ const RemitosEntrega = () => {
   const pedido = useInputValue("");
   const fechaRemito = useInputValue("");
   const montoTotal = useInputValue("");
-  const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
   const entity = "remitoEntrega";
   const [remitosEntrega, setRemitosEntrega] = useState(
@@ -90,12 +89,7 @@ const RemitosEntrega = () => {
             text="Fecha de Remito"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledDataList
-            {...condicionVenta}
-            options={initialState.remitoEntrega}
-            which={["id"]}
-            text="Condicion de venta"
-          />
+          
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
@@ -126,12 +120,6 @@ const RemitosEntrega = () => {
             text="Fecha de Remito"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
-          <LabeledDataList
-            {...condicionVenta}
-            options={initialState.remitoEntrega}
-            which={["id"]}
-            text="Condicion de venta"
-          />
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>

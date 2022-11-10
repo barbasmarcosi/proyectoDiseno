@@ -22,6 +22,7 @@ const Ventas = () => {
   const nroFactura = useInputValue("");
   const tipoFactura = useInputValue("");
   const montoTotal = useInputValue("");
+  const condicionVenta = useInputValue("");
   const observaciones = useInputValue("");
   const producto = useInputValue("");
   const cantidadProducto = useInputValue("");
@@ -140,6 +141,12 @@ const Ventas = () => {
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <LabeledDataList
+            {...condicionVenta}
+            options={initialState.remitoEntrega}
+            which={["id"]}
+            text="Condicion de venta"
+          />
           <LabeledInput {...observaciones} text="Observaciones" />
           <Table
             searchingFor={["pedido"]}
@@ -201,6 +208,12 @@ const Ventas = () => {
             text="Tipo de factura"
           />
           <LabeledInput {...montoTotal} text="Monto total" />
+          <LabeledDataList
+            {...condicionVenta}
+            options={initialState.remitoEntrega}
+            which={["id"]}
+            text="Condicion de venta"
+          />
           <LabeledInput {...observaciones} text="Observaciones" />
           <Table
             onEdit={() => setDetailsModal(!detailsModal)}

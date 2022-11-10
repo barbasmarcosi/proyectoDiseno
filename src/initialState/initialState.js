@@ -1033,6 +1033,7 @@ export default {
       hora: "22:00",
       pedido: 1,
       montoTotal: 1380,
+      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1066,6 +1067,7 @@ export default {
       hora: "10:05",
       pedido: 3,
       montoTotal: 21160,
+      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1120,6 +1122,7 @@ export default {
       hora: "21:00",
       pedido: 2,
       montoTotal: 1380,
+      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1146,7 +1149,6 @@ export default {
       hora: "22:00",
       pedido: 1,
       montoTotal: 1380,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1178,7 +1180,6 @@ export default {
       hora: "10:05",
       pedido: 3,
       montoTotal: 21160,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1231,7 +1232,6 @@ export default {
       hora: "21:00",
       pedido: 2,
       montoTotal: 1380,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
