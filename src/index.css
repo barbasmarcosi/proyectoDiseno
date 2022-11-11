@@ -165,6 +165,7 @@ body {
   width: 70%;
   text-shadow: 0 0 5px rgb(175, 10, 10);
   text-align: center;
+  position: fixed;
 }
 .Pedidos {
   margin: 2rem;
