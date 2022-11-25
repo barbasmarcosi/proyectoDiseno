@@ -76,7 +76,7 @@ body {
 .NavBar {
   display: flex;
   width: 22rem;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 115px);
   height: auto;
   margin: -12px 0;
   background-color: #333333;
@@ -124,7 +124,6 @@ body {
   background-color: rgb(72, 72, 72);
 }
 .Footer {
-  position: fixed;
   left: 0;
   bottom: 0;
   display: grid;
@@ -138,6 +137,7 @@ body {
   justify-self: center;
   text-shadow: 1px 1px 1px #c5c5c5;
 }
+
 .home-image {
   position: absolute;
   width: 100%;
@@ -164,6 +164,7 @@ body {
   width: 70%;
   text-shadow: 0 0 5px rgb(175, 10, 10);
   text-align: center;
+  position: fixed;
 }
 .Pedidos {
   margin: 2rem;
