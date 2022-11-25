@@ -44,10 +44,10 @@ const Productos = () => {
   const cantidadIngrediente = useInputValue("");
   const unidadMedida = useInputValue("");
   const entity = "producto";
-  const [productos, setProductos] = useState(manageLocalStorage("get", entity));
   const [detalleReceta, setDetalleReceta] = useState(
     manageLocalStorage("get", "recetasDetalle")
   );
+  const [productos, setProductos] = useState(manageLocalStorage("get", entity));
 
   useEffect(() => {}, [productos]);
 

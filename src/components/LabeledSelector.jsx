@@ -11,7 +11,7 @@ const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
   return (
     <Labeler hidden={hidden} text={text} onModal={onModal}>
       <>
-        <div style={{ display: "flex", flexDirection: "column" }} onClick={() => setOpen(!open)} class="selectBox">
+        <div style={{ display: "flex", flexDirection: "column" }} onClick={() => setOpen(!open)} >
           <input className="LabeledInput-text-search" style={{ zIndex: "101" }} type={"text"} {...searching} />
           <select style={{ width: "18rem", height: "2.5rem", zIndex: "100", marginTop: "-2.5rem" }} className="LabeledInput-text">
           </select>

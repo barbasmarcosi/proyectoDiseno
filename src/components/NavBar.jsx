@@ -74,6 +74,13 @@ const NavBar = ({ open }) => {
           >
             Remitos de Entrega
           </Link>
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            className="NavBar-item-link"
+            to="/estadistica"
+          >
+            Estadisticas de Venta
+          </Link>
         </Accordion>
         <Accordion title="Compras">
           <Link

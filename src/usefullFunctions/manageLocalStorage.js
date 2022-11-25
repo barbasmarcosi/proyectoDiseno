@@ -1,9 +1,9 @@
-import initialState from "../initialState/initialState";
+import initialState from "../initialState/initialState.js";
 
-const manageLocalStorage = (type, entity, changes, id) => {
-  const haveItems = localStorage.getItem(entity);
+const managesessionStorage = (type, entity, changes, id) => {
+  const haveItems = sessionStorage.getItem(entity);
   if (!haveItems) {
-    localStorage.setItem(
+    sessionStorage.setItem(
       entity,
       initialState[entity]
         ? JSON.stringify(initialState[entity])
@@ -16,21 +16,21 @@ const manageLocalStorage = (type, entity, changes, id) => {
     const newData = JSON.parse(haveItems).filter(
       (element) => element.id !== id
     );
-    localStorage.setItem(entity, JSON.stringify(newData));
+    sessionStorage.setItem(entity, JSON.stringify(newData));
     return newData;
   }
   if (type === "post") {
-    const maxLength = localStorage.getItem(`${entity}Length`)
-      ? JSON.parse(localStorage.getItem(`${entity}Length`))
+    const maxLength = sessionStorage.getItem(`${entity}Length`)
+      ? JSON.parse(sessionStorage.getItem(`${entity}Length`))
       : 0;
     const itemsLength = JSON.parse(haveItems).length;
     const newId = maxLength > itemsLength ? maxLength || 0 : itemsLength || 0;
-    localStorage.setItem(`${entity}Length`, JSON.stringify(newId + 1));
+    sessionStorage.setItem(`${entity}Length`, JSON.stringify(newId + 1));
     const newData = JSON.parse(haveItems).length
       ? [...JSON.parse(haveItems), { id: newId + 1, ...changes }]
       : [{ id: newId + 1, ...changes }];
 
-    localStorage.setItem(entity, JSON.stringify(newData));
+    sessionStorage.setItem(entity, JSON.stringify(newData));
 
     return newData;
   }
@@ -40,9 +40,9 @@ const manageLocalStorage = (type, entity, changes, id) => {
       JSON.parse(haveItems).length - 1
         ? [...useful, { ...changes }]
         : [changes];
-    localStorage.setItem(entity, JSON.stringify(newData));
+    sessionStorage.setItem(entity, JSON.stringify(newData));
     return newData;
   }
 };
 
-export default manageLocalStorage;
+export default managesessionStorage;

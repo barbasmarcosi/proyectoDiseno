@@ -27,6 +27,7 @@ import Calles from "../containers/Calles";
 import FormasPago from "../containers/FormasPago";
 import Marcas from "../containers/Marcas/Marcas";
 import RemitosEntrega from "../containers/RemitosEntrega";
+import Estadistica from "../containers/Estadistica";
 
 function App() {
   return (
@@ -35,11 +36,11 @@ function App() {
         <Layout>
           <Routes className="Content">
             <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<Productos />} />
             <Route path="/recetas" element={<Recetas />} />
             <Route path="/rubros" element={<Rubros />} />
             <Route path="/marcas" element={<Marcas />} />
             <Route path="/pedidos" element={<Pedidos />} />
+            <Route path="/estadistica" element={<Estadistica />} />
             <Route path="/presupuestos" element={<Presupuestos />} />
             <Route path="/reclamos" element={<Reclamos />} />
             <Route path="/ordenes-compra" element={<OrdenesCompra />} />
@@ -60,6 +61,7 @@ function App() {
             <Route path="/calles" element={<Calles />} />
             <Route path="/formas-pago" element={<FormasPago />} />
             <Route path="/remitosEntrega" element={<RemitosEntrega />} />
+            <Route path="/productos" element={<Productos />} />
           </Routes>
         </Layout>
       </Router>
