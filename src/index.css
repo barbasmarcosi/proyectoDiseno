@@ -60,7 +60,7 @@ body {
   transition: 0.5s;
 }
 .active .Line:nth-child(1) {
-  transform: translateY(11px) rotate(135deg);
+  transform: translateY(10px) rotate(135deg);
 }
 .active .Line:nth-child(2) {
   transform: scale(0);

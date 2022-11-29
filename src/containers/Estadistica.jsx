@@ -155,6 +155,7 @@ const Estadistica = () => {
           borderRadius: "0.5rem",
           textAlign: "center",
           fontSize: "1rem",
+          cursor: "pointer",
         }}
         onChange={(e) => doFilter(e.target.value)}
       >
