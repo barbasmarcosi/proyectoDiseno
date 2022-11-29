@@ -1,27 +1,22 @@
 import { useState } from "react";
 import React from "react";
 
-const Searcher = ({ data, newData }) => {
-  const originalCopy = data;
+const Searcher = ({ data, setDataCopy }) => {
   const [searcher, setSearcher] = useState("");
   const toSearch = (value) => {
-    //console.log(
-    //newData(
-    newData(
-      originalCopy.filter(
+    setDataCopy(
+      data.filter(
         (field) =>
-          Object.values(field).filter((single) => `${single}`.includes(value))
+          Object.values(field).filter((single) => `${single}`.toLowerCase().includes(value.toLowerCase()))
             .length
       )
     );
-    //);
-    //);
   };
 
   return (
     <input
-      type="text"
-      placeholder="Ingrese su busqueda"
+      className="Searcher"
+      placeholder="Busqueda rapida"
       value={searcher}
       onChange={(e) => {
         setSearcher(e.target.value);

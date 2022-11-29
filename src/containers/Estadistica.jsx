@@ -52,6 +52,7 @@ const Estadistica = () => {
       }
     });
     setExceptions([]);
+    console.log(arr)
     setPedidosCopy(arr.sort((a, b) => b.cantidad - a.cantidad));
   };
 

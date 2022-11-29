@@ -57,7 +57,7 @@ function Pedidos() {
   const entity = "pedido";
   const [pedidos, setPedidos] = useState(manageLocalStorage("get", entity));
 
-  useEffect(() => {}, [pedidos]);
+  useEffect(() => { }, [pedidos]);
 
   const toGetValue = (index) =>
     detailRef.current.children[index].children[1].children[0].value;
@@ -149,6 +149,8 @@ function Pedidos() {
         Agregar Pedido
       </button>
       <Table
+        dateFilter={true}
+        whichDateField={'fechaPedido'}
         onDelete={(id) =>
           setPedidos(manageLocalStorage("delete", entity, "", id))
         }

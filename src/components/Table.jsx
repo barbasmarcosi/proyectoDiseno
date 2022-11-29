@@ -8,11 +8,13 @@ import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
 import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { display } from "@mui/system";
 import Searcher from "./Searcher";
+import DateFilter from "./DateFilter";
+import { useEffect } from "react";
 
 const Table = ({
+  dateFilter = false,
+  whichDateField = '',
   body,
   edit,
   del,
@@ -22,15 +24,23 @@ const Table = ({
   isDocument = false,
   searchingFor = [],
 }) => {
-  const [data, newData] = useState(body);
-  return body.length > 0 ? (
-    <div>
-      <Searcher data={data} newData={newData} />
+  const [data, setData] = useState(body);
+  const [dataCopy, setDataCopy] = useState(body);
+  useEffect(() => {
+    setData(body)
+    setDataCopy(body)
+  }, [body])
+  return (<div className="Table-container">
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+      {dateFilter ? <DateFilter data={data} setDataCopy={setDataCopy} which={whichDateField} /> : false}
+      <Searcher data={data} setDataCopy={setDataCopy} />
+    </div>
+    {dataCopy.length > 0 ? (
       <div className="Table">
         <table className="Table-self">
           <thead className="Table-thead">
             <tr className="Table-thead-tr">
-              {Object.keys(body[0]).map((key) => {
+              {Object.keys(data[0]).map((key) => {
                 let exc = true;
                 exceptions.map((exception) => {
                   if (exception == key) {
@@ -62,7 +72,7 @@ const Table = ({
             </tr>
           </thead>
           <tbody className="Table-tbody">
-            {body.map((tr) => {
+            {dataCopy.map((tr) => {
               return (
                 <tr className="Table-tbody-tr">
                   {Object.keys(tr).map((key) => {
@@ -235,11 +245,8 @@ const Table = ({
             })}
           </tbody>
         </table>
-      </div>
-    </div>
-  ) : (
-    false
-  );
-};
+      </div>) : <h2>No se encontraron coincidencias</h2>}
+  </div>)
+}
 
 export default Table;
