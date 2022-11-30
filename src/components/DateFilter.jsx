@@ -65,6 +65,7 @@ const DateFilter = ({ data, which, setDataCopy }) => {
             fontSize: "2.2vh",
             height: "1.5rem",
             borderRadius: "0.5rem",
+            cursor: "pointer",
           }}
           value={from}
           onChange={(e) => {
@@ -80,6 +81,7 @@ const DateFilter = ({ data, which, setDataCopy }) => {
             height: "1.5rem",
             marginRight: "0.5rem",
             borderRadius: "0.5rem",
+            cursor: "pointer",
           }}
           value={to}
           onChange={(e) => {
@@ -93,6 +95,7 @@ const DateFilter = ({ data, which, setDataCopy }) => {
             textAllign: "center",
             fontSize: "2.2vh",
             borderRadius: "0.5rem",
+            cursor: "pointer",
           }}
           onClick={() => {
             setFrom(new Date(Date.now()).toISOString().slice(0, 10));
