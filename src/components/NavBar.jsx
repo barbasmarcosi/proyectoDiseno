@@ -4,9 +4,7 @@ import Accordion from "./Accordion";
 
 const NavBar = ({ open }) => {
   return (
-    <div
-      className={`NavBar ${!open ? "hidden" : ""}`}
-    >
+    <div className={`NavBar ${!open ? "hidden" : ""}`}>
       <ul className="NavBar-items">
         <Accordion title="Productos">
           <Link
@@ -132,9 +130,16 @@ const NavBar = ({ open }) => {
           <Link
             onClick={(e) => e.stopPropagation()}
             className="NavBar-item-link"
-            to="/produccion"
+            to="/tipo-documento"
           >
-            Produccion
+            Tipo de documento
+          </Link>
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            className="NavBar-item-link"
+            to="/tipos-responsable"
+          >
+            Tipos de Responsabilidad
           </Link>
           <Link
             onClick={(e) => e.stopPropagation()}
@@ -142,6 +147,14 @@ const NavBar = ({ open }) => {
             to="/deliverys"
           >
             Deliverys
+          </Link>
+
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            className="NavBar-item-link"
+            to="/pago-delivery"
+          >
+            Pagos a Deliverys
           </Link>
           <Link
             onClick={(e) => e.stopPropagation()}
@@ -160,17 +173,25 @@ const NavBar = ({ open }) => {
           <Link
             onClick={(e) => e.stopPropagation()}
             className="NavBar-item-link"
-            to="/tipos-iva"
+            to="/movimiento-materia-prima"
           >
-            Tipos de IVA
+            Movimiento de Materia Prima
           </Link>
           <Link
             onClick={(e) => e.stopPropagation()}
             className="NavBar-item-link"
-            to="/tipos-responsable"
+            to="/produccion"
           >
-            Tipos de Responsabilidad
+            Produccion
           </Link>
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            className="NavBar-item-link"
+            to="/tipos-iva"
+          >
+            Tipos de IVA
+          </Link>
+
           <Link
             onClick={(e) => e.stopPropagation()}
             className="NavBar-item-link"
@@ -198,6 +219,13 @@ const NavBar = ({ open }) => {
             to="/formas-pago"
           >
             Formas de Pago
+          </Link>
+          <Link
+            onClick={(e) => e.stopPropagation()}
+            className="NavBar-item-link"
+            to="/unidad-medida"
+          >
+            Unidad de Medida
           </Link>
         </Accordion>
       </ul>

@@ -52,7 +52,6 @@ const Productos = () => {
   useEffect(() => {}, [productos]);
 
   let proveedores = [];
-  console.log(proveedores);
   const handleAcceptButton = (multiple = false) => {
     if (
       product.value &&
@@ -107,7 +106,6 @@ const Productos = () => {
         unidadMedida: unidadMedida.value,
       })
     );
-    console.log(detalleReceta);
     messageTimeOut(setSuccessMessage);
   };
 

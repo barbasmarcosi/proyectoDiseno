@@ -28,6 +28,10 @@ import FormasPago from "../containers/FormasPago";
 import Marcas from "../containers/Marcas/Marcas";
 import RemitosEntrega from "../containers/RemitosEntrega";
 import Estadistica from "../containers/Estadistica";
+import UnidadMedida from "../containers/UnidadMedidad";
+import TipoDocumento from "../containers/TipoDocumento";
+import MovimientoMateriaPrima from "../containers/MovimientoMateriaPrima";
+import PagoDelivery from "../components/PagoDelivery";
 
 function App() {
   return (
@@ -62,6 +66,13 @@ function App() {
             <Route path="/formas-pago" element={<FormasPago />} />
             <Route path="/remitosEntrega" element={<RemitosEntrega />} />
             <Route path="/productos" element={<Productos />} />
+            <Route path="/unidad-medida" element={<UnidadMedida />} />
+            <Route path="/tipo-documento" element={<TipoDocumento />} />
+            <Route
+              path="/movimiento-materia-prima"
+              element={<MovimientoMateriaPrima />}
+            />
+            <Route path="/pago-delivery" element={<PagoDelivery />} />
           </Routes>
         </Layout>
       </Router>

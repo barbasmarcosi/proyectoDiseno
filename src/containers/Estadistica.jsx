@@ -1,23 +1,30 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import DateFilter from "../components/DateFilter";
 import Table from "../components/Table";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
 
 const Estadistica = () => {
   const entity = "pedido";
+
   const [pedidos, setPedidos] = useState(manageLocalStorage("get", entity));
-  const [pedidosCopy, setPedidosCopy] = useState(pedidos);
+  const [pedidosDateCopy, setPedidosDateCopy] = useState(pedidos);
+  const [pedidosCopy, setPedidosCopy] = useState(pedidosDateCopy);
   const [exceptions, setExceptions] = useState([
     "encargado",
     "tipoVenta",
     "observaciones",
-    "fechaPedido",
     "horaPedido",
     "delivery",
     "costoEnvio",
   ]);
 
+  useEffect(() => {
+    setPedidosCopy(pedidosDateCopy);
+  }, [pedidosDateCopy]);
+
   const filterFunction = (field, newField) => {
-    const firstExtract = pedidos.map((pedido) => {
+    const firstExtract = pedidosDateCopy.map((pedido) => {
       return {
         [field]: pedido[field],
         montoTotal: pedido.montoTotal,
@@ -52,13 +59,12 @@ const Estadistica = () => {
       }
     });
     setExceptions([]);
-    console.log(arr)
     setPedidosCopy(arr.sort((a, b) => b.cantidad - a.cantidad));
   };
 
   const doFilter = (value) => {
     if (value === "monthFilter") {
-      const months = pedidos.map((pedido) => {
+      const months = pedidosDateCopy.map((pedido) => {
         const arr = pedido.fechaPedido.split(/\//);
         return { mes: `${arr[1]}-${arr[2]}`, montoTotal: pedido.montoTotal };
       });
@@ -89,10 +95,10 @@ const Estadistica = () => {
       setExceptions([]);
       setPedidosCopy(arr.sort((a, b) => b.cantidad - a.cantidad));
     }
-    if (value === "default") setPedidosCopy(pedidos);
+    if (value === "default") setPedidosCopy(pedidosDateCopy);
     if (value === "payment") filterFunction("formaPago", "metodoDePago");
     if (value === "topSellers") {
-      const products = pedidos.map((pedido) =>
+      const products = pedidosDateCopy.map((pedido) =>
         pedido.productos.map((product) => ({
           producto: product.producto,
           cantidad: product.cantidad,
@@ -145,30 +151,40 @@ const Estadistica = () => {
   };
 
   return (
-    <div className="Productos">
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      className="Productos"
+    >
       <h1 className="Productos-title">Estadisticas de venta</h1>
-      <select
-        style={{
-          height: "2rem",
-          width: "20rem",
-          marginBottom: "1rem",
-          borderRadius: "0.5rem",
-          textAlign: "center",
-          fontSize: "1rem",
-          cursor: "pointer",
-        }}
-        onChange={(e) => doFilter(e.target.value)}
-      >
-        <option value="default">Seleccione la estadistica</option>
-        <option value="monthFilter">Ventas por mes</option>
-        <option value="payment">Por metodos de pago</option>
-        <option value="topSellers">Producto mas vendido</option>
-        <option value="topClients">Cliente mas recurrente</option>
-        <option value="sellType">Por tipo de venta</option>
-        <option value="sellDate">Por fecha de pedido</option>
-        <option value="seller">Por vendedor</option>
-        <option value="delivery">Por delivery</option>
-      </select>
+      <div style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}>
+        <DateFilter
+          data={pedidos}
+          which={"fechaPedido"}
+          setDataCopy={setPedidosDateCopy}
+        />
+        <select
+          style={{
+            height: "2rem",
+            width: "20rem",
+            marginBottom: "1rem",
+            borderRadius: "0.5rem",
+            textAlign: "center",
+            fontSize: "1rem",
+            cursor: "pointer",
+          }}
+          onChange={(e) => doFilter(e.target.value)}
+        >
+          <option value="default">Seleccione la estadistica</option>
+          <option value="monthFilter">Ventas por mes</option>
+          <option value="payment">Por metodos de pago</option>
+          <option value="topSellers">Producto mas vendido</option>
+          <option value="topClients">Cliente mas recurrente</option>
+          <option value="sellType">Por tipo de venta</option>
+          <option value="sellDate">Por fecha de pedido</option>
+          <option value="seller">Por vendedor</option>
+          <option value="delivery">Por delivery</option>
+        </select>
+      </div>
       <Table
         body={pedidosCopy}
         edit={true}

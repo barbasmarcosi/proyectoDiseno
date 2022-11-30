@@ -23,7 +23,6 @@ const PedidosAdd = ({
   setDetailsModal,
   data = "",
 }) => {
-  console.log(data);
   const [openClientModal, setOpenClientModal] = useState(false);
   const cliente = useInputValue(data.cliente);
   const personal = useInputValue(data.encargado);
@@ -101,10 +100,8 @@ const PedidosAdd = ({
 
   const setClientData = () => {
     const val = clienteRef.current.value;
-    console.log(val);
     if (val) {
       const data = val.split(", ");
-      console.log(data);
       data[0] !== "null" ? cliente.setValue(data[0]) : cliente.setValue("");
       data[1] !== "null"
         ? calleCliente.setValue(data[1])

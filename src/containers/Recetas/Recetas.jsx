@@ -51,7 +51,6 @@ const Recetas = () => {
         unidadMedida: unidadMedida.value,
       })
     );
-    console.log(detalleReceta);
     messageTimeOut(setSuccessMessage);
   };
   const handleModifyButton = () => {
