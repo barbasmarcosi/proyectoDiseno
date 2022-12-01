@@ -107,7 +107,7 @@ const Marcas = () => {
         >
           <LabeledSelector
             options={initialState.marca}
-            which={"nombre"}
+            which={["nombre"]}
             {...descripcion}
             text="Marcas"
           />

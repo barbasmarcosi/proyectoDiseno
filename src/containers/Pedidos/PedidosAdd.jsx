@@ -58,7 +58,7 @@ const PedidosAdd = ({
   const toGetValue = (index) =>
     detailRef.current.children[index].children[1].children[0].value;
 
-  let detallePedido = localStorage.getItem("detallePedido").length
+  let detallePedido = localStorage.getItem("detallePedido")
     ? JSON.parse(localStorage.getItem("detallePedido"))
     : [];
 
@@ -89,7 +89,7 @@ const PedidosAdd = ({
         importe: toGetFormValues(1, detailRef) * toGetFormValues(3, detailRef),
       });
       localStorage.setItem("detallePedido", JSON.stringify(detallePedido));
-      detallePedido = JSON.parse(localStorage.getItem("detallePedido"));
+      detallePedido = localStorage.getItem("detallePedido") ? JSON.parse(localStorage.getItem("detallePedido")) : localStorage.setItem("detallePedido", '[]');
       producto.setValue("");
       cantidadProducto.setValue("");
       unidadMedida.setValue("");

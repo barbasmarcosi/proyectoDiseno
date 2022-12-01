@@ -32,7 +32,7 @@ const LabeledSelector = ({ options, which, hidden, text, onModal = true }) => {
             className="LabeledInput-text"
           ></select>
         </div>
-        {which.length < 2
+        {which.length < 1
           ? options.filter((opt) => {
               return which.map((w) => {
                 return `${opt[w]}`

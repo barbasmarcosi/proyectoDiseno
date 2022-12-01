@@ -118,7 +118,7 @@ const Rubros = () => {
         >
           <LabeledSelector
             options={initialState.rubro}
-            which={"descripcion"}
+            which={["descripcion"]}
             {...descripcion}
             text="Rubros"
           />
