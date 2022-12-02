@@ -106,7 +106,6 @@ const CierresCaja = () => {
             which={["id", "fechaPago", "delivery"]}
             text={"Pagos de delivery"}
           />
-          <LabeledInput {...saldoFinal} text="Saldo Final" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -147,7 +146,6 @@ const CierresCaja = () => {
             which={["id", "fechaPago", "delivery"]}
             text={"Pagos de delivery"}
           />
-          <LabeledInput {...saldoFinal} text="Saldo Final" />
         </Form>
       </Modal>
       <Message
