@@ -192,7 +192,13 @@ function Pedidos() {
               setClientData();
             }}
             options={initialState.cliente}
-            which={["razonSocial", "calle", "altura", "depto", "telefonoEntrega"]}
+            which={[
+              "razonSocial",
+              "calle",
+              "altura",
+              "depto",
+              "telefonoEntrega",
+            ]}
             text="Cliente"
           />
           <button
@@ -203,23 +209,6 @@ function Pedidos() {
           >
             Agregar Cliente
           </button>
-          <ClientesAdd
-            setMessage={setMessage}
-            setMessageState={setSuccessMessage}
-            setOpenModal={setOpenClientModal}
-            openModal={openClientModal}
-          />
-          <LabeledInput
-            value={initialState.pedido.length + 1}
-            text="Nro. Pedido"
-            toShowId={true}
-          />
-          <LabeledDataList
-            {...cliente}
-            options={initialState.cliente}
-            which={["razonSocial"]}
-            text="Cliente"
-          />
           <LabeledDataList
             {...calleCliente}
             options={initialState.calle}
@@ -481,6 +470,13 @@ function Pedidos() {
           </button>
         </Form>
       </Modal>
+
+      <ClientesAdd
+        setMessage={setMessage}
+        setMessageState={setSuccessMessage}
+        setOpenModal={setOpenClientModal}
+        openModal={openClientModal}
+      />
       <Modal open={detailsModal} setClosed={() => setDetailsModal(false)}>
         <Form
           title={"Seleccionar Productos"}

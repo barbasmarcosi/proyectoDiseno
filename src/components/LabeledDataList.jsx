@@ -45,11 +45,11 @@ const LabeledDataList = ({
                   ? which
                       .map((one) => {
                         if (!!opt[one]) {
-                          return `${opt[one]}`;
+                          return opt[one];
                         }
                       })
                       .join(", ")
-                  : `${opt[which]}`
+                  : opt[which]
               }
             />
           );
