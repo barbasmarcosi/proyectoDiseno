@@ -39,7 +39,7 @@ function App() {
       <Router>
         <Layout>
           <Routes className="Content">
-            <Route path="/" element={<Home />} />
+            <Route path="/*" element={<Home />} />
             <Route path="/recetas" element={<Recetas />} />
             <Route path="/rubros" element={<Rubros />} />
             <Route path="/marcas" element={<Marcas />} />

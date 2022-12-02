@@ -125,7 +125,16 @@ const Deliverys = () => {
         >
           <LabeledInput {...nombre} text="Nombres" />
           <LabeledInput {...apellido} text="Apellidos" />
-          <LabeledInput {...cuil} text="CUIL" />
+          <LabeledDataList
+            {...tipoDocumento}
+            options={initialState.tipoDocumento}
+            which={["nombre"]}
+            text="Tipo de Documento"
+          />
+          <LabeledInput
+            {...cuil}
+            text={tipoDocumento.value ? tipoDocumento.value : ""}
+          />
           <LabeledInput
             {...fechaNacimiento}
             type="date"
@@ -133,7 +142,12 @@ const Deliverys = () => {
           />
           <LabeledInput {...telefono} text="Telefono" />
           <LabeledInput {...mail} text="Mail" type="mail" />
-          <LabeledInput {...calle} text="Calle" />
+          <LabeledDataList
+            options={initialState.calle}
+            which={["nombre", "localidad"]}
+            {...calle}
+            text="Calle"
+          />
           <LabeledInput {...altura} text="Altura" />
           <LabeledInput {...depto} text="Departamento" />
           <LabeledInput {...vehiculo} text="Vehiculo" />

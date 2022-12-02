@@ -39,6 +39,7 @@ function Pedidos() {
   const calle = useInputValue("");
   const altura = useInputValue("");
   const depto = useInputValue("");
+  const formaPago = useInputValue("");
   const calleCliente = useInputValue("");
   const alturaCliente = useInputValue("");
   const deptoCliente = useInputValue("");
@@ -57,7 +58,7 @@ function Pedidos() {
   const entity = "pedido";
   const [pedidos, setPedidos] = useState(manageLocalStorage("get", entity));
 
-  useEffect(() => { }, [pedidos]);
+  useEffect(() => {}, [pedidos]);
 
   const toGetValue = (index) =>
     detailRef.current.children[index].children[1].children[0].value;
@@ -148,7 +149,7 @@ function Pedidos() {
       </button>
       <Table
         dateFilter={true}
-        whichDateField={'fechaPedido'}
+        whichDateField={"fechaPedido"}
         onDelete={(id) =>
           setPedidos(manageLocalStorage("delete", entity, "", id))
         }
@@ -162,7 +163,7 @@ function Pedidos() {
           "fechaPedido",
           "horaPedido",
           "delivery",
-          "costoEnvio"
+          "costoEnvio",
         ]}
         isDocument={true}
         edit={false}
@@ -190,8 +191,8 @@ function Pedidos() {
               cliente.setValue(e.target.value);
               setClientData();
             }}
-            options={initialState.pedido}
-            which={["cliente", "calle", "altura", "depto", "telefonoEntrega"]}
+            options={initialState.cliente}
+            which={["razonSocial", "calle", "altura", "depto", "telefonoEntrega"]}
             text="Cliente"
           />
           <button
@@ -208,10 +209,21 @@ function Pedidos() {
             setOpenModal={setOpenClientModal}
             openModal={openClientModal}
           />
+          <LabeledInput
+            value={initialState.pedido.length + 1}
+            text="Nro. Pedido"
+            toShowId={true}
+          />
+          <LabeledDataList
+            {...cliente}
+            options={initialState.cliente}
+            which={["razonSocial"]}
+            text="Cliente"
+          />
           <LabeledDataList
             {...calleCliente}
-            options={initialState.pedido}
-            which={["calle"]}
+            options={initialState.calle}
+            which={["nombre"]}
             text="Calle"
           />
           <LabeledInput {...alturaCliente} text="Altura" />
@@ -219,8 +231,8 @@ function Pedidos() {
           <LabeledInput {...telefonoCliente} text="Telefono de Entrega" />
           <LabeledDataList
             {...personal}
-            options={initialState.pedido}
-            which={["encargado"]}
+            options={initialState.personal}
+            which={["nombreApellido"]}
             text="Encargado"
           />
           <LabeledInput
@@ -235,9 +247,8 @@ function Pedidos() {
           />
           <LabeledDataList
             {...presupuesto}
-            nullable={true}
-            options={initialState.pedido}
-            which={["id"]}
+            options={initialState.presupuesto}
+            which={["id", "fechaEmision", "cliente"]}
             text="Presupuesto"
           />
           <LabeledDataList
@@ -270,8 +281,8 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...calle}
-            options={initialState.pedido}
-            which={["calle"]}
+            options={initialState.calle}
+            which={["nombre"]}
             text="Calle"
           />
           <LabeledInput hidden={!entregaDomicilio} {...altura} text="Altura" />
@@ -279,6 +290,12 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...depto}
             text="Departamento"
+          />
+          <LabeledDataList
+            {...formaPago}
+            options={initialState.formaPago}
+            which={["descripcion"]}
+            text="Forma de Pago"
           />
           <LabeledInput
             hidden={!entregaDomicilio}
@@ -288,8 +305,8 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...delivery}
-            options={initialState.pedido}
-            which={["delivery"]}
+            options={initialState.delivery}
+            which={["nombreApellido"]}
             text="Delivery"
           />
           <LabeledInput
@@ -340,14 +357,14 @@ function Pedidos() {
           />
           <LabeledDataList
             {...cliente}
-            options={initialState.pedido}
-            which={["cliente"]}
+            options={initialState.cliente}
+            which={["razonSocial"]}
             text="Cliente"
           />
           <LabeledDataList
             {...calleCliente}
-            options={initialState.pedido}
-            which={["calle"]}
+            options={initialState.calle}
+            which={["nombre"]}
             text="Calle"
           />
           <LabeledInput {...alturaCliente} text="Altura" />
@@ -355,8 +372,8 @@ function Pedidos() {
           <LabeledInput {...telefonoCliente} text="Telefono de Entrega" />
           <LabeledDataList
             {...personal}
-            options={initialState.pedido}
-            which={["encargado"]}
+            options={initialState.personal}
+            which={["nombreApellido"]}
             text="Encargado"
           />
           <LabeledInput
@@ -371,8 +388,8 @@ function Pedidos() {
           />
           <LabeledDataList
             {...presupuesto}
-            options={initialState.pedido}
-            which={["id"]}
+            options={initialState.presupuesto}
+            which={["id", "fechaEmision", "cliente"]}
             text="Presupuesto"
           />
           <LabeledDataList
@@ -405,8 +422,8 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...calle}
-            options={initialState.pedido}
-            which={["calle"]}
+            options={initialState.calle}
+            which={["nombre"]}
             text="Calle"
           />
           <LabeledInput hidden={!entregaDomicilio} {...altura} text="Altura" />
@@ -414,6 +431,12 @@ function Pedidos() {
             hidden={!entregaDomicilio}
             {...depto}
             text="Departamento"
+          />
+          <LabeledDataList
+            {...formaPago}
+            options={initialState.formaPago}
+            which={["descripcion"]}
+            text="Forma de Pago"
           />
           <LabeledInput
             hidden={!entregaDomicilio}
@@ -423,8 +446,8 @@ function Pedidos() {
           <LabeledDataList
             hidden={!entregaDomicilio}
             {...delivery}
-            options={initialState.pedido}
-            which={["delivery"]}
+            options={initialState.delivery}
+            which={["nombreApellido"]}
             text="Delivery"
           />
           <LabeledInput

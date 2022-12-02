@@ -127,13 +127,13 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...ordenCompra}
             options={initialState.ordenCompra}
-            which={["id"]}
+            which={["id", "fecha", "proveedor"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
             options={initialState.remitoProveedor}
-            which={["id"]}
+            which={["id", "fecha", "proveedor"]}
             text="Remito de proveedor"
           />
           <LabeledInput {...nroFactura} text="Numero de Factura" />
@@ -155,15 +155,15 @@ const FacturasCompra = () => {
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={initialState.remitoProveedor}
-            which={["id"]}
+            options={initialState.formaPago}
+            which={["descripcion"]}
             text="Condicion de venta"
           />
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={initialState.remitoProveedor}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
@@ -181,13 +181,13 @@ const FacturasCompra = () => {
           <LabeledDataList
             {...ordenCompra}
             options={initialState.ordenCompra}
-            which={["id"]}
+            which={["id", "fecha", "proveedor"]}
             text="Orden de compra"
           />
           <LabeledDataList
             {...remito}
             options={initialState.remitoProveedor}
-            which={["id"]}
+            which={["id", "fecha", "proveedor"]}
             text="Remito de proveedor"
           />
           <LabeledInput {...nroFactura} text="Numero de Factura" />
@@ -209,15 +209,15 @@ const FacturasCompra = () => {
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={initialState.remitoProveedor}
-            which={["id"]}
+            options={initialState.formaPago}
+            which={["descripcion"]}
             text="Condicion de venta"
           />
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={initialState.remitoProveedor}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial"]}
           />
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>

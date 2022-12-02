@@ -1015,8 +1015,9 @@ export default {
       calle: null,
       altura: null,
       depto: null,
+      formaPago: "Contado efectivo",
       tipoVenta: "minorista",
-      estado: "en entrega",
+      estado: "En entrega",
       observaciones: "",
       montoTotal: 1380,
       productos: [
@@ -1060,8 +1061,9 @@ export default {
       calle: null,
       altura: null,
       depto: null,
+      formaPago: "Contado efectivo",
       tipoVenta: "minorista",
-      estado: "lista para entrega",
+      estado: "Lista para entrega",
       observaciones: "",
       montoTotal: 3460,
       productos: [
@@ -1105,8 +1107,9 @@ export default {
       calle: null,
       altura: null,
       depto: null,
+      formaPago: "Mercado Pago",
       tipoVenta: "minorista",
-      estado: "lista para entrega",
+      estado: "Lista para entrega",
       observaciones: "",
       montoTotal: 3460,
       productos: [
@@ -1237,7 +1240,6 @@ export default {
       hora: "22:00",
       pedido: 1,
       montoTotal: 1380,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1271,7 +1273,6 @@ export default {
       hora: "10:05",
       pedido: 3,
       montoTotal: 21160,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {
@@ -1326,7 +1327,6 @@ export default {
       hora: "21:00",
       pedido: 2,
       montoTotal: 1380,
-      condicionVenta: "contado efectivo",
       observaciones: "",
       productos: [
         {

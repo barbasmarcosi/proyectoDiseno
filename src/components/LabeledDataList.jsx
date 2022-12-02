@@ -20,20 +20,21 @@ const LabeledDataList = ({
         value={value}
         onChange={onChange}
         onClick={() => setValue("")}
-        className={`LabeledInput-text${!!value ? " LabeledInput-text--filled" : ""
-          }`}
+        className={`LabeledInput-text${
+          !!value ? " LabeledInput-text--filled" : ""
+        }`}
         list={text}
       />
       <datalist id={text}>
-        {nullable ?
+        {nullable ? (
           <option
             key={0}
             className="LabeledInput-option"
             value={`Sin ${text[0].toLowerCase() + text.slice(1, text.length)}`}
           />
-          : (
-            false
-          )}
+        ) : (
+          false
+        )}
         {options.map((opt) => {
           return (
             <option
@@ -41,7 +42,13 @@ const LabeledDataList = ({
               className="LabeledInput-option"
               value={
                 which.length > 1
-                  ? which.map((one) => ` ${opt[one]}`)
+                  ? which
+                      .map((one) => {
+                        if (!!opt[one]) {
+                          return `${opt[one]}`;
+                        }
+                      })
+                      .join(", ")
                   : `${opt[which]}`
               }
             />

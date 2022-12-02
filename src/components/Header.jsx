@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/img/Logo.jpg";
+import Logo from "../../public/Logo.jpg";
 
 const Header = ({ setOpen, open }) => {
   return (

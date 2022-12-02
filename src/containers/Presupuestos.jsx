@@ -116,8 +116,14 @@ const Presupuestos = () => {
           <LabeledDataList
             {...cliente}
             text="Cliente"
-            options={initialState.presupuesto}
-            which={["cliente"]}
+            options={initialState.cliente}
+            which={[
+              "razonSocial",
+              "calle",
+              "altura",
+              "depto",
+              "telefonoEntrega",
+            ]}
           />
           <LabeledInput
             {...fechaEmision}
@@ -172,8 +178,14 @@ const Presupuestos = () => {
           <LabeledDataList
             {...cliente}
             text="Cliente"
-            options={initialState.presupuesto}
-            which={["cliente"]}
+            options={initialState.cliente}
+            which={[
+              "razonSocial",
+              "calle",
+              "altura",
+              "depto",
+              "telefonoEntrega",
+            ]}
           />
           <LabeledInput
             {...fechaEmision}

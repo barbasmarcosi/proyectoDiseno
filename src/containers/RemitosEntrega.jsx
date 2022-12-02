@@ -80,7 +80,7 @@ const RemitosEntrega = () => {
           <LabeledDataList
             {...pedido}
             options={initialState.pedido}
-            which={["id"]}
+            which={["id", "cliente", "fechaPedido", "horaPedido"]}
             text="Nro. Pedido"
           />
           <LabeledInput
@@ -89,7 +89,7 @@ const RemitosEntrega = () => {
             text="Fecha de Remito"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
-          
+
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>
@@ -111,7 +111,7 @@ const RemitosEntrega = () => {
           <LabeledDataList
             {...pedido}
             options={initialState.pedido}
-            which={["id"]}
+            which={["id", "cliente", "fechaPedido", "horaPedido"]}
             text="Nro. Pedido"
           />
           <LabeledInput
@@ -120,6 +120,7 @@ const RemitosEntrega = () => {
             text="Fecha de Remito"
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
+
           <LabeledInput {...observaciones} text="Observaciones" />
         </Form>
       </Modal>

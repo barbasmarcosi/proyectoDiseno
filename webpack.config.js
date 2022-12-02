@@ -5,9 +5,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "./",
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -39,14 +39,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {},
-          },
-        ],
-      },
+        test: /\.(jpe?g|png|gif|svg)$/i, 
+        loader: 'file-loader',
+        options: {
+          name: '/public/[name].[ext]'
+        }
+    }
     ],
   },
   plugins: [
@@ -60,7 +58,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: path.join(__dirname, "dist"),
+    static: path.join(__dirname, "build"),
     compress: true,
     historyApiFallback: true,
     port: 3000,

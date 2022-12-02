@@ -76,14 +76,14 @@ const OrdenesCompra = () => {
         >
           <LabeledDataList
             {...proveedor}
-            options={initialState.ordenCompra}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
-            options={initialState.ordenCompra}
-            which={["encargado"]}
+            options={initialState.personal}
+            which={["nombreApellido"]}
             text="Encargado"
           />
           <LabeledInput
@@ -108,14 +108,14 @@ const OrdenesCompra = () => {
         >
           <LabeledDataList
             {...proveedor}
-            options={initialState.ordenCompra}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial"]}
             text="Proveedor"
           />
           <LabeledDataList
             {...personal}
-            options={initialState.ordenCompra}
-            which={["encargado"]}
+            options={initialState.personal}
+            which={["nombreApellido"]}
             text="Encargado"
           />
           <LabeledInput

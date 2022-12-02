@@ -90,7 +90,12 @@ const Localidades = () => {
           onCancel={() => setOpenModifyModal(!openModifyModal)}
         >
           <LabeledInput {...localidad} text="Localidad" />
-          <LabeledInput {...provincia} text="Provincia" />
+          <LabeledDataList
+            {...provincia}
+            options={initialState.provincia}
+            which={["nombre"]}
+            text="Provincia"
+          />
           <LabeledInput {...codigoPostal} text="Codigo Postal" />
         </Form>
       </Modal>

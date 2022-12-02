@@ -13,6 +13,7 @@ const LabeledInput = ({ type = 'text', value, onChange, hidden = false, text, on
         value={value}
         onChange={onChange}
         type={type}
+        disabled={toShowId}
         name="LabeledInput"
         className={`LabeledInput-text${!!value ? ' LabeledInput-text--filled' : ''}`} 
         style={toShowId ? {width : '5rem'} : {}}

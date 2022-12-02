@@ -80,14 +80,14 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={initialState.remitoProveedor}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial", "nroDocumento", "telefono"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={initialState.remitoProveedor}
-            which={["id"]}
+            options={initialState.formaPago}
+            which={["descripcion"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />
@@ -111,14 +111,14 @@ const RemitosCompra = () => {
           <LabeledDataList
             {...proveedor}
             text="Proveedor"
-            options={initialState.remitoProveedor}
-            which={["proveedor"]}
+            options={initialState.proveedor}
+            which={["razonSocial", "nroDocumento", "telefono"]}
           />
           <LabeledInput {...montoTotal} text="Monto Total" />
           <LabeledDataList
             {...condicionVenta}
-            options={initialState.remitoProveedor}
-            which={["id"]}
+            options={initialState.formaPago}
+            which={["descripcion"]}
             text="Condicion de venta"
           />
           <LabeledInput {...observaciones} text="Observaciones" />

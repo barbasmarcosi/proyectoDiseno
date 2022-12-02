@@ -76,7 +76,7 @@ const Reclamos = () => {
           <LabeledDataList
             {...pedidoCliente}
             options={initialState.pedido}
-            which={["id"]}
+            which={["id", "cliente", "fechaPedido", "horaPedido"]}
             text="Pedido de Cliente"
           />
           <LabeledInput
@@ -105,7 +105,7 @@ const Reclamos = () => {
           <LabeledDataList
             {...pedidoCliente}
             options={initialState.pedido}
-            which={["id"]}
+            which={["id", "cliente", "fechaPedido", "horaPedido"]}
             text="Pedido de Cliente"
           />
           <LabeledInput
