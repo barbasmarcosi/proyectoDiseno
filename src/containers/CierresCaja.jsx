@@ -3,11 +3,14 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 import LabeledInput from "../components/LabeledInput";
+import LabeledDataList from "../components/LabeledDataList";
+import LabeledSelector from "../components/LabeledSelector";
 import Message from "../components/Message";
 import Modal from "../components/Modal";
 import Table from "../components/Table";
 import useInputValue from "../hooks/useInputValue";
 import manageLocalStorage from "../usefullFunctions/manageLocalStorage";
+import initialState from "../initialState/initialState";
 
 const CierresCaja = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +20,9 @@ const CierresCaja = () => {
   const fechaCierreCaja = useInputValue(
     new Date(Date.now()).toISOString().slice(0, 16)
   );
+  const saldoInicial = useInputValue("");
+  const saldoFinal = useInputValue("");
+  const encargado = useInputValue("");
   const retiros = useInputValue("");
   const gastosExtras = useInputValue("");
   const ingresosExtra = useInputValue("");
@@ -43,22 +49,6 @@ const CierresCaja = () => {
       setSuccessMessage(true);
     }, 5000);
   };
-  /*const body = [
-    {
-      "Fecha de Cierre": "07/10/2022",
-      Retiros: 2531.25,
-      "Gastos Extras": 365.2,
-      "Ingresos Extras": 2987.22,
-      Total: 25899.75,
-    },
-    {
-      "Fecha de Cierre": "07/10/2022",
-      Retiros: 1231.25,
-      "Gastos Extras": 985.22,
-      "Ingresos Extras": 278.14,
-      Total: 32900.25,
-    },
-  ];*/
   return (
     <div className="Productos">
       <h1 className="Productos-title">Listado de Cierres de Caja</h1>
@@ -91,9 +81,32 @@ const CierresCaja = () => {
             type="datetime-local"
             text="Fecha de Cierre de Caja"
           />
+          <LabeledDataList
+            {...encargado}
+            options={initialState.personal}
+            which={["nombreApellido"]}
+            text="Encargado"
+          />
+          <LabeledInput {...saldoInicial} text="Saldo Inicial" />
           <LabeledInput {...retiros} text="Retiros" />
           <LabeledInput {...gastosExtras} text="Gastos Extras" />
           <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
+          <LabeledSelector
+            options={initialState.ordenCompra}
+            which={["id", "fecha", "proveedor"]}
+            text={"Ordenes de compra"}
+          />
+          <LabeledSelector
+            options={initialState.pedido}
+            which={["id", "fechaPedido", "cliente", "calle", "altura"]}
+            text={"Pedidos de cliente"}
+          />
+          <LabeledSelector
+            options={initialState.pagoDelivery}
+            which={["id", "fechaPago", "delivery"]}
+            text={"Pagos de delivery"}
+          />
+          <LabeledInput {...saldoFinal} text="Saldo Final" />
         </Form>
       </Modal>
       <Modal open={openModifyModal} setClosed={() => setOpenModifyModal(false)}>
@@ -106,12 +119,35 @@ const CierresCaja = () => {
         >
           <LabeledInput
             {...fechaCierreCaja}
-            type="date"
+            type="datetime-local"
             text="Fecha de Cierre de Caja"
           />
+          <LabeledDataList
+            {...encargado}
+            options={initialState.personal}
+            which={["nombreApellido"]}
+            text="Encargado"
+          />
+          <LabeledInput {...saldoInicial} text="Saldo Inicial" />
           <LabeledInput {...retiros} text="Retiros" />
           <LabeledInput {...gastosExtras} text="Gastos Extras" />
           <LabeledInput {...ingresosExtra} text="Ingresos Extras" />
+          <LabeledSelector
+            options={initialState.ordenCompra}
+            which={["id", "fecha", "proveedor"]}
+            text={"Ordenes de compra"}
+          />
+          <LabeledSelector
+            options={initialState.pedido}
+            which={["id", "fechaPedido", "cliente", "calle", "altura"]}
+            text={"Pedidos de cliente"}
+          />
+          <LabeledSelector
+            options={initialState.pagoDelivery}
+            which={["id", "fechaPago", "delivery"]}
+            text={"Pagos de delivery"}
+          />
+          <LabeledInput {...saldoFinal} text="Saldo Final" />
         </Form>
       </Modal>
       <Message
