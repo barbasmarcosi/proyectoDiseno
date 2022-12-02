@@ -147,7 +147,7 @@ const CierresCaja = () => {
             which={["id", "fechaPago", "delivery"]}
             text={"Pagos de delivery"}
           />
-          <LabeledInput {...saldoInicial} text="Saldo Final" toShowId={true} />
+          <LabeledInput {...saldoFinal} text="Saldo Final" />
         </Form>
       </Modal>
       <Message
