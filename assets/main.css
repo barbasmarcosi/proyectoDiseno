@@ -1,0 +1,478 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: aliceblue;
+  background-color: #9d9d9d;
+}
+.Layout {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5vw;
+  background-color: rgb(175, 10, 10);
+  transition: 0.5s background-color;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 3px 3px 3px black;
+  z-index: 1;
+}
+.Header-content {
+  display: flex;
+}
+.Header-title {
+  margin-left: 1.5vw;
+  text-shadow: 1px 1px 1px gainsboro;
+}
+.Header-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+.Logo-image {
+  border: 1px solid #000;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 10rem;
+}
+.Burger {
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  left: 0;
+  margin-left: 2rem;
+}
+.Line {
+  background-color: white;
+  height: 0.5rem;
+  width: 1.5rem;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+.active .Line:nth-child(1) {
+  transform: translateY(10px) rotate(135deg);
+}
+.active .Line:nth-child(2) {
+  transform: scale(0);
+}
+.active .Line:nth-child(3) {
+  transform: translateY(-11px) rotate(-135deg);
+}
+.Middle {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.NavBar {
+  display: flex;
+  width: 22rem;
+  min-height: calc(100vh - 115px);
+  height: auto;
+  margin: -12px 0;
+  background-color: #333333;
+  border-right: 1px solid aliceblue;
+  box-shadow: 3px 3px 3px black;
+  transition: opacity 1s, margin-left 1s;
+}
+.hidden {
+  margin-left: -22rem;
+  opacity: 0%;
+}
+.NavBar-items {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  margin-left: -40px;
+}
+.NavBar-item {
+  border-bottom: 2px solid red;
+}
+.Accordion,
+.Accordion-children-active,
+.NavBar-item-link {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-top: 4px;
+  padding: 8px;
+  font-size: 20px;
+  border-bottom: 2px solid;
+  border-radius: 8px;
+  transition: 1s border-bottom;
+  transition: 0.5s background-color;
+  text-decoration: none;
+  color: inherit;
+}
+.Accordion:hover,
+.NavBar-item-link:hover {
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  background-color: rgb(61, 61, 61);
+}
+.NavBar-item-link:hover {
+  background-color: rgb(72, 72, 72);
+}
+.Footer {
+  left: 0;
+  bottom: 0;
+  display: grid;
+  grid-area: footer;
+  width: 100%;
+  background: linear-gradient(rgb(175, 10, 10), rgb(166, 3, 3));
+  border-radius: 12px 12px 0 0;
+}
+.Footer-title {
+  letter-spacing: 2px;
+  justify-self: center;
+  text-shadow: 1px 1px 1px #c5c5c5;
+}
+
+.home-image {
+  position: absolute;
+  width: 100%;
+  opacity: 15%;
+  z-index: -1000;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+.Main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.home-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.home-content h1 {
+  z-index: 1000;
+  font-size: 3.5rem;
+  width: 70%;
+  text-shadow: 0 0 5px rgb(175, 10, 10);
+  text-align: center;
+  position: fixed;
+}
+.Pedidos {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80%;
+}
+.Form-self {
+  display: flex;
+  gap: 0rem 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.LabeledInput {
+  margin: 2rem;
+  display: grid;
+  justify-content: stretch;
+  border: 1px solid black;
+  padding: 6px;
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.3rem;
+}
+.LabeledInput--hidden {
+  visibility: hidden;
+}
+.LabeledInput-label {
+  position: block;
+  width: max-content;
+  padding: 0 0.5rem;
+  top: -1rem;
+  margin: -1rem 1rem;
+  background-color: rgb(157, 157, 157);
+  font-size: 12px;
+  color: black;
+}
+.LabeledInput-text,
+.LabeledInput-text-search {
+  font-size: 1.3rem;
+  text-align: center;
+  align-self: center;
+  outline: none;
+  border: none;
+  height: 2.3rem;
+  border-radius: 0.3rem;
+}
+.LabeledInput-text:focus {
+  border: 1px red solid;
+}
+.LabeledInput-text--filled,
+.LabeledInput-text--filled:focus {
+  border: 1px greenyellow solid;
+}
+.LabeledDataList-option {
+  background-color: aqua;
+}
+.Labeler {
+  margin: 2rem;
+  display: grid;
+  border: 1px solid black;
+  width: max-content;
+  border-radius: 0.3rem;
+}
+.Labeler--hidden {
+  position: absolute;
+  top: -100vw;
+  left: -100vw;
+}
+.Labeler-label {
+  position: block;
+  width: max-content;
+  padding: 0 0.5rem;
+  margin: -0.5rem;
+  margin-left: 0.5rem;
+  font-size: 12px;
+  color: black;
+}
+.Labeler-labeled {
+  display: grid;
+  height: 2.3rem;
+  margin: 0.5rem;
+  align-items: center;
+}
+.Switch-bar,
+.Switch-ball--active {
+  display: grid;
+  height: 0.5rem;
+  width: 2rem;
+  background-color: gray;
+  border-radius: 0.5rem;
+  align-content: center;
+  transition: 1s background-color;
+}
+.Switch-bar--active {
+  background-color: rgb(56, 84, 113);
+}
+.Switch-ball,
+.Switch-ball--active {
+  height: 1rem;
+  width: 1rem;
+  background-color: azure;
+  border-radius: 2rem;
+  transition: 0.5s margin-left, 0.5s background-color;
+}
+.Switch-ball--active {
+  margin-left: 1rem;
+  align-self: flex-end;
+  background-color: dodgerblue;
+}
+.Table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.Table {
+  font-size: 0.8vw;
+  margin-top: 0.5rem;
+  color: black;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+.Table-self {
+  align-self: stretch;
+  background-color: transparent;
+  width: 95%;
+  height: 90%;
+  margin-bottom: 5rem;
+  border-radius: 4px;
+  border-collapse: collapse;
+}
+.Table-tbody-tr-td {
+  padding: 0.25rem;
+  border-right: 1px solid grey;
+}
+.Table-thead {
+  border-bottom: 2px solid black;
+}
+.Table-thead-tr-th {
+  padding: 0.25rem;
+  text-overflow: wrap;
+  border-right: 1px solid black;
+}
+.Table-tbody-tr {
+  border-bottom: 2px solid grey;
+}
+.Button-edit,
+.Button-delete,
+.Button-add,
+.Button-generate {
+  background-color: #ffc107;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.25rem;
+  margin: 0.2rem;
+  box-shadow: 1px 1px 1px rgb(82, 82, 82);
+  transition: 0.5s box-shadow;
+}
+.Button-delete {
+  background-color: #dc3545;
+}
+.Button-add {
+  background-color: #0d6efd;
+  color: aliceblue;
+  margin: 0 1.5rem;
+}
+.Button-generate {
+  background-color: lightsteelblue;
+}
+.Button-edit:hover,
+.Button-delete:hover,
+.Button-add:hover {
+  box-shadow: none;
+}
+.Productos {
+  text-align: center;
+}
+.Modal {
+  z-index: 3;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  width: 100%;
+  min-height: 100vw;
+  justify-content: center;
+  opacity: 100%;
+}
+.Modal-container-hidden {
+  display: none;
+}
+.Modal-container {
+  display: flex;
+  padding: 3rem;
+  flex-direction: row;
+  margin: 5%;
+  background-color: #dcdcdc;
+  width: 80%;
+  height: max-content;
+  width: max-content;
+  border-radius: 2rem;
+  box-shadow: 3px 3px 3px 0 black;
+}
+.Button-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem;
+}
+.Button-cancel,
+.Button-accept {
+  border: none;
+  cursor: pointer;
+  padding: 0.5vw 0.5vw;
+  font-size: 0.8vw;
+  height: 3rem;
+  min-width: max-content;
+  width: 3rem;
+  border-radius: 0.5rem;
+  margin: 4px;
+  box-shadow: 3px 3px 3px rgb(82, 82, 82);
+  transition: 0.5s box-shadow;
+}
+.Button-accept {
+  background-color: dodgerblue;
+  color: aliceblue;
+}
+.Button-cancel:hover,
+.Button-accept:hover {
+  box-shadow: none;
+  cursor: pointer;
+}
+.Searcher {
+  width: 30vw;
+  text-align: center;
+  background-color: #dcdcdc;
+  height: 1.5rem;
+  font-size: 2.2vh;
+  border-radius: 0.5rem;
+}
+
+.Message {
+  z-index: 10000;
+  position: fixed;
+  color: aliceblue;
+  bottom: 0;
+  left: 0;
+  opacity: 95%;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  height: 4rem;
+  box-shadow: 3px 3px 3px gray;
+  align-items: center;
+  align-content: center;
+}
+.Message-alert {
+  background-color: red;
+}
+.Message-alert:hover {
+  background-color: rgb(255, 17, 17);
+}
+.Message-warning {
+  background-color: darkorange;
+}
+.Message-warning:hover {
+  background-color: rgb(255, 149, 20);
+}
+.Message-info {
+  background-color: dodgerblue;
+}
+.Message-info:hover {
+  background-color: rgb(60, 158, 255);
+}
+.Message-success {
+  background-color: green;
+}
+.Message-success:hover {
+  background-color: rgb(0, 146, 0);
+}
+.Message-self {
+  font-size: 16px;
+  font-weight: lighter;
+  margin-left: 4px;
+}
+.Message-icon {
+  margin-left: 1rem;
+}
+.Message-close {
+  background-color: inherit;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  color: aliceblue;
+  margin-top: -1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.5 color;
+}
+.Message-close:hover {
+  color: black;
+}
+.Message-hidden {
+  visibility: hidden;
+}
+
